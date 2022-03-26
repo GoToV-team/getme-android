@@ -1,4 +1,4 @@
-package gotov.getmeapp
+package com.gotov.getmeapp
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,7 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import gotov.getmeapp.databinding.ActivityMainBinding
+import com.gotov.getmeapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

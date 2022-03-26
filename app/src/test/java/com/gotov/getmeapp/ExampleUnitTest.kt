@@ -1,4 +1,5 @@
-package gotov.getmeapp
+package com.gotov.getmeapp
+
 
 import org.junit.Test
 

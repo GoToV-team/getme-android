@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "gotov.getmeapp"
+        applicationId "com.gotov.getmeapp"
         minSdk 21
         targetSdk 32
         versionCode 1
