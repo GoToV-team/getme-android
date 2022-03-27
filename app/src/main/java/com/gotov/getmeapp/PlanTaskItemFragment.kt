@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.gotov.getmeapp.databinding.FragmentPlanTaskItemBinding
 
 private const val ARG_TITLE = "title"
 private const val ARG_DESCRIPTION = "description"
@@ -16,10 +17,14 @@ private const val ARG_STATE = "state"
  * create an instance of this fragment.
  */
 class PlanTaskItemFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var title: String? = null
     private var description: String? = null
     private var state: Boolean? = null
+
+    private var _binding: FragmentPlanTaskItemBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +40,16 @@ class PlanTaskItemFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plan_task_item, container, false)
+        _binding = FragmentPlanTaskItemBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        binding.planItemTitle.text = savedInstanceState?.getString(ARG_TITLE)
+        binding.planItemDescription.text = savedInstanceState?.getString(ARG_DESCRIPTION)
+
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {
@@ -48,7 +61,6 @@ class PlanTaskItemFragment : Fragment() {
          * @param description Parameter 2.
          * @return A new instance of fragment PlanTaskItemFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(title: String, description: String, state: Boolean) =
             PlanTaskItemFragment().apply {

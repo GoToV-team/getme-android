@@ -31,8 +31,8 @@
     </fragment>
     <fragment
             android:id="@+id/PlanFragment"
-            android:name="com.gotov.getmeapp.PlanTaskItemFragment"
-            android:label="@string/second_fragment_label"
-            tools:layout="@layout/fragment_plan_task_item">
+            android:name="com.gotov.getmeapp.PlanFragment"
+            android:label=""
+            tools:layout="@layout/fragment_plan">
     </fragment>
 </navigation>
