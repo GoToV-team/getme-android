@@ -614,7 +614,6 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/PlanItem"
-
   PlanItem:
     type: "object"
     properties:
@@ -628,6 +627,8 @@ definitions:
       content:
         type: "string"
         format: "markdown"
+      isComplete:
+        type: "boolean"
   ShortUser:
     type: "object"
     properties:
