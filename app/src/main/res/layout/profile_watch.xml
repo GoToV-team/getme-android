@@ -102,6 +102,7 @@
             app:layout_constrainedWidth="true"
             android:text="Написать"
             android:textSize="10dp"
+            android:backgroundTint = "@android:color/holo_blue_dark"
             app:layout_constraintStart_toStartOf="@id/profile_watch__contacts"
             app:layout_constraintEnd_toStartOf="@id/line_central"
             app:layout_constraintLeft_toLeftOf="@id/profile_watch__contacts"
@@ -137,10 +138,21 @@
             android:id="@+id/profile_watch__skills"
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:background="@android:color/holo_blue_bright"
+            android:background="@android:color/holo_gray_light"
             app:layout_constraintEnd_toStartOf="@id/line_2"
             app:layout_constraintStart_toEndOf="@id/line_1"
             app:layout_constraintTop_toBottomOf="@id/profile_watch__contacts" />
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:listitem="@layout/fragment_oval_button"
+            app:layout_constraintStart_toStartOf="@id/profile_watch__skills"
+            app:layout_constraintEnd_toEndOf="@id/profile_watch__skills"
+            app:layout_constraintTop_toTopOf="@id/profile_watch__skills"
+            app:layout_constraintBottom_toBottomOf="@id/profile_watch__skills" />
 
     <View
             android:id="@+id/profile_watch__about"
