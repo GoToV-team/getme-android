@@ -9,4 +9,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="menti_value">Менти</string>
+    <string name="mentor_value">Ментор</string>
+    <string name="plans_page_header">Активные планы</string>
+    <string name="reject_button_text">Отклонить</string>
+    <string name="apply_button_text">Принять</string>
+    <string name="telegram_button_text">Написать</string>
 </resources>
