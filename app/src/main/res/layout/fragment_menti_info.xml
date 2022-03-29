@@ -59,23 +59,24 @@
             app:layout_constraintTop_toBottomOf="@+id/menti_item_about"
             app:layout_constraintStart_toEndOf="@+id/avatar_item_icon"
             android:drawableLeft="@drawable/ic_telegram"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            style="@style/TelegramButtonStyle"/>
 
     <Button
             android:layout_width="130dp"
             android:layout_height="34dp"
             android:drawableLeft="@drawable/ic_apply"
-            android:textColor="@android:color/white"
+
             android:text="@string/apply_button_text"
             android:textSize="9sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/menti_item_name"
             android:layout_marginTop="12dp"
             android:id="@+id/button"
+            style="@style/ApplyButtonStyle"
              />
 
     <Button
-
             android:layout_width="130dp"
             android:layout_height="34dp"
             android:drawableLeft="@drawable/ic_reject"
@@ -83,6 +84,7 @@
             android:textSize="9sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button"
-            android:id="@+id/button2" />
+            android:id="@+id/button2"
+            style="@style/RejectButtonStyle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
