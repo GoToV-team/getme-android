@@ -647,6 +647,23 @@ definitions:
         type: "string"
       message:
         type: "string"
+  Mentor:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      skills:
+        type: "boolean"
+      description:
+        type: "string"
+  Skills:
+    type: "object"
+      properties:
+        checked:
+          type: "boolean"
   # Order:
   #   type: "object"
   #   properties:
