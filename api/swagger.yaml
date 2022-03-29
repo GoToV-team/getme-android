@@ -661,9 +661,9 @@ definitions:
         type: "string"
   Skills:
     type: "object"
-      properties:
-        checked:
-          type: "boolean"
+    properties:
+      checked:
+        type: "boolean"
   # Order:
   #   type: "object"
   #   properties:
