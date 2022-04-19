@@ -4,10 +4,16 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.setPadding
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 class PlansViewAdapter(plans : Array<Plan>) : RecyclerView.Adapter<PlanItemFragment>() {
@@ -38,6 +44,16 @@ class PlanItemFragment(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(plan: Plan) {
         _namePlan.text = plan.Title
         _progress.progress = plan.Progress
+
+        var navController: NavController? = null
+
+        this.apply {
+            itemView.setOnClickListener {
+                navController = findNavController(itemView)
+                navController!!.navigate(R.id.action_PlansFragment_to_PlanFragment)
+
+            }
+        }
 
         for (skill in plan.Skills) {
             val tmp: TextView = TextView(itemView.context)

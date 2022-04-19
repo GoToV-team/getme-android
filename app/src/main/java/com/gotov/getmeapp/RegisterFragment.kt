@@ -26,7 +26,7 @@ class RegisterFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.registerRegisterButton.setOnClickListener {
-            findNavController().navigate(R.id.action_RegisterPage_to_PlansFragment)
+            findNavController().navigate(R.id.action_RegisterPage_to_SearchFragment)
         }
     }
 

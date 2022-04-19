@@ -6,6 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.get
+import androidx.core.view.marginBottom
+import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gotov.getmeapp.databinding.ActivityMainBinding
@@ -15,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var bottomNav: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -22,13 +31,76 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        val bottomNavigationView = findViewById<BottomNavigationView
-                >(R.id.bottom_navigatin_view)
+        bottomNav = findViewById(R.id.bottom_navigatin_view)
+
+        setupNav()
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.nav_host_fragment_content_main, fragment)
+            .commit();
+    }
+
+    private fun setupNav() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        bottomNavigationView.setupWithNavController(navController)
+        bottomNav.setupWithNavController(navController)
+
+        bottomNav.visibility = View.GONE
+
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.LoginPage -> {
+                    hideBottomNav()
+                    hideUpIcon()
+                }
+                R.id.RegisterPage -> {
+                    hideBottomNav()
+                    showUpIcon()
+                }
+                R.id.PlansFragment -> {
+                    showBottomNav()
+                    hideUpIcon()
+                }
+                R.id.SearchFragment -> {
+                    showBottomNav()
+                    hideUpIcon()
+                }
+                R.id.ProfileFragment -> {
+                    showBottomNav()
+                    hideUpIcon()
+                }
+                else -> {
+                    showBottomNav()
+                    showUpIcon()
+                }
+            }
+        }
+    }
+
+    private fun showUpIcon() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+    }
+
+    private fun hideUpIcon() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(false);
+        supportActionBar?.setDisplayShowHomeEnabled(false);
+    }
+
+
+    private fun showBottomNav() {
+        bottomNav.visibility = View.VISIBLE
+    }
+
+    private fun hideBottomNav() {
+        bottomNav.visibility = View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

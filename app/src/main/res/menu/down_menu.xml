@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-            android:id="@+id/fragment1"
-            android:icon="@drawable/ic_launcher_background"
-            android:title="Фрагмент 1"/>
+            android:id="@id/SearchFragment"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="@string/navbar_search_text"/>
     <item
-            android:id="@+id/fragment4"
-            android:icon="@drawable/ic_launcher_background"
-            android:title="Фрагмент 4"/>
+            android:id="@id/PlansFragment"
+            android:icon="@drawable/ic_baseline_style_24"
+            android:title="@string/navbar_plans_text"/>
+    <item
+            android:id="@id/ProfileFragment"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="@string/navbar_profile_text"/>
 </menu>

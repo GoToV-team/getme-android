@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +32,7 @@ class LoginFragment: Fragment() {
         }
 
         binding.loginLoginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_LoginPage_to_PlansFragment)
+            findNavController().navigate(R.id.action_LoginPage_to_SearchFragment)
         }
     }
 

@@ -4,6 +4,11 @@
     <!-- Strings used for fragments for navigation -->
     <string name="login_fragment_label">Login Fragment</string>
     <string name="plans_fragment_label">Plans Fragment</string>
+    <string name="plan_fragment_label">Plan Fragment</string>
+    <string name="task_fragment_label">Task Fragment</string>
+    <string name="search_fragment_label">Search Fragment</string>
+    <string name="profile_fragment_label">Profile Fragment</string>
+    <string name="edit_profile_fragment_label">EditProfile Fragment</string>
     <string name="register_fragment_label">Register Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
@@ -23,4 +28,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="navbar_search_text">Поиск</string>
+    <string name="navbar_plans_text">Планы</string>
+    <string name="navbar_profile_text">Профиль</string>
 </resources>
