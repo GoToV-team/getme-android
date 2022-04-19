@@ -2,9 +2,9 @@
     <string name="app_name">GetMeApp</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
+    <string name="login_fragment_label">Login Fragment</string>
     <string name="plans_fragment_label">Plans Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="register_fragment_label">Register Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -17,4 +17,10 @@
     <string name="reject_button_text">Отклонить</string>
     <string name="apply_button_text">Принять</string>
     <string name="telegram_button_text">Написать</string>
+    <string name="telegram_login_button_text">Войти через Телеграм</string>
+    <string name="register_link_name"><u>Регистрация</u></string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

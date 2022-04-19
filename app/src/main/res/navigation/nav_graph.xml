@@ -3,12 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/PlansFragment">
+    app:startDestination="@id/LoginPage">
+
+    <fragment
+            android:id="@+id/LoginPage"
+            android:name="com.gotov.getmeapp.LoginFragment"
+
+            tools:layout="@layout/fragment_login">
+        <action
+                android:id="@+id/action_LoginPage_to_RegisterPage"
+                app:destination="@id/RegisterPage" />
+        <action
+                android:id="@+id/action_LoginPage_to_PlansFragment"
+                app:destination="@id/PlansFragment" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/RegisterPage"
+            android:name="com.gotov.getmeapp.RegisterFragment"
+
+            tools:layout="@layout/fragment_register">
+        <action
+                android:id="@+id/action_RegisterPage_to_PlansFragment"
+                app:destination="@id/PlansFragment" />
+    </fragment>
+
 
     <fragment
             android:id="@+id/PlansFragment"
             android:name="com.gotov.getmeapp.PlansFragment"
-            android:label="@string/plans_fragment_label"
+
             tools:layout="@layout/fragment_plans_page">
     </fragment>
 </navigation>
