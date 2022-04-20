@@ -2,11 +2,33 @@
     <string name="app_name">GetMeApp</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="login_fragment_label">Login Fragment</string>
+    <string name="plans_fragment_label">Plans Fragment</string>
+    <string name="plan_fragment_label">Plan Fragment</string>
+    <string name="task_fragment_label">Task Fragment</string>
+    <string name="search_fragment_label">Search Fragment</string>
+    <string name="profile_fragment_label">Profile Fragment</string>
+    <string name="edit_profile_fragment_label">EditProfile Fragment</string>
+    <string name="register_fragment_label">Register Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="menti_value">Менти</string>
+    <string name="mentor_value">Ментор</string>
+    <string name="plans_page_header">Активные планы</string>
+    <string name="menti_info_header">Новые менти</string>
+    <string name="reject_button_text">Отклонить</string>
+    <string name="apply_button_text">Принять</string>
+    <string name="telegram_button_text">Написать</string>
+    <string name="telegram_login_button_text">Войти через Телеграм</string>
+    <string name="register_link_name"><u>Регистрация</u></string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="navbar_search_text">Поиск</string>
+    <string name="navbar_plans_text">Планы</string>
+    <string name="navbar_profile_text">Профиль</string>
 </resources>
