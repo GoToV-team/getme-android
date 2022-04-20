@@ -9,6 +9,7 @@
     <string name="search_fragment_label">Search Fragment</string>
     <string name="profile_fragment_label">Profile Fragment</string>
     <string name="edit_profile_fragment_label">EditProfile Fragment</string>
+    <string name="user_profile_fragment_label">UserProfile Fragment</string>
     <string name="register_fragment_label">Register Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>

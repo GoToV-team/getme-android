@@ -3,31 +3,30 @@ package com.gotov.getmeapp
 import android.content.Context
 import android.graphics.Color
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.view.setPadding
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-data class Plan(val id: Int, val title: String, val description: String, val progress: Int, val skills: Array<String>) {
+data class User(val id: Int, val name: String, val about: String, val skills: Array<String>) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Plan
+        other as User
 
-        if (title != other.title) return false
-        if (progress != other.progress) return false
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (about != other.about) return false
         if (!skills.contentEquals(other.skills)) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = title.hashCode()
-        result = 31 * result + progress.hashCode()
+        var result = id
+        result = 31 * result + name.hashCode()
+        result = 31 * result + about.hashCode()
         result = 31 * result + skills.contentHashCode()
         return result
     }
@@ -43,12 +42,9 @@ data class Plan(val id: Int, val title: String, val description: String, val pro
         return tmp
     }
 
-    fun addToViews(title: TextView?, description: TextView?,
-                   progress: ProgressBar?, skills: ChipGroup?,
-                   context: Context?) {
-        title?.text = this.title
-        description?.text = this.description
-        progress?.progress = this.progress
+    fun addToViews(title: TextView?, description: TextView?, skills: ChipGroup?, context: Context?) {
+        title?.text = this.name
+        description?.text = this.about
         if (skills != null && context != null) {
             for (skill in this.skills) {
                 skills.addView(getChipSkill(skill, context))
@@ -57,12 +53,12 @@ data class Plan(val id: Int, val title: String, val description: String, val pro
     }
 }
 
-fun getPlans() : Array<Plan>  {
+fun getUsers() : Array<User>  {
     return arrayOf(
-        Plan(0,"Dore", "Полезная задача", 20, Array(1) { "Мир" }),
-        Plan(1,"Dore", "Поможет", 20, Array(1) { "Мир" }),
-        Plan(2,"Dore", "Поможет", 20, Array(1) { "Мир" }),
-        Plan(3,"Dore", "Поможет", 20, Array(1) { "Мир" }),
-        Plan(4,"Dore", "Поможет", 20, Array(1) { "Мир" })
+        User(0,"Dore", "Полезная задача",  Array(1) { "Мир" }),
+        User(1,"Dore", "Поможет",  Array(1) { "Мир" }),
+        User(2,"Dore", "Поможет",  Array(1) { "Мир" }),
+        User(3,"Dore", "Поможет",  Array(1) { "Мир" }),
+        User(4,"Dore", "Поможет",  Array(1) { "Мир" })
     )
 }

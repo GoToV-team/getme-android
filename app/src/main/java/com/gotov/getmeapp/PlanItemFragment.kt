@@ -1,20 +1,19 @@
 package com.gotov.getmeapp
 
 import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.core.view.setPadding
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.ChipGroup
 
 class PlansViewAdapter(plans : Array<Plan>) : RecyclerView.Adapter<PlanItemFragment>() {
 
@@ -39,30 +38,20 @@ class PlansViewAdapter(plans : Array<Plan>) : RecyclerView.Adapter<PlanItemFragm
 class PlanItemFragment(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val _namePlan: TextView = itemView.findViewById(R.id.plan_item_title)
     private val _progress: ProgressBar = itemView.findViewById(R.id.plan_progress_bar)
-    private val _skills: LinearLayout = itemView.findViewById(R.id.plan_item_skills)
+    private val _skills: ChipGroup = itemView.findViewById(R.id.plan_item_skills)
 
     fun bind(plan: Plan) {
-        _namePlan.text = plan.Title
-        _progress.progress = plan.Progress
+        plan.addToViews(_namePlan,null,
+            _progress,  _skills, itemView.context)
 
-        var navController: NavController? = null
+        var navController: NavController?
 
         this.apply {
             itemView.setOnClickListener {
                 navController = findNavController(itemView)
-                navController!!.navigate(R.id.action_PlansFragment_to_PlanFragment)
-
+                val args: Bundle = bundleOf("plan_id" to plan.id)
+                navController!!.navigate(R.id.action_PlansFragment_to_PlanFragment, args)
             }
-        }
-
-        for (skill in plan.Skills) {
-            val tmp: TextView = TextView(itemView.context)
-            tmp.text = skill
-            tmp.setTextColor(Color.WHITE);
-            tmp.setBackgroundColor(Color.BLACK);
-            tmp.textSize = 11F;
-            tmp.setPadding(5);
-            _skills.addView(tmp)
         }
     }
 }

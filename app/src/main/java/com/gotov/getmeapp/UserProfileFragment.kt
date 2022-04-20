@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.gotov.getmeapp.databinding.FragmentProfileBinding
 
-class ProfileFragment : Fragment() {
+class UserProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
 
     private val binding get() = _binding!!
@@ -19,15 +19,20 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val userId = arguments?.getInt("user_id")
+        val user = userId?.let { getUsers().get(userId)}
+        user?.addToViews(binding.profileWatchHeaderFio,
+            binding.profileWatchAbout, binding.profileWatchSkills, this.context)
 
-        binding.profileWatchContacts.visibility = View.GONE
-        binding.profileWatchContactsBtnMessage.visibility = View.GONE
-        binding.profileWatchContactsBtnStartWork.visibility = View.GONE
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.profileWatchContactsBtnStartWork.setOnClickListener {
+            findNavController().navigate(R.id.action_UserFragment_to_PlansFragment)
+        }
 
     }
 

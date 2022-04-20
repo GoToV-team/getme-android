@@ -7,8 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".PlanFragment"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,64 +35,16 @@
                 android:textColor="@color/black" />
 
         <HorizontalScrollView
-
-                android:id="@+id/plan_skills"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp">
 
-            <LinearLayout
+            <com.google.android.material.chip.ChipGroup
+                    app:singleLine="true"
+                    android:id="@+id/plan_skills"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:background="@color/black"
-                        android:padding="5dp"
-                        android:text="lmklmlkmlmmklm"
-
-                        android:textColor="@color/white"
-                        android:textSize="11sp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:background="@color/black"
-                        android:padding="5dp"
-                        android:text="lmklmlkmlmmklm"
-
-                        android:textColor="@color/white"
-                        android:textSize="11sp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:background="@color/black"
-                        android:padding="5dp"
-                        android:text="lmklmlkmlmmklm"
-
-                        android:textColor="@color/white"
-                        android:textSize="11sp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:background="@color/black"
-                        android:padding="5dp"
-                        android:text="lmklmlkmlmmklm"
-
-                        android:textColor="@color/white"
-                        android:textSize="11sp" />
-
-            </LinearLayout>
+                    android:layout_height="wrap_content" />
         </HorizontalScrollView>
 
 
@@ -100,15 +52,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <androidx.fragment.app.FragmentContainerView
+            <ImageView
+                    android:src="@drawable/ic_baseline_person_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:name="com.gotov.getmeapp.UserInfoSmallFragment"
-                    android:id="@+id/fragmentContainerView"
-
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:id="@+id/user_info_small_avatar"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:padding="10dp" />
+
+            <TextView
+                    android:text="Стив Джобс"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user_info_small_name"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/user_info_small_avatar"
+                    app:layout_constraintBottom_toTopOf="@id/user_info_small_note"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                    android:text="Новый менти"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user_info_small_note"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintTop_toBottomOf="@id/user_info_small_name"
+                    app:layout_constraintStart_toEndOf="@id/user_info_small_avatar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:padding="2dp"
+                    android:textSize="12sp" />
+
 
             <Button
                     android:text="Написать"
@@ -118,14 +98,9 @@
                     android:drawableLeft="@drawable/ic_baseline_send_24"
 
                     app:layout_constraintEnd_toEndOf="parent"
-
+                    android:backgroundTint="@color/telegram"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-
-
-                    />
-
-
+                    app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
@@ -147,29 +122,13 @@
                 android:textSize="14sp"
                 android:layout_marginVertical="10dp" />
 
-        <androidx.fragment.app.FragmentContainerView
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/task_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.gotov.getmeapp.PlanTaskItemFragment"
-                android:id="@+id/dopkdeko" />
-
-        <androidx.fragment.app.FragmentContainerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.gotov.getmeapp.PlanTaskItemFragment"
-                android:id="@+id/dopkdeko1" />
-
-        <androidx.fragment.app.FragmentContainerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.gotov.getmeapp.PlanTaskItemFragment"
-                android:id="@+id/dopkdeko2" />
-
-        <androidx.fragment.app.FragmentContainerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.gotov.getmeapp.PlanTaskItemFragment"
-                android:id="@+id/dopkdeko4" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+        </androidx.recyclerview.widget.RecyclerView>
 
         <Button
                 android:layout_width="match_parent"

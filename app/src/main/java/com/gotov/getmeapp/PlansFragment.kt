@@ -22,21 +22,15 @@ class PlansFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        val test : Array<Plan> = Array(5) {
-            Plan("Dore", 20, Array(1) { "Мир" })
-            Plan("Dore", 20, Array(1) { "Мир" })
-            Plan("Dore", 20, Array(1) { "Мир" })
-            Plan("Dore", 20, Array(1) { "Мир" })
-            Plan("Dore", 20, Array(1) { "Мир" })
-        }
+        val test : Array<Plan> = getPlans()
 
-        val testMenti : Array<Menti> = Array(5) {
+        val testMenti : Array<Menti> = arrayOf(
+            Menti("Dore", "Я хороший"),
+            Menti("Dore", "Я хороший"),
+            Menti("Dore", "Я хороший"),
+            Menti("Dore", "Я хороший"),
             Menti("Dore", "Я хороший")
-            Menti("Dore", "Я хороший")
-            Menti("Dore", "Я хороший")
-            Menti("Dore", "Я хороший")
-            Menti("Dore", "Я хороший")
-        }
+        )
 
         _binding = FragmentPlansPageBinding.inflate(inflater, container, false)
         val rec : RecyclerView = binding.planList

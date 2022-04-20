@@ -48,12 +48,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/plan_item_title"
                 app:layout_constraintStart_toStartOf="@+id/plan_progress_bar">
 
-            <LinearLayout
-                    android:id="@+id/plan_item_skills"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-            </LinearLayout>
+        <com.google.android.material.chip.ChipGroup
+                app:singleLine="true"
+                android:id="@+id/plan_item_skills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </HorizontalScrollView>
 
         <ProgressBar

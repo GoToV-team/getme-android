@@ -41,9 +41,9 @@
 
     <fragment
             android:id="@+id/PlanFragment"
-            android:name="com.gotov.getmeapp.LoginFragment"
-            android:label="@string/plans_fragment_label"
-            tools:layout="@layout/fragment_login">
+            android:name="com.gotov.getmeapp.PlanFragment"
+            android:label="@string/plan_fragment_label"
+            tools:layout="@layout/fragment_plan">
         <action
                 android:id="@+id/action_PlanFragment_to_TaskFragment"
                 app:destination="@id/TaskFragment" />
@@ -51,9 +51,9 @@
 
     <fragment
             android:id="@+id/TaskFragment"
-            android:name="com.gotov.getmeapp.LoginFragment"
+            android:name="com.gotov.getmeapp.TaskFragment"
             android:label="@string/task_fragment_label"
-            tools:layout="@layout/fragment_login">
+            tools:layout="@layout/fragment_plan_task">
     </fragment>
 
     <fragment
@@ -61,6 +61,9 @@
             android:name="com.gotov.getmeapp.SearchFragment"
             android:label="@string/search_fragment_label"
             tools:layout="@layout/fragment_search">
+        <action
+                android:id="@+id/action_SearchFragment_to_UserFragment"
+                app:destination="@id/UserFragment" />
     </fragment>
 
     <fragment
@@ -81,5 +84,16 @@
         <action
                 android:id="@+id/action_EditProfileFragment_to_ProfileFragment"
                 app:destination="@id/ProfileFragment" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/UserFragment"
+            android:name="com.gotov.getmeapp.UserProfileFragment"
+            android:label="@string/user_profile_fragment_label"
+            tools:layout="@layout/fragment_profile">
+
+        <action
+                android:id="@+id/action_UserFragment_to_PlansFragment"
+                app:destination="@id/PlansFragment" />
     </fragment>
 </navigation>

@@ -1,12 +1,62 @@
 package com.gotov.getmeapp
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.gotov.getmeapp.databinding.FragmentPlanTaskItemBinding
+import android.widget.*
+import androidx.core.os.bundleOf
+import androidx.core.view.setPadding
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 
+class TaskViewAdapter(tasks : Array<Task>) : RecyclerView.Adapter<TaskItemFragment>() {
+
+    private val _tasks : Array<Task> = tasks
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemFragment {
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.fragment_plan_task_item, parent, false)
+        return TaskItemFragment(view)
+    }
+
+    override fun onBindViewHolder(holder: TaskItemFragment, position: Int) {
+        val plan = _tasks[position]
+        holder.bind(plan)
+    }
+
+    override fun getItemCount(): Int {
+        return _tasks.size
+    }
+
+}
+
+class TaskItemFragment(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val _checkBox: CheckBox = itemView.findViewById(R.id.task_item_checkbox)
+    private val _title: TextView = itemView.findViewById(R.id.task_item_title)
+    private val _description: TextView = itemView.findViewById(R.id.task_item_description)
+
+    fun bind(task: Task) {
+        task.addToViews(_title, _description, _checkBox)
+
+        var navController: NavController?
+        this.apply {
+            itemView.setOnClickListener {
+                navController = findNavController(itemView)
+                val args: Bundle = bundleOf("task_id" to task.id)
+                navController!!.navigate(R.id.action_PlanFragment_to_TaskFragment, args)
+
+            }
+        }
+    }
+}
+
+
+/*
 private const val ARG_TITLE = "title"
 private const val ARG_DESCRIPTION = "description"
 private const val ARG_STATE = "state"
@@ -72,3 +122,4 @@ class PlanTaskItemFragment : Fragment() {
             }
     }
 }
+*/

@@ -1,13 +1,9 @@
 package com.gotov.getmeapp
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 
 class MentisViewAdapter(mentis : Array<Menti>) : RecyclerView.Adapter<MentiItemFragment>() {
@@ -35,7 +31,6 @@ class MentiItemFragment(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val _about: TextView = itemView.findViewById(R.id.menti_item_about)
 
     fun bind(menti: Menti) {
-        _name.text = menti.Name
-        _about.text = menti.About
+        menti.addToViews(_name, _about)
     }
 }

@@ -1,3 +1,11 @@
 package com.gotov.getmeapp
 
-data class Menti(val Name : String, val About : String)
+import android.widget.CheckBox
+import android.widget.TextView
+
+data class Menti(val name : String, val about : String) {
+    fun addToViews(title: TextView?, description: TextView?) {
+        title?.text = this.name
+        description?.text = this.about
+    }
+}

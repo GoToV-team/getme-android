@@ -9,45 +9,6 @@
 
         >
 
-    <ImageView
-            android:src="@drawable/ic_baseline_person_24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_info_small_avatar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:padding="10dp" />
-
-    <TextView
-            android:text="Стив Джобс"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_info_small_name"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/user_info_small_avatar"
-            app:layout_constraintBottom_toTopOf="@id/user_info_small_note"
-            android:padding="2dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-            android:text="Новый менти"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/user_info_small_note"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintTop_toBottomOf="@id/user_info_small_name"
-            app:layout_constraintStart_toEndOf="@id/user_info_small_avatar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:padding="2dp"
-            android:textSize="12sp"
-
-
-            />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
