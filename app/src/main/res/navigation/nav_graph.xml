@@ -58,9 +58,9 @@
 
     <fragment
             android:id="@+id/SearchFragment"
-            android:name="com.gotov.getmeapp.PlansFragment"
+            android:name="com.gotov.getmeapp.SearchFragment"
             android:label="@string/search_fragment_label"
-            tools:layout="@layout/fragment_plans_page">
+            tools:layout="@layout/fragment_search">
     </fragment>
 
     <fragment
