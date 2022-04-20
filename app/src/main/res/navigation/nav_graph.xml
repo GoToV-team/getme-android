@@ -65,9 +65,9 @@
 
     <fragment
             android:id="@+id/ProfileFragment"
-            android:name="com.gotov.getmeapp.LoginFragment"
+            android:name="com.gotov.getmeapp.ProfileFragment"
             android:label="@string/profile_fragment_label"
-            tools:layout="@layout/fragment_plans_page">
+            tools:layout="@layout/fragment_profile">
         <action
                 android:id="@+id/action_ProfileFragment_to_EditProfileFragment"
                 app:destination="@id/EditProfileFragment" />

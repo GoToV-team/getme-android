@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.gotov.getmeapp.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -23,6 +24,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.profileWatchContactsBtnStartWork.setOnClickListener {
+            findNavController().navigate(R.id.action_PlansFragment_to_PlanFragment)
+        }
 
     }
 
