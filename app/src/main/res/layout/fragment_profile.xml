@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".FirstFragment">
+        tools:context=".ProfileFragment">
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/line_central"
@@ -174,5 +174,6 @@
               app:layout_constraintTop_toTopOf="@id/profile_watch__about"
               app:layout_constraintBottom_toBottomOf="@id/profile_watch__about"
               />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
