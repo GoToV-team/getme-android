@@ -1,25 +1,29 @@
 package com.gotov.getmeapp
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.get
-import androidx.core.view.marginBottom
-import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainerView
-import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gotov.getmeapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+        setupNavigation()
+    }
+    /*
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -36,16 +40,21 @@ class MainActivity : AppCompatActivity() {
         bottomNav = findViewById(R.id.bottom_navigatin_view)
 
         setupNav()
+    }*/
+
+    private fun setupNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+        navGraph.setStartDestination(R.id.mainFlowFragment)
+        navController.graph = navGraph
+
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    private fun openFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.nav_host_fragment_content_main, fragment)
-            .commit();
-    }
-
-    private fun setupNav() {
+        /*
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         bottomNav.setupWithNavController(navController)
 
@@ -102,7 +111,7 @@ class MainActivity : AppCompatActivity() {
     private fun hideBottomNav() {
         bottomNav.visibility = View.GONE
     }
-
+*/
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -120,7 +129,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/sign_nav_graph"
+        app:startDestination="@id/LoginPage">
+
+    <fragment
+            android:id="@+id/LoginPage"
+            android:name="com.gotov.getmeapp.ui.fragments.LoginFragment"
+            android:label="@string/login_fragment_label"
+            tools:layout="@layout/fragment_login">
+        <action
+                android:id="@+id/action_LoginPage_to_RegisterPage"
+                app:destination="@id/RegisterPage" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/RegisterPage"
+            android:name="com.gotov.getmeapp.ui.fragments.RegisterFragment"
+            android:label="@string/register_fragment_label"
+            tools:layout="@layout/fragment_register">
+    </fragment>
+
+</navigation>

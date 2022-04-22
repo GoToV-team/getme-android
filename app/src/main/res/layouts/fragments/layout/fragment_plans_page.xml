@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.PlansFragment"
+        android:orientation="vertical"
+        android:paddingTop="0dp"
+        android:padding="20dp">
+
+
+    <TextView
+            android:text="@string/plans_page_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="-10dp" />
+
+    <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="@drawable/ic_layout_bounders"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+                android:id="@+id/radio_menti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/menti_value"
+                android:button="@null"
+                android:textColor="@drawable/ic_custom_switch_text_color"
+                android:textAlignment="center"
+                android:background="@drawable/ic_custom_swith_button_draw"
+                android:checked="true" />
+
+        <RadioButton
+                android:id="@+id/radio_mentor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mentor_value"
+                android:button="@null"
+                android:textColor="@drawable/ic_custom_switch_text_color"
+                android:textAlignment="center"
+                android:background="@drawable/ic_custom_swith_button_draw"
+                android:checked="false" />
+    </RadioGroup>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="630dp"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menti_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#7E7E7E"
+                android:id="@+id/divider_between_menti_and_plan" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/plan_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
