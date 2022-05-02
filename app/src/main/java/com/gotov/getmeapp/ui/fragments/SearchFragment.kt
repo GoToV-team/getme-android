@@ -35,10 +35,6 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.profileWatchContactsBtnStartWork.setOnClickListener {
-//            findNavController().navigate(R.id.action_PlansFragment_to_PlanFragment)
-//        }
-
     }
 
     override fun onDestroyView() {
