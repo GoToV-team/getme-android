@@ -7,21 +7,25 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import com.gotov.getmeapp.R
 
 abstract class BaseFlowFragment(
     @LayoutRes layoutId: Int,
     @IdRes private val navHostFragmentId: Int
 ) : Fragment(layoutId) {
 
-    final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    protected lateinit var navController: NavController
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navHostFragment =
-            childFragmentManager.findFragmentById(navHostFragmentId) as NavHostFragment
-        val navController = navHostFragment.navController
+        val navHostFragment = childFragmentManager.findFragmentById(navHostFragmentId) as NavHostFragment
+        navController = navHostFragment.navController
 
-        setupNavigation(navController)
+        setupNavigation()
     }
 
-    protected open fun setupNavigation(navController: NavController) {}
+    protected open fun setupNavigation() {}
 }

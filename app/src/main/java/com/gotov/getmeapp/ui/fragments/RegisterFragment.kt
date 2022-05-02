@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentRegisterBinding
+import com.gotov.getmeapp.ui.utils.activityNavController
 import com.gotov.getmeapp.ui.utils.navigateSafely
 
 class RegisterFragment: Fragment() {
@@ -26,7 +27,7 @@ class RegisterFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.registerRegisterButton.setOnClickListener {
-            findNavController().navigateSafely(R.id.action_global_mainFlowFragment)
+            activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
         }
     }
 

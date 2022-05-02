@@ -6,6 +6,23 @@
         android:layout_height="match_parent"
         tools:context=".ui.flow_fragments.SignFlowFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:id="@+id/sign_app_bar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/sign_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment_sign"
             android:name="androidx.navigation.fragment.NavHostFragment"
