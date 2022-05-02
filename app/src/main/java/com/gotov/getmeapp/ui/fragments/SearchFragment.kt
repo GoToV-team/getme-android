@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gotov.getmeapp.data.User
-import com.gotov.getmeapp.UsersViewAdapter
+import com.gotov.getmeapp.ui.items.UsersViewAdapter
 import com.gotov.getmeapp.databinding.FragmentSearchBinding
 import com.gotov.getmeapp.data.getUsers
 

@@ -3,17 +3,9 @@ package com.gotov.getmeapp.ui.flow_fragments
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.gotov.getmeapp.R
-import androidx.navigation.ui.NavigationUI
 import com.gotov.getmeapp.databinding.FlowFragmentMainBinding
 import com.gotov.getmeapp.ui.utils.BaseFlowFragment
 import com.gotov.getmeapp.ui.utils.hideUpIcon
@@ -21,7 +13,8 @@ import com.gotov.getmeapp.ui.utils.setToolbar
 import com.gotov.getmeapp.ui.utils.showUpIcon
 
 class MainFlowFragment : BaseFlowFragment(
-    R.layout.flow_fragment_main, R.id.nav_host_fragment_content_main
+    R.layout.flow_fragment_main,
+    R.id.nav_host_fragment_content_main
 ) {
 
     private val binding by viewBinding(FlowFragmentMainBinding::bind)

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gotov.getmeapp.data.Task
-import com.gotov.getmeapp.TaskViewAdapter
+import com.gotov.getmeapp.ui.items.TaskViewAdapter
 import com.gotov.getmeapp.databinding.FragmentPlanBinding
 import com.gotov.getmeapp.data.getPlans
 import com.gotov.getmeapp.data.getTasks

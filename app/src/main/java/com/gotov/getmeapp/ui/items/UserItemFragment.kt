@@ -1,4 +1,4 @@
-package com.gotov.getmeapp
+package com.gotov.getmeapp.ui.items
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.ChipGroup
+import com.gotov.getmeapp.R
 import com.gotov.getmeapp.data.User
 
 class UsersViewAdapter(users : Array<User>) : RecyclerView.Adapter<UserItemFragment>() {

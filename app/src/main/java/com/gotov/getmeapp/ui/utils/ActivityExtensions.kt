@@ -6,7 +6,6 @@ import androidx.navigation.NavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 
-
 fun AppCompatActivity.setToolbar(navController: NavController, toolbar: Toolbar) {
     val appBarConfiguration = AppBarConfiguration(navController.graph)
 

@@ -1,10 +1,11 @@
-package com.gotov.getmeapp
+package com.gotov.getmeapp.ui.items
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.gotov.getmeapp.R
 import com.gotov.getmeapp.data.Menti
 
 class MentisViewAdapter(mentis : Array<Menti>) : RecyclerView.Adapter<MentiItemFragment>() {

@@ -1,4 +1,4 @@
-package com.gotov.getmeapp
+package com.gotov.getmeapp.ui.items
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.gotov.getmeapp.R
 import com.gotov.getmeapp.data.Task
 
 class TaskViewAdapter(tasks : Array<Task>) : RecyclerView.Adapter<TaskItemFragment>() {

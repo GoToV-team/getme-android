@@ -6,7 +6,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import com.gotov.getmeapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

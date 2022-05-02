@@ -7,9 +7,6 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import com.gotov.getmeapp.R
 
 abstract class BaseFlowFragment(
     @LayoutRes layoutId: Int,

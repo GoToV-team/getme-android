@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gotov.getmeapp.*
 import com.gotov.getmeapp.data.Menti
 import com.gotov.getmeapp.data.Plan
 import com.gotov.getmeapp.data.getPlans
 import com.gotov.getmeapp.databinding.FragmentPlansPageBinding
+import com.gotov.getmeapp.ui.items.MentisViewAdapter
+import com.gotov.getmeapp.ui.items.PlansViewAdapter
 
 class PlansFragment : Fragment() {
     private var _binding: FragmentPlansPageBinding? = null
