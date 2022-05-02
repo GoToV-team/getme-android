@@ -16,11 +16,11 @@ fun AppCompatActivity.setToolbar(navController: NavController, toolbar: Toolbar)
 }
 
 fun AppCompatActivity.showUpIcon() {
-    supportActionBar?.setDisplayHomeAsUpEnabled(true);
-    supportActionBar?.setDisplayShowHomeEnabled(true);
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    supportActionBar?.setDisplayShowHomeEnabled(true)
 }
 
 fun AppCompatActivity.hideUpIcon() {
-    supportActionBar?.setDisplayHomeAsUpEnabled(false);
-    supportActionBar?.setDisplayShowHomeEnabled(false);
+    supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    supportActionBar?.setDisplayShowHomeEnabled(false)
 }

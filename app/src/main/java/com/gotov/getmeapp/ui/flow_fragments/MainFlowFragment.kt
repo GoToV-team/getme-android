@@ -45,5 +45,4 @@ class MainFlowFragment : BaseFlowFragment(
     override fun setupNavigation() {
         binding.navHostFragmentMain.setupWithNavController(navController)
     }
-
 }
