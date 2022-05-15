@@ -17,7 +17,5 @@ data class Resource<out T>(val state: LoadingState, val data: T?) {
         fun <T> loading(data: T?): Resource<T> {
             return Resource(loading, data)
         }
-
     }
-
 }

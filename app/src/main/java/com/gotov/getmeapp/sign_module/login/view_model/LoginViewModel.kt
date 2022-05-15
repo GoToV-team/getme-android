@@ -10,10 +10,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-
 private const val SUCCESS_CODE = 200
 private const val INCORRECT_FIELD_CODE = 403
-
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
     private val status = MutableLiveData<Resource<LoginStatus>>()
@@ -30,20 +28,32 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             loginRepository.login(login)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response ->
-                    when (response.code()) {
-                        SUCCESS_CODE -> status.postValue(Resource.success(LoginStatus.SUCCESS))
-                        INCORRECT_FIELD_CODE -> status.postValue(Resource.error("", LoginStatus.INCORRECT_FIELD))
-                        else -> {
-                            val body: String?
-                            body = response?.body().toString()
+                .subscribe(
+                    { response ->
+                        when (response.code()) {
+                            SUCCESS_CODE -> status.postValue(Resource.success(LoginStatus.SUCCESS))
+                            INCORRECT_FIELD_CODE -> status.postValue(
+                                Resource.error(
+                                    "",
+                                    LoginStatus.INCORRECT_FIELD
+                                )
+                            )
+                            else -> {
+                                val body: String?
+                                body = response?.body().toString()
 
-                            status.postValue(Resource.error(body, LoginStatus.SERVER_ERROR))
+                                status.postValue(Resource.error(body, LoginStatus.SERVER_ERROR))
+                            }
                         }
-                    }
-                }, { throwable ->
-                    status.postValue(Resource.error("Err when try login: " + throwable.message, null))
-                })
+                    },
+                    { throwable ->
+                        status.postValue(
+                            Resource.error(
+                                "Err when try login: " + throwable.message,
+                                null
+                            )
+                        )
+                    })
         )
         return status
     }
