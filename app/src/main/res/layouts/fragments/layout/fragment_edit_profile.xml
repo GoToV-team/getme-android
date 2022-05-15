@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.ProfileFragment">
+        tools:context=".main_module.profile.ui.ProfileFragment">
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/line_central"
@@ -103,10 +103,8 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
-    <Switch
-            android:text="Стать ментором"
+    <androidx.appcompat.widget.SwitchCompat
+            android:text="@string/edit_profile_switch_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/switch1"
