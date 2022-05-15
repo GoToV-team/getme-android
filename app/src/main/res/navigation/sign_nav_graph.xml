@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/LoginPage"
-            android:name="com.gotov.getmeapp.sign_module.login.ui.LoginFragment"
+            android:name="com.gotov.getmeapp.sign_module.login.view.ui.LoginFragment"
             android:label="@string/login_fragment_label"
             tools:layout="@layout/fragment_login">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
             android:id="@+id/RegisterPage"
-            android:name="com.gotov.getmeapp.sign_module.signup.ui.RegisterFragment"
+            android:name="com.gotov.getmeapp.sign_module.signup.view.ui.RegisterFragment"
             android:label="@string/register_fragment_label"
             tools:layout="@layout/fragment_register">
     </fragment>

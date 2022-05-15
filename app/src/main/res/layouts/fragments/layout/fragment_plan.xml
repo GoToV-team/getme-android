@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".main_module.plan.ui.PlanFragment"
+        tools:context=".main_module.plan.view.ui.PlanFragment"
         android:orientation="vertical">
 
     <LinearLayout
