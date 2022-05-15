@@ -53,7 +53,8 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                                 null
                             )
                         )
-                    })
+                    }
+                )
         )
         return status
     }
