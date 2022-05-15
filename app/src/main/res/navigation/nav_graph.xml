@@ -1,99 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/LoginPage">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph"
+        tools:ignore="InvalidNavigation">
+
+    <action
+            android:id="@+id/action_global_signFlowFragment"
+            app:destination="@id/signFlowFragment"
+            app:popUpTo="@id/nav_graph" />
+
+    <action
+            android:id="@+id/action_global_mainFlowFragment"
+            app:destination="@id/mainFlowFragment"
+            app:popUpTo="@id/nav_graph" />
 
     <fragment
-            android:id="@+id/LoginPage"
-            android:name="com.gotov.getmeapp.LoginFragment"
-            android:label="@string/login_fragment_label"
-            tools:layout="@layout/fragment_login">
-        <action
-                android:id="@+id/action_LoginPage_to_RegisterPage"
-                app:destination="@id/RegisterPage" />
-        <action
-                android:id="@+id/action_LoginPage_to_SearchFragment"
-                app:destination="@id/SearchFragment" />
-    </fragment>
+            android:id="@+id/mainFlowFragment"
+            android:name="com.gotov.getmeapp.main_module.ui.MainFlowFragment"
+            android:label="flow_fragment_main"
+            tools:layout="@layout/flow_fragment_main" />
 
     <fragment
-            android:id="@+id/RegisterPage"
-            android:name="com.gotov.getmeapp.RegisterFragment"
-            android:label="@string/register_fragment_label"
-            tools:layout="@layout/fragment_register">
-        <action
-                android:id="@+id/action_RegisterPage_to_SearchFragment"
-                app:destination="@id/SearchFragment" />
-    </fragment>
+            android:id="@+id/signFlowFragment"
+            android:name="com.gotov.getmeapp.sign_module.ui.SignFlowFragment"
+            android:label="flow_fragment_sign"
+            tools:layout="@layout/flow_fragment_sign" />
 
 
-    <fragment
-        android:id="@+id/PlansFragment"
-        android:name="com.gotov.getmeapp.PlansFragment"
-        android:label="@string/plans_fragment_label"
-        tools:layout="@layout/fragment_plans_page">
-        <action
-                android:id="@+id/action_PlansFragment_to_PlanFragment"
-                app:destination="@id/PlanFragment" />
-    </fragment>
-
-    <fragment
-            android:id="@+id/PlanFragment"
-            android:name="com.gotov.getmeapp.PlanFragment"
-            android:label="@string/plan_fragment_label"
-            tools:layout="@layout/fragment_plan">
-        <action
-                android:id="@+id/action_PlanFragment_to_TaskFragment"
-                app:destination="@id/TaskFragment" />
-    </fragment>
-
-    <fragment
-            android:id="@+id/TaskFragment"
-            android:name="com.gotov.getmeapp.TaskFragment"
-            android:label="@string/task_fragment_label"
-            tools:layout="@layout/fragment_plan_task">
-    </fragment>
-
-    <fragment
-            android:id="@+id/SearchFragment"
-            android:name="com.gotov.getmeapp.SearchFragment"
-            android:label="@string/search_fragment_label"
-            tools:layout="@layout/fragment_search">
-        <action
-                android:id="@+id/action_SearchFragment_to_UserFragment"
-                app:destination="@id/UserFragment" />
-    </fragment>
-
-    <fragment
-            android:id="@+id/ProfileFragment"
-            android:name="com.gotov.getmeapp.ProfileFragment"
-            android:label="@string/profile_fragment_label"
-            tools:layout="@layout/fragment_profile">
-        <action
-                android:id="@+id/action_ProfileFragment_to_EditProfileFragment"
-                app:destination="@id/EditProfileFragment" />
-    </fragment>
-
-    <fragment
-            android:id="@+id/EditProfileFragment"
-            android:name="com.gotov.getmeapp.PlansFragment"
-            android:label="@string/edit_profile_fragment_label"
-            tools:layout="@layout/fragment_plans_page">
-        <action
-                android:id="@+id/action_EditProfileFragment_to_ProfileFragment"
-                app:destination="@id/ProfileFragment" />
-    </fragment>
-
-    <fragment
-            android:id="@+id/UserFragment"
-            android:name="com.gotov.getmeapp.UserProfileFragment"
-            android:label="@string/user_profile_fragment_label"
-            tools:layout="@layout/fragment_profile">
-
-        <action
-                android:id="@+id/action_UserFragment_to_PlansFragment"
-                app:destination="@id/PlansFragment" />
-    </fragment>
 </navigation>

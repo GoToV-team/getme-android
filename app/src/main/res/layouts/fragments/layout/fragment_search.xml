@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main_module.search.ui.SearchFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_central"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="1.0" />
+
+    <View
+            android:id="@+id/main_page__header"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            app:layout_constraintStart_toStartOf="@id/line_1"
+            app:layout_constraintEnd_toEndOf="@id/line_2"
+            app:layout_constraintTop_toTopOf="@id/line_3"
+            app:layout_constraintLeft_toRightOf="@id/line_1"
+            app:layout_constraintRight_toLeftOf="@id/line_2"
+            />
+
+    <TextView
+            android:id="@+id/main_page__header__mentor"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:text="Менторы"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/main_page__header"
+            app:layout_constraintLeft_toLeftOf="@id/main_page__header"
+            app:layout_constraintTop_toTopOf="@id/main_page__header"
+            />
+
+    <View
+            android:id="@+id/skills"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintTop_toBottomOf="@id/main_page__header"
+            app:layout_constraintEnd_toStartOf="@id/line_2"
+            app:layout_constraintStart_toEndOf="@id/line_1"
+            />
+
+    <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/mentor_info__skills_list"
+            app:layout_constraintTop_toBottomOf="@id/main_page__header"
+            app:layout_constraintEnd_toStartOf="@id/line_2"
+            app:layout_constraintStart_toEndOf="@id/line_1"
+            >
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/mentor_info__skills_list_linear"
+                >
+
+            <com.google.android.material.chip.ChipGroup
+                    app:layout_constraintStart_toStartOf="@id/mentor_info__skills_list"
+                    app:layout_constraintLeft_toLeftOf="@id/mentor_info__skills_list"
+                    app:layout_constraintTop_toTopOf="@id/mentor_info__skills_list"
+                    app:singleLine="true"
+                    android:id="@+id/mentor_info__skills_list_chips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintHorizontal_bias="0.0">
+
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="Скилл"
+                        android:textSize="11sp"
+                        android:backgroundTint="@color/teal_700"
+                        android:theme="@style/Theme.MaterialComponents.Bridge"
+                        android:checkable="false" />
+
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="Скилл"
+                        android:textSize="11sp"
+                        android:backgroundTint="@color/teal_700"
+                        android:theme="@style/Theme.MaterialComponents.Bridge"
+                        android:checkable="false" />
+
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="Скилл"
+                        android:textSize="11sp"
+                        android:backgroundTint="@color/teal_700"
+                        android:theme="@style/Theme.MaterialComponents.Bridge"
+                        android:checkable="false" />
+
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="Скилл"
+                        android:textSize="11sp"
+                        android:backgroundTint="@color/teal_700"
+                        android:theme="@style/Theme.MaterialComponents.Bridge"
+                        android:checkable="false" />
+
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="Скилл"
+                        android:textSize="11sp"
+                        android:backgroundTint="@color/teal_700"
+                        android:theme="@style/Theme.MaterialComponents.Bridge"
+                        android:checkable="false" />
+
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="Скилл"
+                        android:backgroundTint="@color/teal_700"
+                        android:textSize="11sp"
+                        android:theme="@style/Theme.MaterialComponents.Bridge"
+                        android:checkable="false" />
+            </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+    </HorizontalScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/skills"
+            app:layout_constraintBottom_toTopOf="@+id/line_4"
+            app:layout_constraintEnd_toStartOf="@+id/line_2"
+            app:layout_constraintStart_toStartOf="@+id/line_1">
+    </androidx.recyclerview.widget.RecyclerView>
+<!--    <View-->
+<!--            android:id="@+id/mentor"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/skills"-->
+<!--            app:layout_constraintEnd_toStartOf="@id/line_2"-->
+<!--            app:layout_constraintStart_toEndOf="@id/line_1"-->
+<!--            >-->
+<!--    </View>-->
+
+<!--    <ImageView-->
+<!--            android:src="@drawable/mentor_avatar"-->
+<!--            android:layout_width="90dp"-->
+<!--            android:layout_height="90dp"-->
+<!--            android:id="@+id/mentor_info__avatar"-->
+<!--            app:layout_constraintTop_toTopOf="@id/mentor"-->
+<!--            app:layout_constraintStart_toStartOf="@id/mentor"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/mentor"-->
+<!--            />-->
+
+<!--    <TextView-->
+<!--            android:text="Стив Джобс"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/mentor_info__name"-->
+<!--            app:layout_constrainedWidth="true"-->
+<!--            app:layout_constraintTop_toTopOf="@id/mentor_info__avatar"-->
+<!--            app:layout_constraintStart_toEndOf="@id/mentor_info__avatar"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/mentor_info__skills"-->
+<!--            android:padding="2dp"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintVertical_chainStyle="packed" />-->
+
+<!--    <TextView-->
+<!--            android:text="Description"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/mentor_info__description"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            app:layout_constrainedWidth="true"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/mentor_info__skills"-->
+<!--            app:layout_constraintStart_toEndOf="@id/mentor_info__avatar"-->
+<!--            android:padding="2dp"-->
+<!--            android:textSize="12sp"-->
+<!--            />-->
+
+<!--    <com.google.android.material.chip.ChipGroup-->
+<!--            app:layout_constraintStart_toStartOf="@id/mentor_info__name"-->
+<!--            app:layout_constraintStart_toEndOf="@id/mentor"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/mentor_info__name"-->
+<!--            app:singleLine="true"-->
+<!--            android:id="@+id/mentor_info__skills"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/mentor_info__avatar"-->
+<!--            app:layout_constraintHorizontal_bias="0.0">-->
+
+<!--        <com.google.android.material.chip.Chip-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="36dp"-->
+<!--                android:text="Скилл"-->
+<!--                android:textSize="11sp"-->
+<!--                android:theme="@style/Theme.MaterialComponents.Bridge"-->
+<!--                android:checkable="false" />-->
+
+<!--        <com.google.android.material.chip.Chip-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="36dp"-->
+<!--                android:text="Скилл"-->
+<!--                android:textSize="11sp"-->
+<!--                android:theme="@style/Theme.MaterialComponents.Bridge"-->
+<!--                android:checkable="false" />-->
+
+<!--        <com.google.android.material.chip.Chip-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="36dp"-->
+<!--                android:text="Скилл"-->
+<!--                android:textSize="11sp"-->
+<!--                android:theme="@style/Theme.MaterialComponents.Bridge"-->
+<!--                android:checkable="false" />-->
+<!--    </com.google.android.material.chip.ChipGroup>-->
+
+
+
+
+
+
+
+
+
+    <!--    <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--            android:id="@+id/main_page__header__avatar"-->
+    <!--            app:civ_border_width="1dp"-->
+    <!--            android:src="@drawable/avatar"-->
+    <!--            app:civ_border_color="@color/black"-->
+    <!--            android:layout_width="80dp"-->
+    <!--            android:layout_height="80dp"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/main_page__header"-->
+    <!--            app:layout_constraintLeft_toLeftOf="@id/main_page__header"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/main_page__header" />-->
+    <!--    <View-->
+    <!--            android:id="@+id/main_page__header__fio_container"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:background="@android:color/holo_gray_light"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/main_page__header__avatar"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/main_page__header"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/main_page__header"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@id/main_page__header__avatar" />-->
+    <!--    <TextView-->
+    <!--            android:id="@+id/main_page__header__fio"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="30dp"-->
+    <!--            android:layout_margin="8dp"-->
+    <!--            android:text="Василий Романов"-->
+    <!--            android:textSize="25sp"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/main_page__header__fio_container"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/main_page__header__fio_container"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/main_page__header__fio_container"-->
+    <!--            />-->
+    <!--    <TextView-->
+    <!--            android:id="@+id/main_page__header__role"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="30dp"-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:text="Ментор"-->
+    <!--            android:textSize="20sp"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/main_page__header__fio_container"-->
+    <!--            app:layout_constraintLeft_toLeftOf="@id/main_page__header__avatar"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/main_page__header__fio_container"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/main_page__header__fio"-->
+    <!--            />-->
+
+
+    <!--    <View-->
+    <!--            android:id="@+id/profile_watch__contacts"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="80dp"-->
+    <!--            android:background="@android:color/holo_gray_light"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/main_page__header"-->
+    <!--            app:layout_constraintEnd_toStartOf="@id/line_2"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/line_1"-->
+    <!--            />-->
+
+    <!--    <Button-->
+    <!--            android:id="@+id/profile_watch__contacts__btn_message"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            app:layout_constrainedWidth="true"-->
+    <!--            android:text="Написать"-->
+    <!--            android:textSize="10dp"-->
+    <!--            android:backgroundTint = "@android:color/holo_blue_dark"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/profile_watch__contacts"-->
+    <!--            app:layout_constraintEnd_toStartOf="@id/line_central"-->
+    <!--            app:layout_constraintLeft_toLeftOf="@id/profile_watch__contacts"-->
+    <!--            app:layout_constraintRight_toLeftOf="@id/line_central"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/profile_watch__contacts"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@id/profile_watch__contacts"-->
+    <!--            />-->
+    <!--    <Button-->
+    <!--            android:id="@+id/profile_watch__contacts__btn_start_work"-->
+    <!--            android:layout_margin="5dp"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:text="Начать заниматься"-->
+    <!--            android:textSize="10dp"-->
+    <!--            app:layout_constrainedWidth="true"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/line_central"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/profile_watch__contacts"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/profile_watch__contacts"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@id/profile_watch__contacts"-->
+    <!--            />-->
+
+
+
+    <!--    <View-->
+    <!--            android:id="@+id/profile_watch__skills"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="30dp"-->
+    <!--            android:background="@android:color/holo_gray_light"-->
+    <!--            app:layout_constraintEnd_toStartOf="@id/line_2"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/line_1"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/profile_watch__contacts" />-->
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_margin="5dp"-->
+    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            tools:listitem="@layout/fragment_oval_button"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/profile_watch__skills"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/profile_watch__skills"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/profile_watch__skills"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@id/profile_watch__skills" />-->
+
+    <!--    <View-->
+    <!--            android:id="@+id/profile_watch__about"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:background="@android:color/holo_gray_light"-->
+    <!--            app:layout_constraintEnd_toStartOf="@id/line_2"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/line_1"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/profile_watch__skills"-->
+    <!--            app:layout_constraintBottom_toTopOf="@id/line_4"-->
+    <!--            />-->
+    <!--    <TextView-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Работаю в vk\n   *опыт работы;\n   *стоимость;\n   *помог n людям."-->
+    <!--            android:textSize="25sp"-->
+    <!--            app:layout_constraintStart_toStartOf="@id/profile_watch__about"-->
+    <!--            app:layout_constraintEnd_toEndOf="@id/profile_watch__about"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/profile_watch__about"-->
+    <!--            app:layout_constraintBottom_toBottomOf="profile_watch__about"-->
+    <!--            />-->
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

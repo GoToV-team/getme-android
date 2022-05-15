@@ -1,106 +1,41 @@
 package com.gotov.getmeapp
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.get
-import androidx.core.view.marginBottom
-import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainerView
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.ui.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import com.gotov.getmeapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
-    private lateinit var bottomNav: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        bottomNav = findViewById(R.id.bottom_navigatin_view)
-
-        setupNav()
+        setupNavigation()
     }
 
-    private fun openFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.nav_host_fragment_content_main, fragment)
-            .commit();
-    }
+    private fun setupNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
-    private fun setupNav() {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        bottomNav.setupWithNavController(navController)
-
-        bottomNav.visibility = View.GONE
-
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.LoginPage -> {
-                    hideBottomNav()
-                    hideUpIcon()
-                }
-                R.id.RegisterPage -> {
-                    hideBottomNav()
-                    showUpIcon()
-                }
-                R.id.PlansFragment -> {
-                    showBottomNav()
-                    hideUpIcon()
-                }
-                R.id.SearchFragment -> {
-                    showBottomNav()
-                    hideUpIcon()
-                }
-                R.id.ProfileFragment -> {
-                    showBottomNav()
-                    hideUpIcon()
-                }
-                else -> {
-                    showBottomNav()
-                    showUpIcon()
-                }
-            }
-        }
-    }
-
-    private fun showUpIcon() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
-        supportActionBar?.setDisplayShowHomeEnabled(true);
-    }
-
-    private fun hideUpIcon() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(false);
-        supportActionBar?.setDisplayShowHomeEnabled(false);
-    }
+        navController = navHostFragment.navController
 
 
-    private fun showBottomNav() {
-        bottomNav.visibility = View.VISIBLE
-    }
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
 
-    private fun hideBottomNav() {
-        bottomNav.visibility = View.GONE
+        navGraph.setStartDestination(R.id.signFlowFragment)
+
+        navController.graph = navGraph
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -120,7 +55,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
