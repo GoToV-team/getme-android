@@ -1,7 +1,6 @@
 package com.gotov.getmeapp.app
 
 import android.app.Application
-import android.content.Context
 import com.gotov.getmeapp.app.di.apiModule
 import com.gotov.getmeapp.app.di.netModule
 import com.gotov.getmeapp.app.di.repositoryModule

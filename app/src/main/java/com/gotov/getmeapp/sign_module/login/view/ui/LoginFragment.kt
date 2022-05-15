@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.gotov.getmeapp.R
@@ -13,19 +12,20 @@ import com.gotov.getmeapp.databinding.FragmentLoginBinding
 import com.gotov.getmeapp.sign_module.login.model.data.Login
 import com.gotov.getmeapp.sign_module.login.view_model.LoginStatus
 import com.gotov.getmeapp.sign_module.login.view_model.LoginViewModel
-import com.gotov.getmeapp.utils.model.LoadingState
 import com.gotov.getmeapp.utils.model.Status
 import com.gotov.getmeapp.utils.ui.activityNavController
 import com.gotov.getmeapp.utils.ui.navigateSafely
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 class LoginFragment : Fragment() {
     private val binding by viewBinding(FragmentLoginBinding::bind)
 
     private lateinit var loginViewModel: LoginViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         return binding.root
     }
 
@@ -46,7 +46,8 @@ class LoginFragment : Fragment() {
                             Status.SUCCESS -> {
                                 when (it.data) {
                                     LoginStatus.SUCCESS ->
-                                        activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
+                                        activityNavController()
+                                            .navigateSafely(R.id.action_global_mainFlowFragment)
                                     else -> {}
                                 }
                             }
@@ -55,7 +56,6 @@ class LoginFragment : Fragment() {
                         }
                     }
             }
-
         }
     }
 }

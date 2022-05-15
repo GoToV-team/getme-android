@@ -21,7 +21,6 @@ val viewModelModule = module {
     single { LoginViewModel(get()) }
 }
 
-
 val apiModule = module {
     single { provideApi<LoginApi>(get()) }
 }
@@ -43,7 +42,6 @@ val netModule = module {
         return ObjectMapper()
     }
 
-
     fun provideRetrofit(mapper: ObjectMapper, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -57,7 +55,6 @@ val netModule = module {
     single { provideHttpClient(get()) }
     single { provideJackson() }
     single { provideRetrofit(get(), get()) }
-
 }
 
 val repositoryModule = module {
