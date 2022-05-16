@@ -28,6 +28,23 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            loginViewModel.status.collect {
+                when (it.state.status) {
+                    Status.SUCCESS -> {
+                        when (it.data) {
+                            LoginStatus.SUCCESS ->
+                                activityNavController()
+                                    .navigateSafely(R.id.action_global_mainFlowFragment)
+                            else -> {}
+                        }
+                    }
+                    Status.FAILED -> {}
+                    else -> {}
+                }
+            }
+        }
+
         binding.loginRegisterLink.setOnClickListener {
             findNavController().navigateSafely(R.id.action_LoginPage_to_RegisterPage)
         }
@@ -36,22 +53,7 @@ class LoginFragment : Fragment() {
             val login = binding.loginUsernameText.text.toString()
             val password = binding.loginPasswordText.text.toString()
 
-            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                loginViewModel.login(Login(login, password)).collect {
-                    when (it.state.status) {
-                        Status.SUCCESS -> {
-                            when (it.data) {
-                                LoginStatus.SUCCESS ->
-                                    activityNavController()
-                                        .navigateSafely(R.id.action_global_mainFlowFragment)
-                                else -> {}
-                            }
-                        }
-                        Status.FAILED -> {}
-                        else -> {}
-                    }
-                }
-            }
+            loginViewModel.login(Login(login, password))
         }
     }
 }

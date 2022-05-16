@@ -6,7 +6,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Response
 
 class LoginRepository(private val loginApi: LoginApi) {
-    fun loginAsync(login: Login): Deferred<Response<Void>> {
-        return loginApi.loginAsync(login)
+    suspend fun login(login: Login): Response<Void> {
+        return loginApi.login(login)
     }
 }

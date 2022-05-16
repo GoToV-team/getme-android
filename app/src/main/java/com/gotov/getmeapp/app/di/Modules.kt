@@ -7,7 +7,6 @@ import com.gotov.getmeapp.sign.login.model.repository.LoginRepository
 import com.gotov.getmeapp.sign.login.viewmodel.LoginViewModel
 import com.gotov.getmeapp.utils.app.provideApi
 import com.gotov.getmeapp.utils.app.provideRepository
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
@@ -46,7 +45,6 @@ val netModule = module {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(JacksonConverterFactory.create(mapper))
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(client)
             .build()
     }
