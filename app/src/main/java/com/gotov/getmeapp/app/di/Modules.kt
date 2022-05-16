@@ -2,17 +2,17 @@ package com.gotov.getmeapp.app.di
 
 import android.app.Application
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.gotov.getmeapp.sign_module.login.model.api.LoginApi
-import com.gotov.getmeapp.sign_module.login.model.repository.LoginRepository
-import com.gotov.getmeapp.sign_module.login.view_model.LoginViewModel
+import com.gotov.getmeapp.sign.login.model.api.LoginApi
+import com.gotov.getmeapp.sign.login.model.repository.LoginRepository
+import com.gotov.getmeapp.sign.login.viewmodel.LoginViewModel
 import com.gotov.getmeapp.utils.app.provideApi
 import com.gotov.getmeapp.utils.app.provideRepository
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 
 private const val BASE_URL = "https://api.github.com/api/v1"
@@ -46,7 +46,7 @@ val netModule = module {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(JacksonConverterFactory.create(mapper))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(client)
             .build()
     }

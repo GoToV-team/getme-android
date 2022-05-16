@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main_module.plans.view.ui.PlansFragment"
+        tools:context=".main.plans.view.ui.PlansFragment"
         android:orientation="vertical"
         android:paddingTop="0dp"
         android:padding="20dp">

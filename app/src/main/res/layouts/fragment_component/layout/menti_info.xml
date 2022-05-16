@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        tools:context=".main_module.plans.view.items.MentiItemHolder">
+        tools:context=".main.plans.view.items.MentiItemHolder">
 
     <ImageView
             android:id="@+id/avatar_item_icon"

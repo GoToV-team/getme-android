@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main_module.search.view.ui.SearchFragment">
+        tools:context=".main.search.view.ui.SearchFragment">
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/line_central"

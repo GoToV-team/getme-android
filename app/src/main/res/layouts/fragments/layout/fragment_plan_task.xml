@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        tools:context=".main_module.task.view.ui.TaskFragment">
+        tools:context=".main.task.view.ui.TaskFragment">
 
     <CheckBox
             android:id="@+id/task_item_checkbox"

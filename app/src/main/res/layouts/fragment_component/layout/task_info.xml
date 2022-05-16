@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        tools:context=".main_module.plans.view.items.PlanItemHolder">
+        tools:context=".main.plans.view.items.PlanItemHolder">
 
     <ImageView
             android:id="@+id/plan_item_title_arrow"
