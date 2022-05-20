@@ -17,10 +17,8 @@ import com.gotov.getmeapp.main.profile.model.data.getUsers
 class SearchFragment : Fragment(R.layout.fragment_search) {
     private val binding by viewBinding(FragmentSearchBinding::bind)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val test: Array<User> = getUsers()
 
         val rec: RecyclerView = binding.userList
@@ -28,7 +26,5 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             LinearLayoutManager(context)
         rec.layoutManager = layoutManager
         rec.adapter = UsersViewAdapter(test)
-
-        return binding.root
     }
 }

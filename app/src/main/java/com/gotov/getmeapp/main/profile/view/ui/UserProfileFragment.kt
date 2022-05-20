@@ -14,22 +14,14 @@ import com.gotov.getmeapp.main.profile.model.data.getUsers
 class UserProfileFragment : Fragment(R.layout.fragment_profile) {
     private val binding by viewBinding(FragmentProfileBinding::bind)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val userId = arguments?.getInt("user_id")
         val user = userId?.let { getUsers()[userId] }
         user?.addToViews(binding.profileWatchHeaderFio,
             binding.profileWatchAbout, binding.profileWatchSkills, this.context)
 
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.profileWatchContactsBtnStartWork.setOnClickListener {
             findNavController().navigate(R.id.action_UserFragment_to_PlansFragment)
         }

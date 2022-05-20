@@ -19,11 +19,8 @@ class PlanFragment : Fragment(R.layout.fragment_plan) {
 
     private val binding by viewBinding(FragmentPlanBinding::bind)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val test: Array<Task> = getTasks()
         val planId = arguments?.getInt("plan_id")
         val plan = planId?.let { getPlans()[planId] }
@@ -38,7 +35,5 @@ class PlanFragment : Fragment(R.layout.fragment_plan) {
             LinearLayoutManager(context)
         rec.layoutManager = layoutManager
         rec.adapter = TaskViewAdapter(test)
-
-        return binding.root
     }
 }

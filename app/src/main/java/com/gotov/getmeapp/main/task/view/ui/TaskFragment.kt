@@ -13,11 +13,10 @@ import com.gotov.getmeapp.main.task.model.data.getTasks
 class TaskFragment : Fragment(R.layout.fragment_plan_task) {
     private val binding by viewBinding(FragmentPlanTaskBinding::bind)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val taskId = arguments?.getInt("task_id")
         val task = taskId?.let { getTasks()[taskId] }
         task?.addToViews(binding.taskItemTitle, binding.taskItemDescription, binding.taskItemCheckbox)
-        return binding.root
     }
 }

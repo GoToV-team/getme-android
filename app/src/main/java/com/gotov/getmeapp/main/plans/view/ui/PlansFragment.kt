@@ -19,8 +19,8 @@ import com.gotov.getmeapp.main.plans.view.items.PlansViewAdapter
 class PlansFragment : Fragment(R.layout.fragment_plans_page) {
     private val binding by viewBinding(FragmentPlansPageBinding::bind)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val test: Array<Plan> = getPlans()
 
         val testMenti: Array<Menti> = arrayOf(
@@ -57,7 +57,5 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
             binding.mentiList.visibility = View.GONE
             binding.dividerBetweenMentiAndPlan.visibility = View.GONE
         }
-
-        return binding.root
     }
 }
