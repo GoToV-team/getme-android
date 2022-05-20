@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.gotov.getmeapp.R
 import com.gotov.getmeapp.main.plans.model.data.Menti
 import com.gotov.getmeapp.main.plan.model.data.Plan
 import com.gotov.getmeapp.main.plan.model.data.getPlans
@@ -15,7 +16,7 @@ import com.gotov.getmeapp.databinding.FragmentPlansPageBinding
 import com.gotov.getmeapp.main.plans.view.items.MentisViewAdapter
 import com.gotov.getmeapp.main.plans.view.items.PlansViewAdapter
 
-class PlansFragment : Fragment() {
+class PlansFragment : Fragment(R.layout.fragment_plans_page) {
     private val binding by viewBinding(FragmentPlansPageBinding::bind)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

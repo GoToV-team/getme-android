@@ -10,7 +10,6 @@
         android:paddingTop="0dp"
         android:padding="20dp">
 
-
     <TextView
             android:text="@string/plans_page_header"
             android:layout_width="match_parent"

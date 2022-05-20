@@ -7,5 +7,5 @@ inline fun <reified T> provideApi(retrofit: Retrofit): T {
 }
 
 inline fun <reified Repository, reified Api> provideRepository(api: Api): Repository {
-    return Repository::class.java.getConstructor().newInstance(api)
+    return Repository::class.constructors.first().call(api)
 }

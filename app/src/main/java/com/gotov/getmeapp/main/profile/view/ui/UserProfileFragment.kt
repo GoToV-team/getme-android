@@ -11,7 +11,7 @@ import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentProfileBinding
 import com.gotov.getmeapp.main.profile.model.data.getUsers
 
-class UserProfileFragment : Fragment() {
+class UserProfileFragment : Fragment(R.layout.fragment_profile) {
     private val binding by viewBinding(FragmentProfileBinding::bind)
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class UserProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val userId = arguments?.getInt("user_id")
-        val user = userId?.let { getUsers().get(userId)}
+        val user = userId?.let { getUsers()[userId] }
         user?.addToViews(binding.profileWatchHeaderFio,
             binding.profileWatchAbout, binding.profileWatchSkills, this.context)
 

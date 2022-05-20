@@ -17,7 +17,7 @@ import com.gotov.getmeapp.utils.ui.navigateSafely
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login) {
     private val binding by viewBinding(FragmentLoginBinding::bind)
 
     private val loginViewModel by viewModel<LoginViewModel>()
@@ -47,8 +47,8 @@ class LoginFragment : Fragment() {
         }
 
         binding.loginLoginButton.setOnClickListener {
-            val login = binding.loginUsernameText.text.toString()
-            val password = binding.loginPasswordText.text.toString()
+            val login = binding.loginUsernameInput.text.toString()
+            val password = binding.loginPasswordInput.text.toString()
 
             loginViewModel.login(Login(login, password))
         }

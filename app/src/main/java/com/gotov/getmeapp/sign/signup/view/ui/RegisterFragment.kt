@@ -9,7 +9,7 @@ import com.gotov.getmeapp.databinding.FragmentRegisterBinding
 import com.gotov.getmeapp.utils.ui.activityNavController
 import com.gotov.getmeapp.utils.ui.navigateSafely
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(R.layout.fragment_register) {
     private val binding by viewBinding(FragmentRegisterBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

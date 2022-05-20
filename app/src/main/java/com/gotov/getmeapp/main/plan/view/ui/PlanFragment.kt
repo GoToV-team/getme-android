@@ -8,13 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.gotov.getmeapp.R
 import com.gotov.getmeapp.main.task.model.data.Task
 import com.gotov.getmeapp.main.plan.view.items.TaskViewAdapter
 import com.gotov.getmeapp.databinding.FragmentPlanBinding
 import com.gotov.getmeapp.main.plan.model.data.getPlans
 import com.gotov.getmeapp.main.task.model.data.getTasks
 
-class PlanFragment : Fragment() {
+class PlanFragment : Fragment(R.layout.fragment_plan) {
 
     private val binding by viewBinding(FragmentPlanBinding::bind)
 
@@ -25,7 +26,7 @@ class PlanFragment : Fragment() {
     ): View {
         val test: Array<Task> = getTasks()
         val planId = arguments?.getInt("plan_id")
-        val plan = planId?.let { getPlans().get(planId)}
+        val plan = planId?.let { getPlans()[planId] }
         plan?.addToViews(binding.planTitle, binding.planDescription,
             binding.progressBar, binding.planSkills, this.context)
 
