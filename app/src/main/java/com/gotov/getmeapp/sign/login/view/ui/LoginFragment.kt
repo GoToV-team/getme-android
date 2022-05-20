@@ -1,11 +1,8 @@
 package com.gotov.getmeapp.sign.login.view.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -14,7 +11,7 @@ import com.gotov.getmeapp.databinding.FragmentLoginBinding
 import com.gotov.getmeapp.sign.login.model.data.Login
 import com.gotov.getmeapp.sign.login.viewmodel.LoginStatus
 import com.gotov.getmeapp.sign.login.viewmodel.LoginViewModel
-import com.gotov.getmeapp.utils.model.Status
+import com.gotov.getmeapp.utils.model.Resource
 import com.gotov.getmeapp.utils.ui.activityNavController
 import com.gotov.getmeapp.utils.ui.navigateSafely
 import kotlinx.coroutines.flow.collect
@@ -30,8 +27,8 @@ class LoginFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             loginViewModel.status.collect {
-                when (it.state.status) {
-                    Status.SUCCESS -> {
+                when (it) {
+                    is Resource.Success -> {
                         when (it.data) {
                             LoginStatus.SUCCESS ->
                                 activityNavController()
@@ -39,8 +36,8 @@ class LoginFragment : Fragment() {
                             else -> {}
                         }
                     }
-                    Status.FAILED -> {}
-                    else -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {}
                 }
             }
         }

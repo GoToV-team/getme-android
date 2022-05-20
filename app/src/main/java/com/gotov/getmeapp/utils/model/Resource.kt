@@ -1,21 +1,10 @@
 package com.gotov.getmeapp.utils.model
 
-import com.gotov.getmeapp.utils.model.LoadingState.Companion.error
-import com.gotov.getmeapp.utils.model.LoadingState.Companion.loaded
-import com.gotov.getmeapp.utils.model.LoadingState.Companion.loading
+sealed class Resource<out T>(val data: T?, val msg: String?) {
 
-data class Resource<out T>(val state: LoadingState, val data: T?) {
-    companion object {
-        fun <T> success(data: T?): Resource<T> {
-            return Resource(loaded, data)
-        }
+    class Success<T>(data: T) : Resource<T>(data, null)
 
-        fun <T> error(msg: String, data: T?): Resource<T> {
-            return Resource(error(msg), data)
-        }
+    class Error<T>(message: String?, data: T? = null) : Resource<T>(data, message)
 
-        fun <T> loading(data: T?): Resource<T> {
-            return Resource(loading, data)
-        }
-    }
+    class Loading<T> : Resource<T>(null, null)
 }

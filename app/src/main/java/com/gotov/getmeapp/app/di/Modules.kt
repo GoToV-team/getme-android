@@ -14,7 +14,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 
-private const val BASE_URL = "https://api.github.com/api/v1"
+private const val BASE_URL = "https://glidemess.pw/api/v1"
 
 val viewModelModule = module {
     single { LoginViewModel(get()) }
