@@ -15,7 +15,7 @@ private const val SUCCESS_CODE = 200
 private const val INCORRECT_FIELD_CODE = 403
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
-    private val _status = MutableStateFlow<Resource<LoginStatus>>(Resource.Loading())
+    private val _status = MutableStateFlow<Resource<LoginStatus>>(Resource.Null())
 
     val status = _status.asStateFlow()
 
@@ -23,6 +23,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
+                    _status.emit(Resource.Loading())
                     val response = loginRepository.login(login)
                     when (response.code()) {
                         SUCCESS_CODE -> _status.emit(Resource.Success(LoginStatus.SUCCESS))

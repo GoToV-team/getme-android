@@ -25,6 +25,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.loadingLogin.visibility = View.GONE
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             loginViewModel.status.collect {
                 when (it) {
@@ -35,9 +37,21 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                                     .navigateSafely(R.id.action_global_mainFlowFragment)
                             else -> {}
                         }
+                        binding.loadingLogin.visibility = View.GONE
+                        binding.loginLoginButton.visibility = View.VISIBLE
+                        binding.loginLoginButton.isClickable = true
                     }
-                    is Resource.Loading -> {}
-                    is Resource.Error -> {}
+                    is Resource.Loading -> {
+                        binding.loadingLogin.visibility = View.VISIBLE
+                        binding.loginLoginButton.visibility = View.INVISIBLE
+                        binding.loginLoginButton.isClickable = false
+                    }
+                    is Resource.Error -> {
+                        binding.loadingLogin.visibility = View.GONE
+                        binding.loginLoginButton.visibility = View.VISIBLE
+                        binding.loginLoginButton.isClickable = true
+                    }
+                    else -> {}
                 }
             }
         }

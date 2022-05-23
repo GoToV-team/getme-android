@@ -40,6 +40,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.9" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toStartOf="@+id/line_2"
+            app:layout_constraintStart_toStartOf="@+id/line_1"
+            android:id="@+id/load_page_list"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toTopOf="@+id/line_3" />
     <View
             android:id="@+id/profile_watch__header"
             android:layout_width="0dp"

@@ -57,6 +57,16 @@
             app:layout_constraintStart_toStartOf="@+id/login_username_input"
             android:id="@+id/login_password_input" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loading_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_password_input"
+            app:layout_constraintHorizontal_bias="0.763"
+            android:indeterminate="true"/>
+
     <Button
             android:layout_width="180dp"
             android:layout_height="50dp"
