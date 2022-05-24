@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface SearchApi {
-    @GET("login")
+    @GET("skills")
     suspend fun getSkills(): Response<Array<SkillResponse>>
 
     @GET("search")

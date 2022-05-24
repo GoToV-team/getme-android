@@ -1,4 +1,4 @@
-package com.gotov.getmeapp.main.profile.viewmodel
+package com.gotov.getmeapp.main.task.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,6 +6,8 @@ import com.gotov.getmeapp.main.profile.model.repository.ProfileRepository
 import com.gotov.getmeapp.main.search.model.data.User
 import com.gotov.getmeapp.main.search.model.data.Skill
 import com.gotov.getmeapp.main.search.model.repository.SearchRepository
+import com.gotov.getmeapp.main.task.model.data.Task
+import com.gotov.getmeapp.main.task.model.repository.TaskRepository
 import com.gotov.getmeapp.utils.model.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,31 +17,33 @@ import kotlinx.coroutines.withContext
 
 private const val SUCCESS_CODE = 200
 
-class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewModel() {
-    private val _user = MutableStateFlow<Resource<User>>(Resource.Null())
+class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
+    private val _task = MutableStateFlow<Resource<Task>>(Resource.Null())
 
-    val user = _user.asStateFlow()
+    val task = _task.asStateFlow()
 
-    fun getCurrentUser() {
+    fun markTask(id: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    _user.emit(Resource.Loading())
-                    val response = profileRepository.getCurrentUser()
+                    _task.emit(Resource.Loading())
+                    val response = taskRepository.markTask(id)
                     when (response.code()) {
                         SUCCESS_CODE -> {
-                            response.body()?.let {
-                                _user.emit(Resource.Success(it))
+                            val tsk = task.value
+                            tsk.data?.run {
+                                tsk.data.isDone = !tsk.data.isDone
+                                _task.emit(Resource.Success(tsk.data))
                             }
                         }
                         else -> {
                             val body: String?
                             body = response.body().toString()
-                            _user.emit(Resource.Error(body))
+                            _task.emit(Resource.Error(body))
                         }
                     }
                 } catch (e: Exception) {
-                    _user.emit(
+                    _task.emit(
                         Resource.Error(
                             "Err when try get skills: " + e.message,
                             null
@@ -50,30 +54,30 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
         }
     }
 
-    fun getUserById(id: Int) {
+    fun getTask(id: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    _user.emit(Resource.Loading())
-                    val response = profileRepository.getUserById(id)
+                    _task.emit(Resource.Loading())
+                    val response = taskRepository.getTask(id)
                     when (response.code()) {
                         SUCCESS_CODE -> {
                             response.body()?.let {
-                                _user.emit(Resource.Success(it))
+                                _task.emit(Resource.Success(it))
                             }
                         }
                         else -> {
                             val body: String?
                             body = response.body().toString()
 
-                            _user.emit(Resource.Error(body))
+                            _task.emit(Resource.Error(body))
                         }
                     }
 
                 } catch (e: Exception) {
-                    _user.emit(
+                    _task.emit(
                         Resource.Error(
-                            "Err when try get profile: " + e.message,
+                            "Err when try get task: " + e.message,
                             null
                         )
                     )

@@ -3,7 +3,7 @@ package com.gotov.getmeapp.main.task.model.data
 import android.widget.CheckBox
 import android.widget.TextView
 
-data class Task(val id: Int, val name: String, val about: String, val isDone: Boolean ) {
+data class Task(val id: Int, val name: String, val about: String, var isDone: Boolean ) {
     fun addToViews(title: TextView?, description: TextView?,  checkBox: CheckBox?) {
         title?.text = this.name
         description?.text = this.about
