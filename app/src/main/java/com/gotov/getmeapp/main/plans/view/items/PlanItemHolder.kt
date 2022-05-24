@@ -19,7 +19,11 @@ class PlansViewAdapter(plans: Array<Plan>) : RecyclerView.Adapter<PlanItemHolder
     private val _plans: Array<Plan> = plans
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanItemHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.task_info, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(
+            R.layout.task_info,
+            parent,
+            false
+        )
         return PlanItemHolder(view)
     }
 
@@ -31,7 +35,6 @@ class PlansViewAdapter(plans: Array<Plan>) : RecyclerView.Adapter<PlanItemHolder
     override fun getItemCount(): Int {
         return _plans.size
     }
-
 }
 
 class PlanItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,8 +43,13 @@ class PlanItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val _skills: ChipGroup = itemView.findViewById(R.id.plan_item_skills)
 
     fun bind(plan: Plan) {
-        plan.addToViews(_namePlan,null,
-            _progress,  _skills, itemView.context)
+        plan.addToViews(
+            _namePlan,
+            null,
+            _progress,
+            _skills,
+            itemView.context
+        )
 
         var navController: NavController?
 

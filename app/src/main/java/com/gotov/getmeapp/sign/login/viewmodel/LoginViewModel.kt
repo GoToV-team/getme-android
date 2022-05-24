@@ -19,7 +19,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     val status = _status.asStateFlow()
 
-    fun login(login: Login){
+    fun login(login: Login) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {

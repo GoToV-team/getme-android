@@ -30,8 +30,11 @@ data class User(
     }
 
     fun addToViews(
-        title: TextView?, description: TextView?,
-        skills: ChipGroup?, image: ImageView?, context: Context?
+        title: TextView?,
+        description: TextView?,
+        skills: ChipGroup?,
+        image: ImageView?,
+        context: Context?
     ) {
         title?.text = this.name
         description?.text = this.about

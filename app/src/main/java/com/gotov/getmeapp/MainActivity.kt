@@ -1,9 +1,9 @@
 package com.gotov.getmeapp
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
 
-
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
 
         navGraph.setStartDestination(R.id.signFlowFragment)
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) ||
+            super.onSupportNavigateUp()
     }
 }

@@ -1,7 +1,11 @@
 package com.gotov.getmeapp.app.di
 
 import android.app.Application
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.gotov.getmeapp.main.plan.model.api.PlanApi
+import com.gotov.getmeapp.main.plan.model.repository.PlanRepository
+import com.gotov.getmeapp.main.plan.viewmodel.PlanViewModel
 import com.gotov.getmeapp.main.profile.model.api.ProfileApi
 import com.gotov.getmeapp.main.profile.model.repository.ProfileRepository
 import com.gotov.getmeapp.main.profile.viewmodel.ProfileViewModel
@@ -20,18 +24,20 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 
-private const val BASE_URL = "https://glidemess.pw/api/v1/"
+private const val BASE_URL = "https://f129-195-19-63-41.eu.ngrok.io/api/v1/"
 
 val viewModelModule = module {
     single { LoginViewModel(get()) }
     single { SearchViewModel(get()) }
     single { ProfileViewModel(get()) }
+    single { PlanViewModel(get()) }
 }
 
 val apiModule = module {
     single { provideApi<LoginApi>(get()) }
     single { provideApi<SearchApi>(get()) }
     single { provideApi<ProfileApi>(get()) }
+    single { provideApi<PlanApi>(get()) }
 }
 
 val netModule = module {
@@ -52,6 +58,7 @@ val netModule = module {
     }
 
     fun provideRetrofit(mapper: ObjectMapper, client: OkHttpClient): Retrofit {
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(JacksonConverterFactory.create(mapper))
@@ -69,4 +76,5 @@ val repositoryModule = module {
     single { provideRepository<LoginRepository, LoginApi>(get()) }
     single { provideRepository<SearchRepository, SearchApi>(get()) }
     single { provideRepository<ProfileRepository, ProfileApi>(get()) }
+    single { provideRepository<PlanRepository, PlanApi>(get()) }
 }

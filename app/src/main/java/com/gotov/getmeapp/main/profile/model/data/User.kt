@@ -2,7 +2,6 @@ package com.gotov.getmeapp.main.profile.model.data
 
 import android.content.Context
 import android.graphics.Color
-import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -31,8 +30,11 @@ data class User(
     }
 
     fun addToViews(
-        title: TextView?, description: TextView?,
-        skills: ChipGroup?, image: ImageView?, context: Context?
+        title: TextView?,
+        description: TextView?,
+        skills: ChipGroup?,
+        image: ImageView?,
+        context: Context?
     ) {
         title?.text = this.name
         description?.text = this.about
@@ -48,4 +50,3 @@ data class User(
         }
     }
 }
-

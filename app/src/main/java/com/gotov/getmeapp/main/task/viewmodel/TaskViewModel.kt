@@ -2,10 +2,6 @@ package com.gotov.getmeapp.main.task.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gotov.getmeapp.main.profile.model.repository.ProfileRepository
-import com.gotov.getmeapp.main.search.model.data.User
-import com.gotov.getmeapp.main.search.model.data.Skill
-import com.gotov.getmeapp.main.search.model.repository.SearchRepository
 import com.gotov.getmeapp.main.task.model.data.Task
 import com.gotov.getmeapp.main.task.model.repository.TaskRepository
 import com.gotov.getmeapp.utils.model.Resource
@@ -73,7 +69,6 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
                             _task.emit(Resource.Error(body))
                         }
                     }
-
                 } catch (e: Exception) {
                     _task.emit(
                         Resource.Error(

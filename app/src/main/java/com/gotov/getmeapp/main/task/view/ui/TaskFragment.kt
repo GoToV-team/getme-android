@@ -1,16 +1,12 @@
 package com.gotov.getmeapp.main.task.view.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentPlanTaskBinding
-import com.gotov.getmeapp.main.profile.viewmodel.ProfileViewModel
-import com.gotov.getmeapp.main.task.model.data.getTasks
 import com.gotov.getmeapp.main.task.viewmodel.TaskViewModel
 import com.gotov.getmeapp.utils.model.Resource
 import kotlinx.coroutines.flow.collect
@@ -30,7 +26,6 @@ class TaskFragment : Fragment(R.layout.fragment_plan_task) {
             taskId?.let {
                 taskViewModel.markTask(taskId!!)
             }
-
         }
     }
 
@@ -54,5 +49,4 @@ class TaskFragment : Fragment(R.layout.fragment_plan_task) {
             }
         }
     }
-
 }

@@ -2,8 +2,8 @@ package com.gotov.getmeapp.main.search.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gotov.getmeapp.main.search.model.data.User
 import com.gotov.getmeapp.main.search.model.data.Skill
+import com.gotov.getmeapp.main.search.model.data.User
 import com.gotov.getmeapp.main.search.model.repository.SearchRepository
 import com.gotov.getmeapp.utils.model.Resource
 import kotlinx.coroutines.Dispatchers
@@ -45,7 +45,7 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                     when (response.code()) {
                         SUCCESS_CODE -> {
                             val res: MutableList<Skill> = ArrayList()
-                            response.body()?.let{
+                            response.body()?.let {
                                 for (skill in it) {
                                     res.add(Skill(skill.name, true))
                                 }
@@ -78,7 +78,8 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                     if (skills.value is Resource.Success && skills.value.data != null) {
                         _mentors.emit(Resource.Loading())
                         val response = searchRepository.search(
-                            skills.value.data!!.filter { it.active })
+                            skills.value.data!!.filter { it.active }
+                        )
                         when (response.code()) {
                             SUCCESS_CODE -> {
                                 if (response.body() != null) {

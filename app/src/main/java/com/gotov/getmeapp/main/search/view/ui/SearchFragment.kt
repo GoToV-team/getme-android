@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,11 +14,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.gotov.getmeapp.R
-import com.gotov.getmeapp.main.search.model.data.User
-import com.gotov.getmeapp.ui.items.UsersViewAdapter
 import com.gotov.getmeapp.databinding.FragmentSearchBinding
 import com.gotov.getmeapp.main.search.model.data.Skill
+import com.gotov.getmeapp.main.search.model.data.User
 import com.gotov.getmeapp.main.search.viewmodel.SearchViewModel
+import com.gotov.getmeapp.ui.items.UsersViewAdapter
 import com.gotov.getmeapp.utils.model.Resource
 import com.gotov.getmeapp.utils.ui.DiffUtilsCallback
 import com.gotov.getmeapp.utils.ui.toDips
@@ -87,14 +87,14 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                                     },
                                     { oldItem: User, newItem: User ->
                                         oldItem.name == newItem.name &&
-                                                oldItem.about == newItem.about &&
-                                                oldItem.skills === newItem.skills
+                                            oldItem.about == newItem.about &&
+                                            oldItem.skills === newItem.skills
                                     }
                                 )
-                            val productDiffResult = DiffUtil.calculateDiff(userDiffUtilCallback);
+                            val productDiffResult = DiffUtil.calculateDiff(userDiffUtilCallback)
 
-                            adapter!!.setData(it.data);
-                            productDiffResult.dispatchUpdatesTo(adapter!!);
+                            adapter!!.setData(it.data)
+                            productDiffResult.dispatchUpdatesTo(adapter!!)
                         }
 
                         binding.loadUserList.visibility = View.GONE
@@ -110,6 +110,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
         }
 
+        searchViewModel.getSkills()
+        searchViewModel.getMentors()
     }
 
     @SuppressLint("ResourceType")

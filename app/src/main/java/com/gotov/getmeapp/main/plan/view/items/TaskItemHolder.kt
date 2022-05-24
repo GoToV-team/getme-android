@@ -12,12 +12,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.main.task.model.data.Task
 
-class TaskViewAdapter(tasks: Array<Task>) : RecyclerView.Adapter<TaskItemHolder>() {
+class TaskViewAdapter(tasks: List<Task>) : RecyclerView.Adapter<TaskItemHolder>() {
 
-    private val _tasks: Array<Task> = tasks
+    private val _tasks: List<Task> = tasks
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.fragment_plan_task_item, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(
+            R.layout.fragment_plan_task_item,
+            parent,
+            false
+        )
         return TaskItemHolder(view)
     }
 
@@ -29,7 +33,6 @@ class TaskViewAdapter(tasks: Array<Task>) : RecyclerView.Adapter<TaskItemHolder>
     override fun getItemCount(): Int {
         return _tasks.size
     }
-
 }
 
 class TaskItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -46,7 +49,6 @@ class TaskItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 navController = findNavController(itemView)
                 val args: Bundle = bundleOf("task_id" to task.id)
                 navController!!.navigate(R.id.action_PlanFragment_to_TaskFragment, args)
-
             }
         }
     }

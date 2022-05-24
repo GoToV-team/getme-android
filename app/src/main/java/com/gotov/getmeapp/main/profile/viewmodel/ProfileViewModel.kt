@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gotov.getmeapp.main.profile.model.repository.ProfileRepository
 import com.gotov.getmeapp.main.search.model.data.User
-import com.gotov.getmeapp.main.search.model.data.Skill
-import com.gotov.getmeapp.main.search.model.repository.SearchRepository
 import com.gotov.getmeapp.utils.model.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -69,7 +67,6 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
                             _user.emit(Resource.Error(body))
                         }
                     }
-
                 } catch (e: Exception) {
                     _user.emit(
                         Resource.Error(

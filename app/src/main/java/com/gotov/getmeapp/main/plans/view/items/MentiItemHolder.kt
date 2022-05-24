@@ -13,7 +13,11 @@ class MentisViewAdapter(mentis: Array<Menti>) : RecyclerView.Adapter<MentiItemHo
     private val _mentis: Array<Menti> = mentis
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MentiItemHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.menti_info, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(
+            R.layout.menti_info,
+            parent,
+            false
+        )
         return MentiItemHolder(view)
     }
 
@@ -25,7 +29,6 @@ class MentisViewAdapter(mentis: Array<Menti>) : RecyclerView.Adapter<MentiItemHo
     override fun getItemCount(): Int {
         return _mentis.size
     }
-
 }
 
 class MentiItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -11,7 +11,7 @@ fun Fragment.activityNavController() = requireActivity().findNavController(R.id.
 
 fun NavController.navigateSafely(@IdRes actionId: Int) {
     if (graph.getAction(actionId) == null) {
-        currentDestination?.getAction(actionId)?.let { navigate(actionId)  }
+        currentDestination?.getAction(actionId)?.let { navigate(actionId) }
     } else {
         graph.getAction(actionId)?.let { navigate(actionId) }
     }
@@ -19,7 +19,7 @@ fun NavController.navigateSafely(@IdRes actionId: Int) {
 
 fun NavController.navigateSafely(directions: NavDirections) {
     if (graph.getAction(directions.actionId) == null) {
-        currentDestination?.getAction(directions.actionId)?.let { navigate(directions)  }
+        currentDestination?.getAction(directions.actionId)?.let { navigate(directions) }
     } else {
         graph.getAction(directions.actionId)?.let { navigate(directions) }
     }
