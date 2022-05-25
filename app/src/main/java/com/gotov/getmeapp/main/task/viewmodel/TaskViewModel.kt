@@ -50,34 +50,34 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
         }
     }
 
-    fun getTask(id: Int) {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    _task.emit(Resource.Loading())
-                    val response = taskRepository.getTask(id)
-                    when (response.code()) {
-                        SUCCESS_CODE -> {
-                            response.body()?.let {
-                                _task.emit(Resource.Success(it))
-                            }
-                        }
-                        else -> {
-                            val body: String?
-                            body = response.body().toString()
-
-                            _task.emit(Resource.Error(body))
-                        }
+    suspend fun getTask(id: Int) {
+//        viewModelScope.launch {
+//            withContext(Dispatchers.IO) {
+        try {
+            _task.emit(Resource.Loading())
+            val response = taskRepository.getTask(id)
+            when (response.code()) {
+                SUCCESS_CODE -> {
+                    response.body()?.let {
+                        _task.emit(Resource.Success(it))
                     }
-                } catch (e: Exception) {
-                    _task.emit(
-                        Resource.Error(
-                            "Err when try get task: " + e.message,
-                            null
-                        )
-                    )
+                }
+                else -> {
+                    val body: String?
+                    body = response.body().toString()
+
+                    _task.emit(Resource.Error(body))
                 }
             }
+        } catch (e: Exception) {
+            _task.emit(
+                Resource.Error(
+                    "Err when try get task: " + e.message,
+                    null
+                )
+            )
         }
+//            }
+//        }
     }
 }

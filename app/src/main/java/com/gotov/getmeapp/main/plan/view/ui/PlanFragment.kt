@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentPlanBinding
 import com.gotov.getmeapp.main.plan.view.items.TaskViewAdapter
@@ -30,6 +31,11 @@ class PlanFragment : Fragment(R.layout.fragment_plan) {
         rec.adapter = TaskViewAdapter(listOf())
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            val planId = arguments?.getInt("plan_id")
+            planId?.let {
+                planViewModel.getPlanById(it)
+            }
+
             planViewModel.plan.collect {
                 when (it) {
                     is Resource.Success -> {
@@ -44,6 +50,8 @@ class PlanFragment : Fragment(R.layout.fragment_plan) {
                         binding.userInfoSmallName.text = it.data?.mentor?.name
                         binding.userInfoSmallNote.text = it.data?.mentor?.about
 
+                        it.data?.mentor?.avatar?.let { it1 -> setImage(it1) }
+
                         binding.taskList.adapter = it.data?.tasks?.let {
                             it1 ->
                             TaskViewAdapter(it1)
@@ -52,23 +60,19 @@ class PlanFragment : Fragment(R.layout.fragment_plan) {
                         binding.taskList.visibility = View.VISIBLE
                         binding.spinner.visibility = View.GONE
                     }
-                    is Resource.Loading -> {
-                        binding.taskList.visibility = View.GONE
-                        binding.spinner.visibility = View.VISIBLE
-                    }
                     else -> {}
                 }
             }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    fun setImage(image: String) {
+        Glide.with(this).load(image).into(binding.userInfoSmallAvatar)
+    }
+    override fun onStart() {
+        super.onStart()
 
-        val planId = arguments?.getInt("plan_id")
-
-        planId?.let {
-            planViewModel.getPlanById(it)
-        }
+        binding.taskList.visibility = View.GONE
+        binding.spinner.visibility = View.VISIBLE
     }
 }

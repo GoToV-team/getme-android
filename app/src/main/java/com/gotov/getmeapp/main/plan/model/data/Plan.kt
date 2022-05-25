@@ -18,7 +18,7 @@ data class Plan(
     @JsonProperty("description") val description: String,
     @JsonProperty("progress") val progress: Int,
     @JsonProperty("skills") val skills: List<String>,
-    @JsonProperty("tasks") val tasks: List<Task>,
+    @JsonProperty("tasks") val tasks: List<Task>?,
     @JsonProperty("mentor") val mentor: User?,
     @JsonProperty("menti") val menti: User?,
 ) {
@@ -59,11 +59,7 @@ fun getPlans(): Array<Plan> {
             "Полезная задача",
             20,
             List(1) { "Мир" },
-            listOf(
-                Task(1, "One task", "desc 1", false),
-                Task(2, "Two task", "desc 2 done", true),
-                Task(3, "Three task", "", false),
-            ),
+            null,
             User(0, "asd", "asd", "", listOf()),
             null
 
@@ -74,11 +70,7 @@ fun getPlans(): Array<Plan> {
             "sdfs dfsdf",
             20,
             List(1) { "Gore" },
-            listOf(
-                Task(1, "One task", "desc 1", false),
-                Task(2, "Two task", "desc 2 done", true),
-                Task(3, "Three task", "", false),
-            ),
+            null,
             User(0, "asd", "asd", "", listOf()),
             null
         )

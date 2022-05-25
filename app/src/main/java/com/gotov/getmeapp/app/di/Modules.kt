@@ -12,6 +12,9 @@ import com.gotov.getmeapp.main.profile.viewmodel.ProfileViewModel
 import com.gotov.getmeapp.main.search.model.api.SearchApi
 import com.gotov.getmeapp.main.search.model.repository.SearchRepository
 import com.gotov.getmeapp.main.search.viewmodel.SearchViewModel
+import com.gotov.getmeapp.main.task.model.api.TaskApi
+import com.gotov.getmeapp.main.task.model.repository.TaskRepository
+import com.gotov.getmeapp.main.task.viewmodel.TaskViewModel
 import com.gotov.getmeapp.sign.login.model.api.LoginApi
 import com.gotov.getmeapp.sign.login.model.repository.LoginRepository
 import com.gotov.getmeapp.sign.login.viewmodel.LoginViewModel
@@ -31,6 +34,7 @@ val viewModelModule = module {
     single { SearchViewModel(get()) }
     single { ProfileViewModel(get()) }
     single { PlanViewModel(get()) }
+    single { TaskViewModel(get()) }
 }
 
 val apiModule = module {
@@ -38,6 +42,7 @@ val apiModule = module {
     single { provideApi<SearchApi>(get()) }
     single { provideApi<ProfileApi>(get()) }
     single { provideApi<PlanApi>(get()) }
+    single { provideApi<TaskApi>(get()) }
 }
 
 val netModule = module {
@@ -77,4 +82,5 @@ val repositoryModule = module {
     single { provideRepository<SearchRepository, SearchApi>(get()) }
     single { provideRepository<ProfileRepository, ProfileApi>(get()) }
     single { provideRepository<PlanRepository, PlanApi>(get()) }
+    single { provideRepository<TaskRepository, TaskApi>(get()) }
 }

@@ -21,16 +21,17 @@ class TaskFragment : Fragment(R.layout.fragment_plan_task) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        taskId = arguments?.getInt("task_id")
+
         binding.taskItemCheckbox.setOnCheckedChangeListener { _, b ->
             taskId?.let {
                 taskViewModel.markTask(taskId!!)
             }
         }
-    }
 
-    fun setLiveCycle() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            taskId = arguments?.getInt("task_id")
+            taskId?.let { taskViewModel.getTask(it) }
+
             taskViewModel.task.collect {
                 when (it) {
                     is Resource.Success -> {

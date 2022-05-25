@@ -8,7 +8,9 @@ data class Task(
     @JsonProperty("id") val id: Int,
     @JsonProperty("name") val name: String,
     @JsonProperty("about") val about: String,
-    @JsonProperty("isDone") var isDone: Boolean
+    @JsonProperty("isDone") var isDone: Boolean,
+    @JsonProperty("description") val description: String?
+
 ) {
     fun addToViews(title: TextView?, description: TextView?, checkBox: CheckBox?) {
         title?.text = this.name
@@ -19,10 +21,10 @@ data class Task(
 
 fun getTasks(): Array<Task> {
     return arrayOf(
-        Task(0, "Dore", "Купить", true),
-        Task(1, "Dore", "Купить", true),
-        Task(2, "Dore", "Купить", true),
-        Task(3, "Dore", "Купить", true),
-        Task(4, "Dore", "Купить", true)
+        Task(0, "Dore", "Купить", true, null),
+        Task(1, "Dore", "Купить", true, null),
+        Task(2, "Dore", "Купить", true, null),
+        Task(3, "Dore", "Купить", true, null),
+        Task(4, "Dore", "Купить", true, null)
     )
 }
