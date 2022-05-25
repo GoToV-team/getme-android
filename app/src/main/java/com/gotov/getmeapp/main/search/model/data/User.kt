@@ -11,12 +11,14 @@ import com.google.android.material.chip.ChipGroup
 import com.gotov.getmeapp.R
 import com.squareup.picasso.Picasso
 
+
 data class User(
     @JsonProperty("id") val id: Int,
     @JsonProperty("name") val name: String,
     @JsonProperty("about") val about: String,
     @JsonProperty("avatar") val avatar: String,
-    @JsonProperty("skills") val skills: List<String>
+    @JsonProperty("skills") val skills: List<String>,
+    @JsonProperty("isMentor") val isMentor: Boolean
 ) {
     private fun getChipSkill(skill: String, context: Context): Chip {
         val tmp = Chip(context)

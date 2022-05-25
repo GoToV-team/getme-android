@@ -50,9 +50,9 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
         }
     }
 
-    suspend fun getTask(id: Int) {
-//        viewModelScope.launch {
-//            withContext(Dispatchers.IO) {
+    fun getTask(id: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
         try {
             _task.emit(Resource.Loading())
             val response = taskRepository.getTask(id)
@@ -77,8 +77,8 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
                 )
             )
         }
-//            }
-//        }
+            }
+        }
     }
 
     suspend fun update(title: String, description: String) {

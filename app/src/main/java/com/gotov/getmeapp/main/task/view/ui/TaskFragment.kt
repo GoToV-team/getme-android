@@ -21,6 +21,12 @@ class TaskFragment : Fragment(R.layout.fragment_plan_task) {
 
     private var taskId: Int? = null
 
+    override fun onResume() {
+        super.onResume()
+        taskId = arguments?.getInt("task_id")
+        taskViewModel.getTask(taskId!!)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

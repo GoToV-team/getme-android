@@ -18,6 +18,9 @@ import com.gotov.getmeapp.main.task.viewmodel.TaskViewModel
 import com.gotov.getmeapp.sign.login.model.api.LoginApi
 import com.gotov.getmeapp.sign.login.model.repository.LoginRepository
 import com.gotov.getmeapp.sign.login.viewmodel.LoginViewModel
+import com.gotov.getmeapp.sign.signup.model.api.RegisterApi
+import com.gotov.getmeapp.sign.signup.model.repository.RegisterRepository
+import com.gotov.getmeapp.sign.signup.viewmodel.RegisterViewModel
 import com.gotov.getmeapp.utils.app.provideApi
 import com.gotov.getmeapp.utils.app.provideRepository
 import okhttp3.Cache
@@ -27,7 +30,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 
-private const val BASE_URL = "https://f129-195-19-63-41.eu.ngrok.io/api/v1/"
+private const val BASE_URL = "http://android.glidemess.pw/api/v1/"
 
 val viewModelModule = module {
     single { LoginViewModel(get()) }
@@ -35,6 +38,7 @@ val viewModelModule = module {
     single { ProfileViewModel(get()) }
     single { PlanViewModel(get()) }
     single { TaskViewModel(get()) }
+    single { RegisterViewModel(get()) }
 }
 
 val apiModule = module {
@@ -43,6 +47,7 @@ val apiModule = module {
     single { provideApi<ProfileApi>(get()) }
     single { provideApi<PlanApi>(get()) }
     single { provideApi<TaskApi>(get()) }
+    single { provideApi<RegisterApi>(get()) }
 }
 
 val netModule = module {
@@ -53,6 +58,8 @@ val netModule = module {
 
     fun provideHttpClient(cache: Cache): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
+            .addInterceptor(AddCookiesInterceptor())
+            .addInterceptor(ReceivedCookiesInterceptor())
             .cache(cache)
 
         return okHttpClientBuilder.build()
@@ -83,4 +90,5 @@ val repositoryModule = module {
     single { provideRepository<ProfileRepository, ProfileApi>(get()) }
     single { provideRepository<PlanRepository, PlanApi>(get()) }
     single { provideRepository<TaskRepository, TaskApi>(get()) }
+    single { provideRepository<RegisterRepository, RegisterApi>(get()) }
 }

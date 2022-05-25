@@ -61,30 +61,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/mentor_info__avatar"
             app:layout_constraintHorizontal_bias="0.0">
-
-        <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:text="Скилл"
-                android:textSize="11sp"
-                android:theme="@style/Theme.MaterialComponents.Bridge"
-                android:checkable="false" />
-
-        <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:text="Скилл"
-                android:textSize="11sp"
-                android:theme="@style/Theme.MaterialComponents.Bridge"
-                android:checkable="false" />
-
-        <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:text="Скилл"
-                android:textSize="11sp"
-                android:theme="@style/Theme.MaterialComponents.Bridge"
-                android:checkable="false" />
     </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

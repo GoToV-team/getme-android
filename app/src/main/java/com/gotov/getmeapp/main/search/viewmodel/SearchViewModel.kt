@@ -46,7 +46,7 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                         SUCCESS_CODE -> {
                             val res: MutableList<Skill> = ArrayList()
                             response.body()?.let {
-                                for (skill in it) {
+                                for (skill in it.skills) {
                                     res.add(Skill(skill.name, true))
                                 }
                             }
@@ -77,8 +77,9 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                 try {
                     if (skills.value is Resource.Success && skills.value.data != null) {
                         _mentors.emit(Resource.Loading())
+                        val tmp = skills.value.data!!
                         val response = searchRepository.search(
-                            skills.value.data!!.filter { it.active }
+                            tmp.filter { it.active }
                         )
                         when (response.code()) {
                             SUCCESS_CODE -> {

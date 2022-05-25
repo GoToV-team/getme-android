@@ -1,6 +1,7 @@
 package com.gotov.getmeapp.main.search.model.api
 
 import com.gotov.getmeapp.main.search.model.data.SkillResponse
+import com.gotov.getmeapp.main.search.model.data.SkillResponseItem
 import com.gotov.getmeapp.main.search.model.data.User
 import retrofit2.Response
 import retrofit2.http.GET
@@ -8,8 +9,8 @@ import retrofit2.http.Query
 
 interface SearchApi {
     @GET("skills")
-    suspend fun getSkills(): Response<Array<SkillResponse>>
+    suspend fun getSkills(): Response<SkillResponse>
 
     @GET("search")
-    suspend fun search(@Query("skills") skills: List<String>): Response<Array<User>>
+    suspend fun search(@Query("skills[]") skills: List<String>): Response<Array<User>>
 }

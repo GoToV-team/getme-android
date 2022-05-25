@@ -136,6 +136,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun addSearchSkill(skills: List<Skill>) {
+        binding.mentorInfoSkillsListChips.removeAllViews()
         for (skill in skills) {
             binding.mentorInfoSkillsListChips.addView(
                 getChipSkill(

@@ -6,6 +6,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface LoginApi {
-    @POST("login")
+    @POST("auth/simple/login")
     suspend fun login(@Body login: Login): Response<Void>
 }
