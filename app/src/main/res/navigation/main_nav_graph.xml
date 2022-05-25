@@ -17,6 +17,13 @@
     </fragment>
 
     <fragment
+            android:id="@+id/EditTaskFragment"
+            android:name="com.gotov.getmeapp.main.task.view.ui.EditTaskFragment"
+            android:label="Редактировать задачу"
+            tools:layout="@layout/fragment_edit_task">
+    </fragment>
+
+    <fragment
             android:id="@+id/PlanFragment"
             android:name="com.gotov.getmeapp.main.plan.view.ui.PlanFragment"
             android:label="@string/plan_fragment_label"
@@ -31,6 +38,10 @@
             android:name="com.gotov.getmeapp.main.task.view.ui.TaskFragment"
             android:label="@string/task_fragment_label"
             tools:layout="@layout/fragment_plan_task">
+
+        <action
+                android:id="@+id/action_TaskFragment_to_EditTaskFragment"
+                app:destination="@id/EditTaskFragment" />
     </fragment>
 
     <fragment

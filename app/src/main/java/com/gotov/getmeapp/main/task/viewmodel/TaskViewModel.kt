@@ -80,4 +80,11 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
 //            }
 //        }
     }
+
+    suspend fun update(title: String, description: String) {
+        taskRepository.updateTask(
+            _task.value.data!!.id,
+            Task(_task.value.data!!.id, title, description, _task.value.data!!.isDone, null)
+        )
+    }
 }

@@ -2,6 +2,7 @@ package com.gotov.getmeapp.main.task.model.api
 
 import com.gotov.getmeapp.main.task.model.data.Task
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -12,4 +13,7 @@ interface TaskApi {
 
     @PUT("task/{id}/mark")
     suspend fun markTask(@Path("id") id: Int): Response<Void>
+
+    @PUT("task/{id}")
+    suspend fun updateTask(@Path("id") id: Int, @Body task: Task): Response<Task>
 }

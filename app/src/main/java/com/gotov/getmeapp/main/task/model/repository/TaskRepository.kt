@@ -11,4 +11,7 @@ class TaskRepository(private val taskApi: TaskApi) {
     suspend fun getTask(id: Int): Response<Task> {
         return taskApi.getTask(id)
     }
+    suspend fun updateTask(id: Int, task: Task): Response<Task> {
+        return taskApi.updateTask(id, task)
+    }
 }
