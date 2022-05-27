@@ -47,7 +47,7 @@ class PlanFragment : Fragment(R.layout.fragment_plan) {
                             context
                         )
 
-                        binding.userInfoSmallName.text = it.data?.mentor?.name
+                        binding.userInfoSmallName.text = it.data?.mentor?.firstName
                         binding.userInfoSmallNote.text = it.data?.mentor?.about
 
                         it.data?.mentor?.avatar?.let { it1 -> setImage(it1) }

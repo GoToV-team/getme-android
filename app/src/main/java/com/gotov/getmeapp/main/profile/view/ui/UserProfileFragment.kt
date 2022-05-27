@@ -21,19 +21,19 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.profileWatchHeaderRole.text = "Ментор"
-        binding.loadPageList.visibility = View.GONE
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             profileViewModel.user.collect {
                 when (it) {
                     is Resource.Success -> {
-                        it.data?.addToViews(
-                            binding.profileWatchHeaderFio,
-                            binding.profileWatchAbout,
-                            binding.profileWatchSkills,
-                            binding.profileWatchHeaderAvatar,
-                            context
-                        )
+                        context?.let { ctx ->
+                            it.data?.addToViews(
+                                binding.profileWatchHeaderFio,
+                                binding.profileWatchAbout,
+                                binding.profileWatchSkills,
+                                binding.profileWatchHeaderAvatar,
+                                ctx
+                            )
+                        }
                         binding.loadPageList.visibility = View.GONE
                     }
                     is Resource.Loading -> {
@@ -47,13 +47,18 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
             }
         }
 
+        binding.profileWatchContactsBtnStartWork.setOnClickListener {
+            findNavController().navigate(R.id.action_UserFragment_to_PlansFragment)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.profileWatchHeaderRole.text = "Ментор"
+        binding.loadPageList.visibility = View.VISIBLE
         val userId = arguments?.getInt("user_id")
         userId?.let {
             profileViewModel.getUserById(it)
-        }
-
-        binding.profileWatchContactsBtnStartWork.setOnClickListener {
-            findNavController().navigate(R.id.action_UserFragment_to_PlansFragment)
         }
     }
 }

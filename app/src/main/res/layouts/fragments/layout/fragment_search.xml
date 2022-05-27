@@ -18,14 +18,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
+            app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/line_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
+            app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/line_3"
@@ -44,7 +44,7 @@
     <View
             android:id="@+id/main_page__header"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="@id/line_1"
             app:layout_constraintEnd_toEndOf="@id/line_2"
             app:layout_constraintTop_toTopOf="@id/line_3"
@@ -55,9 +55,9 @@
     <TextView
             android:id="@+id/main_page__header__mentor"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:text="Менторы"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/main_page__header"

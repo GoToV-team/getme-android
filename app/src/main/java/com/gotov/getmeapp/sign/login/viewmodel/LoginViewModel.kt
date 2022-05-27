@@ -35,7 +35,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                         )
                         else -> {
                             val body: String?
-                            body = response.body().toString()
+                            body = response.errorBody().toString()
 
                             _status.emit(Resource.Error(body, LoginStatus.SERVER_ERROR))
                         }

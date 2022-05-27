@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 private const val SUCCESS_CODE = 200
 
 class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
-    private val _mentors = MutableStateFlow<Resource<Array<User>>>(Resource.Null())
+    private val _mentors = MutableStateFlow<Resource<List<User>>>(Resource.Null())
 
     private val _skills = MutableStateFlow<Resource<List<Skill>>>(Resource.Null())
 
@@ -84,14 +84,17 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                         when (response.code()) {
                             SUCCESS_CODE -> {
                                 if (response.body() != null) {
-                                    _mentors.emit(Resource.Success(response.body()!!))
+                                    _mentors.emit(
+                                        Resource
+                                            .Success(response.body()!!.users.toList())
+                                    )
                                 } else {
-                                    _mentors.emit(Resource.Success(arrayOf()))
+                                    _mentors.emit(Resource.Success(listOf()))
                                 }
                             }
                             else -> {
                                 val body: String?
-                                body = response.body().toString()
+                                body = response.errorBody().toString()
 
                                 _mentors.emit(Resource.Error(body))
                             }

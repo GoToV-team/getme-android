@@ -38,7 +38,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                         )
                         else -> {
                             val body: String?
-                            body = response.body().toString()
+                            body = response.errorBody()?.source().toString()
 
                             _status.emit(Resource.Error(body, RegisterStatus.SERVER_ERROR))
                         }

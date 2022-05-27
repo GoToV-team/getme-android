@@ -47,7 +47,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         binding.loadSkillsList.visibility = View.VISIBLE
         binding.loadUserList.visibility = View.GONE
-        binding.userList.visibility = View.GONE
+        //binding.userList.visibility = View.GONE
         binding.mentorInfoSkillsList.visibility = View.GONE
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -64,7 +64,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     is Resource.Loading -> {
                         binding.loadSkillsList.visibility = View.VISIBLE
                         binding.loadUserList.visibility = View.GONE
-                        binding.userList.visibility = View.GONE
+                        //binding.userList.visibility = View.GONE
                         binding.mentorInfoSkillsList.visibility = View.GONE
                     }
                     is Resource.Error -> {}
@@ -86,9 +86,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                                         oldItem.id == newItem.id
                                     },
                                     { oldItem: User, newItem: User ->
-                                        oldItem.name == newItem.name &&
-                                            oldItem.about == newItem.about &&
-                                            oldItem.skills === newItem.skills
+                                        oldItem.firstName == newItem.firstName &&
+                                                oldItem.lastName == newItem.lastName &&
+                                                oldItem.isMentor == newItem.isMentor &&
+                                                oldItem.about == newItem.about &&
+                                                oldItem.skills === newItem.skills
                                     }
                                 )
                             val productDiffResult = DiffUtil.calculateDiff(userDiffUtilCallback)
@@ -98,13 +100,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         }
 
                         binding.loadUserList.visibility = View.GONE
-                        binding.userList.visibility = View.VISIBLE
+                        // binding.userList.visibility = View.VISIBLE
                     }
                     is Resource.Loading -> {
                         binding.loadUserList.visibility = View.VISIBLE
-                        binding.userList.visibility = View.GONE
+                        //binding.userList.visibility = View.GONE
                     }
-                    is Resource.Error -> {}
+                    is Resource.Error -> {
+                        binding.loadUserList.visibility = View.GONE
+                    }
                     else -> {}
                 }
             }

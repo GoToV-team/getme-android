@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentRegisterBinding
@@ -33,7 +34,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     is Resource.Success -> {
                         when (it.data) {
                             RegisterStatus.SUCCESS ->
-                                activityNavController().navigateUp()
+                                findNavController().navigateUp()
                             else -> {}
                         }
                         binding.registerRegisterButton.isClickable = true
@@ -54,7 +55,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             val password = binding.registerPasswordInput.text.toString()
 
             registerViewModel.register(Register(login, password))
-            //activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
         }
     }
 }

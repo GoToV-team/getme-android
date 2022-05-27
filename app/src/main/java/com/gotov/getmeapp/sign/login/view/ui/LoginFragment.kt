@@ -1,13 +1,17 @@
 package com.gotov.getmeapp.sign.login.view.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.textfield.TextInputEditText
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentLoginBinding
+import com.gotov.getmeapp.main.plans.view.ui.NewPlanDialogFragment
 import com.gotov.getmeapp.sign.login.model.data.Login
 import com.gotov.getmeapp.sign.login.viewmodel.LoginStatus
 import com.gotov.getmeapp.sign.login.viewmodel.LoginViewModel
@@ -26,6 +30,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.loadingLogin.visibility = View.GONE
+        binding.loginErrorText.visibility = View.GONE
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             loginViewModel.status.collect {
@@ -40,16 +45,23 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         binding.loadingLogin.visibility = View.GONE
                         binding.loginLoginButton.visibility = View.VISIBLE
                         binding.loginLoginButton.isClickable = true
+                        binding.loginErrorText.visibility = View.GONE
                     }
                     is Resource.Loading -> {
                         binding.loadingLogin.visibility = View.VISIBLE
                         binding.loginLoginButton.visibility = View.INVISIBLE
                         binding.loginLoginButton.isClickable = false
+                        binding.loginErrorText.visibility = View.GONE
                     }
                     is Resource.Error -> {
                         binding.loadingLogin.visibility = View.GONE
                         binding.loginLoginButton.visibility = View.VISIBLE
                         binding.loginLoginButton.isClickable = true
+
+                        it.msg?.run {
+                            binding.loginErrorText.text = it.msg
+                            binding.loginErrorText.visibility = View.VISIBLE
+                        }
                     }
                     else -> {}
                 }
@@ -63,8 +75,31 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.loginLoginButton.setOnClickListener {
             val login = binding.loginUsernameInput.text.toString()
             val password = binding.loginPasswordInput.text.toString()
+            val entity = Login(login, password)
 
-            loginViewModel.login(Login(login, password))
+            if (validate(entity)) {
+                loginViewModel.login(entity)
+            }
+        }
+
+        binding.loginUsernameInput.doOnTextChanged { text, _, _, _ ->
+            binding.loginUsernameInput.error = Login.validateLogin(text.toString())
+        }
+
+        binding.loginPasswordInput.doOnTextChanged { text, _, _, _ ->
+            binding.loginPasswordInput.error = Login.validatePassword(text.toString())
         }
     }
+
+
+    private fun validate(login: Login): Boolean {
+        val loginError = Login.validateLogin(login.login)
+        val passwordError = Login.validatePassword(login.password)
+
+        binding.loginUsernameInput.error = loginError
+        binding.loginPasswordInput.error = passwordError
+
+        return passwordError == null && loginError == null
+    }
+
 }

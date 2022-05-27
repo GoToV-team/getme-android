@@ -36,7 +36,7 @@ class TaskFragment : Fragment(R.layout.fragment_plan_task) {
             navController.navigate(R.id.action_TaskFragment_to_EditTaskFragment, args)
         }
 
-        binding.taskItemCheckbox.setOnCheckedChangeListener { _, b ->
+        binding.taskItemCheckbox.setOnCheckedChangeListener { _, _ ->
             taskId?.let {
                 taskViewModel.markTask(taskId!!)
             }

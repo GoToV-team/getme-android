@@ -6,6 +6,7 @@ import com.gotov.getmeapp.main.profile.model.repository.ProfileRepository
 import com.gotov.getmeapp.main.search.model.data.User
 import com.gotov.getmeapp.utils.model.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

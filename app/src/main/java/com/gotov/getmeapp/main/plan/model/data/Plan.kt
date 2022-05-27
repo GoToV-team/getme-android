@@ -59,17 +59,8 @@ fun getPlans(): Array<Plan> {
             "Полезная задача",
             20,
             List(1) { "Мир" },
-<<<<<<< Updated upstream
             null,
-            User(0, "asd", "asd", "", listOf()),
-=======
-            listOf(
-                Task(1, "One task", "desc 1", false),
-                Task(2, "Two task", "desc 2 done", true),
-                Task(3, "Three task", "", false),
-            ),
-            User(0, "asd", "asd", "", listOf(), true),
->>>>>>> Stashed changes
+            User(0, "asd",  "dore","asd", "", listOf(), true),
             null
 
         ),
@@ -79,17 +70,8 @@ fun getPlans(): Array<Plan> {
             "sdfs dfsdf",
             20,
             List(1) { "Gore" },
-<<<<<<< Updated upstream
             null,
-            User(0, "asd", "asd", "", listOf()),
-=======
-            listOf(
-                Task(1, "One task", "desc 1", false),
-                Task(2, "Two task", "desc 2 done", true),
-                Task(3, "Three task", "", false),
-            ),
-            User(0, "asd", "asd", "", listOf(), true),
->>>>>>> Stashed changes
+            User(0, "asd",  "dore", "asd", "", listOf(), true),
             null
         )
     )

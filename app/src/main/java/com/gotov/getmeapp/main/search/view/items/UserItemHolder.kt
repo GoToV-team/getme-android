@@ -36,7 +36,7 @@ class UsersViewAdapter(users: ArrayList<User>) : RecyclerView.Adapter<UserItemHo
         return _users.size
     }
 
-    fun setData(users: Array<User>) {
+    fun setData(users: Collection<User>) {
         _users.clear()
         _users.addAll(users)
     }

@@ -26,13 +26,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             profileViewModel.user.collect {
                 when (it) {
                     is Resource.Success -> {
-                        it.data?.addToViews(
-                            binding.profileWatchHeaderFio,
-                            binding.profileWatchAbout,
-                            binding.profileWatchSkills,
-                            binding.profileWatchHeaderAvatar,
-                            context
-                        )
+                        context?.let { ctx ->
+                            it.data?.addToViews(
+                                binding.profileWatchHeaderFio,
+                                binding.profileWatchAbout,
+                                binding.profileWatchSkills,
+                                binding.profileWatchHeaderAvatar,
+                                ctx
+                            )
+                        }
                         binding.loadPageList.visibility = View.GONE
                     }
                     is Resource.Loading -> {

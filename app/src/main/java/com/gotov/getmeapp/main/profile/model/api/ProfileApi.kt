@@ -9,6 +9,6 @@ interface ProfileApi {
     @GET("user")
     suspend fun getCurrentUser(): Response<User>
 
-    @GET("mentor/{id}")
+    @GET("user/{id}")
     suspend fun getUserById(@Path("id") id: Int): Response<User>
 }
