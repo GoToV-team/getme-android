@@ -2,9 +2,6 @@ package com.gotov.getmeapp.sign.signup.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gotov.getmeapp.sign.login.model.data.Login
-import com.gotov.getmeapp.sign.login.model.repository.LoginRepository
-import com.gotov.getmeapp.sign.login.viewmodel.LoginStatus
 import com.gotov.getmeapp.sign.signup.model.data.Register
 import com.gotov.getmeapp.sign.signup.model.repository.RegisterRepository
 import com.gotov.getmeapp.utils.model.Resource

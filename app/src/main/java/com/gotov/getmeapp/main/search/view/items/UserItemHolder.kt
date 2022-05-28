@@ -53,6 +53,7 @@ class UserItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val _image: ImageView = itemView.findViewById(R.id.mentor_info__avatar)
 
     fun bind(user: User) {
+        _skills.removeAllViews()
         user.addToViews(_name, _about, _skills, _image, itemView.context)
 
         var navController: NavController?

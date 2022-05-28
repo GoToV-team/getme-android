@@ -2,6 +2,7 @@ package com.gotov.getmeapp.main.profile.view.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
     private val binding by viewBinding(FragmentProfileBinding::bind)
 
     private val profileViewModel by viewModel<ProfileViewModel>()
+
+    private var userId: Int? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,8 +50,33 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
             }
         }
 
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            profileViewModel.isAdded.collect {
+                when (it) {
+                    is Resource.Success -> {
+                        it.data?.let { isAdded ->
+                            if (isAdded) {
+                                val args: Bundle = bundleOf("status" to "menti")
+                                findNavController().navigate(R.id.action_UserFragment_to_PlansFragment, args)
+                            }
+                        }
+                        binding.loadPageList.visibility = View.GONE
+                    }
+                    is Resource.Loading -> {
+                        binding.loadPageList.visibility = View.VISIBLE
+                    }
+                    is Resource.Error -> {
+                        binding.loadPageList.visibility = View.GONE
+                    }
+                    else -> {}
+                }
+            }
+        }
+
         binding.profileWatchContactsBtnStartWork.setOnClickListener {
-            findNavController().navigate(R.id.action_UserFragment_to_PlansFragment)
+            userId?.let {
+                profileViewModel.startMentor(it)
+            }
         }
     }
 
@@ -56,7 +84,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onResume()
         binding.profileWatchHeaderRole.text = "Ментор"
         binding.loadPageList.visibility = View.VISIBLE
-        val userId = arguments?.getInt("user_id")
+        userId = arguments?.getInt("user_id")
+
         userId?.let {
             profileViewModel.getUserById(it)
         }

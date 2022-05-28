@@ -2,21 +2,17 @@ package com.gotov.getmeapp.sign.signup.view.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentRegisterBinding
-import com.gotov.getmeapp.sign.login.model.data.Login
-import com.gotov.getmeapp.sign.login.viewmodel.LoginStatus
-import com.gotov.getmeapp.sign.login.viewmodel.LoginViewModel
 import com.gotov.getmeapp.sign.signup.model.data.Register
 import com.gotov.getmeapp.sign.signup.viewmodel.RegisterStatus
 import com.gotov.getmeapp.sign.signup.viewmodel.RegisterViewModel
 import com.gotov.getmeapp.utils.model.Resource
-import com.gotov.getmeapp.utils.ui.activityNavController
-import com.gotov.getmeapp.utils.ui.navigateSafely
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -28,6 +24,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.loadingRegister.visibility = View.GONE
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             registerViewModel.status.collect {
                 when (it) {
@@ -38,23 +36,50 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                             else -> {}
                         }
                         binding.registerRegisterButton.isClickable = true
+                        binding.loadingRegister.visibility = View.GONE
+                        binding.registerRegisterButton.visibility = View.VISIBLE
                     }
                     is Resource.Loading -> {
                         binding.registerRegisterButton.isClickable = false
+                        binding.registerRegisterButton.visibility = View.INVISIBLE
+                        binding.loadingRegister.visibility = View.VISIBLE
                     }
                     is Resource.Error -> {
                         binding.registerRegisterButton.isClickable = true
+                        binding.loadingRegister.visibility = View.GONE
+                        binding.registerRegisterButton.visibility = View.VISIBLE
                     }
                     else -> {}
                 }
             }
         }
 
+        binding.registerUsernameInput.doOnTextChanged { text, _, _, _ ->
+            binding.registerUsernameInput.error = Register.validateLogin(text.toString())
+        }
+
+        binding.registerPasswordInput.doOnTextChanged { text, _, _, _ ->
+            binding.registerPasswordInput.error = Register.validatePassword(text.toString())
+        }
+
         binding.registerRegisterButton.setOnClickListener {
             val login = binding.registerUsernameInput.text.toString()
             val password = binding.registerPasswordInput.text.toString()
+            val entity = Register(login, password)
 
-            registerViewModel.register(Register(login, password))
+            if (validate(entity)) {
+                registerViewModel.register(Register(login, password))
+            }
         }
+    }
+
+    private fun validate(register: Register): Boolean {
+        val loginError = Register.validateLogin(register.login)
+        val passwordError = Register.validatePassword(register.password)
+
+        binding.registerUsernameInput.error = loginError
+        binding.registerPasswordInput.error = passwordError
+
+        return passwordError == null && loginError == null
     }
 }

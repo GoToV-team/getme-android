@@ -5,9 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.gotov.getmeapp.main.plan.model.data.Plan
 import com.gotov.getmeapp.main.plans.model.data.Menti
 import com.gotov.getmeapp.main.plans.model.repository.PlansRepository
-import com.gotov.getmeapp.main.search.model.data.Skill
-import com.gotov.getmeapp.main.search.model.data.User
-import com.gotov.getmeapp.main.search.model.repository.SearchRepository
 import com.gotov.getmeapp.utils.model.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,7 +36,6 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                             response.body()?.let {
                                 _mentis.emit(Resource.Success(it))
                             }
-
                         }
                         else -> {
                             val body: String?
@@ -102,7 +98,6 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                             response.body()?.let {
                                 _mentorPlans.emit(Resource.Success(it))
                             }
-
                         }
                         else -> {
                             val body: String?
@@ -134,7 +129,6 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                             response.body()?.let {
                                 _isMentor.emit(Resource.Success(it.isMentor))
                             }
-
                         }
                         else -> {
                             val body: String?
@@ -154,5 +148,4 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
             }
         }
     }
-
 }

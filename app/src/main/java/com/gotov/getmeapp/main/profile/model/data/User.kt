@@ -1,5 +1,6 @@
 package com.gotov.getmeapp.main.profile.model.data
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.View
@@ -9,14 +10,14 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.gotov.getmeapp.R
-import com.bumptech.glide.Glide
+import com.gotov.getmeapp.utils.ui.setImage
 
 data class User(
     @JsonProperty("id") val id: Int,
-    @JsonProperty("first_name")  val firstName: String? = "",
+    @JsonProperty("first_name") val firstName: String? = "",
     @JsonProperty("last_name") val lastName: String? = "",
     @JsonProperty("about") val about: String? = "",
-    @JsonProperty("avatar")  val avatar: String? = "",
+    @JsonProperty("avatar") val avatar: String? = "",
     @JsonProperty("skills") val skills: List<String>,
     @JsonProperty("is_mentor") val isMentor: Boolean
 ) {
@@ -31,6 +32,7 @@ data class User(
         return tmp
     }
 
+    @SuppressLint("SetTextI18n")
     fun addToViews(
         title: TextView?,
         description: TextView?,
@@ -38,11 +40,11 @@ data class User(
         image: ImageView?,
         context: Context
     ) {
-        title?.text = this.firstName.plus(' ').plus(this.lastName)
+        title?.text = "$this.firstNam $this.lastName"
         description?.text = this.about
 
         if (avatar != null && avatar.isNotEmpty()) {
-            image?.let { Glide.with(context).load(avatar).into(it) }
+            image?.setImage(avatar)
         }
 
         if (skills != null) {

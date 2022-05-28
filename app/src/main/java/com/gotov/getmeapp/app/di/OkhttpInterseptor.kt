@@ -4,6 +4,7 @@ import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
+import okio.Buffer
 import java.io.IOException
 
 object CookiesStore {
@@ -26,11 +27,19 @@ class AddCookiesInterceptor : Interceptor {
         for (cookie in cookies) {
             builder.addHeader("Cookie", cookie)
         }
+
         Log.v(
             "OkHttp",
             "Adding Header: $cookies"
         ) // This is done so I know which headers are being added; this interceptor is used after the normal logging of OkHttp
-        return chain.proceed(builder.build())
+        val request = builder.build()
+        val buffer = Buffer()
+        request.body()?.writeTo(buffer)
+        Log.v(
+            "Request Body",
+            buffer.toString()
+        )
+        return chain.proceed(request)
     }
 }
 

@@ -49,8 +49,7 @@
             app:layout_constraintEnd_toEndOf="@id/line_2"
             app:layout_constraintTop_toTopOf="@id/line_3"
             app:layout_constraintLeft_toRightOf="@id/line_1"
-            app:layout_constraintRight_toLeftOf="@id/line_2"
-            />
+            app:layout_constraintRight_toLeftOf="@id/line_2" />
 
     <TextView
             android:id="@+id/main_page__header__mentor"
@@ -62,8 +61,7 @@
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/main_page__header"
             app:layout_constraintLeft_toLeftOf="@id/main_page__header"
-            app:layout_constraintTop_toTopOf="@id/main_page__header"
-            />
+            app:layout_constraintTop_toTopOf="@id/main_page__header" />
 
     <View
             android:id="@+id/skills"
@@ -88,47 +86,34 @@
             android:id="@+id/mentor_info__skills_list"
             app:layout_constraintTop_toBottomOf="@id/main_page__header"
             app:layout_constraintEnd_toStartOf="@id/line_2"
-            app:layout_constraintStart_toEndOf="@id/line_1"
-            >
+            app:layout_constraintStart_toEndOf="@id/line_1">
 
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/mentor_info__skills_list_linear"
-                >
-            <com.google.android.material.chip.ChipGroup
-                    app:layout_constraintStart_toStartOf="@id/mentor_info__skills_list"
-                    app:layout_constraintLeft_toLeftOf="@id/mentor_info__skills_list"
-                    app:layout_constraintTop_toTopOf="@id/mentor_info__skills_list"
-                    app:singleLine="true"
-                    android:id="@+id/mentor_info__skills_list_chips"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintHorizontal_bias="0.0">
+        <com.google.android.material.chip.ChipGroup
+                app:layout_constraintStart_toStartOf="@id/mentor_info__skills_list"
+                app:layout_constraintLeft_toLeftOf="@id/mentor_info__skills_list"
+                app:layout_constraintTop_toTopOf="@id/mentor_info__skills_list"
+                app:singleLine="true"
+                android:id="@+id/mentor_info__skills_list_chips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_bias="0.0">
 
-            </com.google.android.material.chip.ChipGroup>
-        </LinearLayout>
+        </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/load_user_list"
-            app:layout_constraintBottom_toTopOf="@+id/line_4"
-            app:layout_constraintTop_toBottomOf="@+id/skills"
-            app:layout_constraintStart_toStartOf="@+id/line_1"
-            app:layout_constraintEnd_toStartOf="@+id/line_2"
-            android:indeterminate="true" />
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/user_list"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/search_swipe_layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/skills"
             app:layout_constraintBottom_toTopOf="@+id/line_4"
             app:layout_constraintEnd_toStartOf="@+id/line_2"
             app:layout_constraintStart_toStartOf="@+id/line_1">
-    </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/user_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

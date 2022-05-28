@@ -5,26 +5,22 @@ import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonSetter
-import com.fasterxml.jackson.annotation.Nulls
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.gotov.getmeapp.R
-
+import com.gotov.getmeapp.utils.ui.setImage
 
 data class UserResponse(
-    @JsonProperty("users")  val users: ArrayList<User>
+    @JsonProperty("users") val users: ArrayList<User>
 )
 
 data class User(
     @JsonProperty("id") val id: Int,
-    @JsonProperty("first_name")  val firstName: String? = "",
+    @JsonProperty("first_name") val firstName: String? = "",
     @JsonProperty("last_name") val lastName: String? = "",
     @JsonProperty("about") val about: String? = "",
-    @JsonProperty("avatar")  val avatar: String? = "",
+    @JsonProperty("avatar") val avatar: String? = "",
     @JsonProperty("skills") val skills: List<String>,
     @JsonProperty("is_mentor") val isMentor: Boolean
 ) {
@@ -50,7 +46,7 @@ data class User(
         description?.text = this.about
 
         if (avatar != null && avatar.isNotEmpty()) {
-            image?.let { Glide.with(context).load(avatar).into(it) }
+            image?.setImage(avatar)
         }
 
         if (skills != null) {

@@ -50,7 +50,7 @@
             android:layout_marginEnd="20dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="Вспомогательная информация о задаче Вспомогательная информация о задаче Вспомогательная информация о задаче"
+            tools:text="Вспомогательная информация о задаче Вспомогательная информация о задаче Вспомогательная информация о задаче"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/task_item_title_arrow"

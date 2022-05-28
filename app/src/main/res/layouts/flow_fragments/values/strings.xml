@@ -1,4 +1,14 @@
 <resources>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menti_info_new_menti">Новый менти</string>
+    <string name="register_page_username_input_title">Имя пользователя</string>
+    <string name="register_page_password_input_title">Пароль</string>
+    <string name="register_page_register_button_text">Зарегистироваться</string>
+    <string name="profile_page_start_working_button_text">Начать заниматься</string>
+    <string name="profile_page_start_writting_button_text">Написать</string>
+    <string name="plan_task_edit_button">Редактировать</string>
+    <string name="login_page_username_input_title">Имя пользователя</string>
+    <string name="login_page_password_input_title">Пароль</string>
+    <string name="login_page_sigin_button_text">Войти</string>
 </resources>

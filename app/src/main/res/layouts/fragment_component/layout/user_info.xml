@@ -24,7 +24,7 @@
             />
 
     <TextView
-            android:text="Стив Джобс"
+            tools:text="Стив Джобс"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/mentor_info__name"
@@ -39,7 +39,7 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-            android:text="Description"
+            tools:text="Description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="10"

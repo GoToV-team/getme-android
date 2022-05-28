@@ -29,7 +29,7 @@
                 android:layout_height="32dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Задача"
+                tools:text="Задача"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -44,7 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:text="Вспомогательная информация о задаче Вспомогательная информация о задаче Вспомогательная информация о задаче"
+                tools:text="Вспомогательная информация о задаче Вспомогательная информация о задаче Вспомогательная информация о задаче"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/task_item_description"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:text="Редактировать"
+                android:text="@string/plan_task_edit_button"
                 />
 
 

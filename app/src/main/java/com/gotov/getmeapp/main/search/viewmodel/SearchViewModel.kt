@@ -47,7 +47,7 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                             val res: MutableList<Skill> = ArrayList()
                             response.body()?.let {
                                 for (skill in it.skills) {
-                                    res.add(Skill(skill.name, true))
+                                    res.add(Skill(skill.name, false))
                                 }
                             }
                             _skills.emit(Resource.Success(res))
@@ -84,10 +84,11 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                         when (response.code()) {
                             SUCCESS_CODE -> {
                                 if (response.body() != null) {
-                                    _mentors.emit(
-                                        Resource
-                                            .Success(response.body()!!.users.toList())
-                                    )
+                                    response.body()?.run {
+                                        _mentors.emit(
+                                            Resource.Success(this.users.toList())
+                                        )
+                                    }
                                 } else {
                                     _mentors.emit(Resource.Success(listOf()))
                                 }

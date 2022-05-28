@@ -60,7 +60,7 @@ fun getPlans(): Array<Plan> {
             20,
             List(1) { "Мир" },
             null,
-            User(0, "asd",  "dore","asd", "", listOf(), true),
+            User(0, "asd", "dore", "asd", "", listOf(), true),
             null
 
         ),
@@ -71,7 +71,7 @@ fun getPlans(): Array<Plan> {
             20,
             List(1) { "Gore" },
             null,
-            User(0, "asd",  "dore", "asd", "", listOf(), true),
+            User(0, "asd", "dore", "asd", "", listOf(), true),
             null
         )
     )

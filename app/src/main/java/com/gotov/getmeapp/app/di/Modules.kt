@@ -26,6 +26,7 @@ import com.gotov.getmeapp.utils.app.provideRepository
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -33,12 +34,12 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 private const val BASE_URL = "http://android.glidemess.pw/api/v1/"
 
 val viewModelModule = module {
-    single { LoginViewModel(get()) }
-    single { SearchViewModel(get()) }
-    single { ProfileViewModel(get()) }
-    single { PlanViewModel(get()) }
-    single { TaskViewModel(get()) }
-    single { RegisterViewModel(get()) }
+    viewModel { LoginViewModel(get()) }
+    viewModel { SearchViewModel(get()) }
+    viewModel { ProfileViewModel(get()) }
+    viewModel { PlanViewModel(get()) }
+    viewModel { TaskViewModel(get()) }
+    viewModel { RegisterViewModel(get()) }
 }
 
 val apiModule = module {

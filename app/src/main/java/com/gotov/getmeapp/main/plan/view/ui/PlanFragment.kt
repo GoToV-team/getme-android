@@ -7,12 +7,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.bumptech.glide.Glide
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentPlanBinding
 import com.gotov.getmeapp.main.plan.view.items.TaskViewAdapter
 import com.gotov.getmeapp.main.plan.viewmodel.PlanViewModel
 import com.gotov.getmeapp.utils.model.Resource
+import com.gotov.getmeapp.utils.ui.setImage
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -50,7 +50,9 @@ class PlanFragment : Fragment(R.layout.fragment_plan) {
                         binding.userInfoSmallName.text = it.data?.mentor?.firstName
                         binding.userInfoSmallNote.text = it.data?.mentor?.about
 
-                        it.data?.mentor?.avatar?.let { it1 -> setImage(it1) }
+                        it.data?.mentor?.avatar?.let { avatar ->
+                            binding.userInfoSmallAvatar?.setImage(avatar)
+                        }
 
                         binding.taskList.adapter = it.data?.tasks?.let {
                             it1 ->
@@ -66,9 +68,6 @@ class PlanFragment : Fragment(R.layout.fragment_plan) {
         }
     }
 
-    fun setImage(image: String) {
-        Glide.with(this).load(image).into(binding.userInfoSmallAvatar)
-    }
     override fun onStart() {
         super.onStart()
 

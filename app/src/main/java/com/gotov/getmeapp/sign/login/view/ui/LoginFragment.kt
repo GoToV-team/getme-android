@@ -1,17 +1,14 @@
 package com.gotov.getmeapp.sign.login.view.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.textfield.TextInputEditText
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentLoginBinding
-import com.gotov.getmeapp.main.plans.view.ui.NewPlanDialogFragment
 import com.gotov.getmeapp.sign.login.model.data.Login
 import com.gotov.getmeapp.sign.login.viewmodel.LoginStatus
 import com.gotov.getmeapp.sign.login.viewmodel.LoginViewModel
@@ -91,7 +88,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-
     private fun validate(login: Login): Boolean {
         val loginError = Login.validateLogin(login.login)
         val passwordError = Login.validatePassword(login.password)
@@ -101,5 +97,4 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         return passwordError == null && loginError == null
     }
-
 }

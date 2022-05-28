@@ -1,7 +1,9 @@
 package com.gotov.getmeapp.main.search.model.repository
 
 import com.gotov.getmeapp.main.search.model.api.SearchApi
-import com.gotov.getmeapp.main.search.model.data.*
+import com.gotov.getmeapp.main.search.model.data.Skill
+import com.gotov.getmeapp.main.search.model.data.SkillResponse
+import com.gotov.getmeapp.main.search.model.data.UserResponse
 import retrofit2.Response
 
 class SearchRepository(private val searchApi: SearchApi) {

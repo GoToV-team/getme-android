@@ -24,8 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:paddingLeft="10dp"
-            android:text="Знакомство с Android"
+            android:paddingStart="10dp"
+            tools:text="Знакомство с Android"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"

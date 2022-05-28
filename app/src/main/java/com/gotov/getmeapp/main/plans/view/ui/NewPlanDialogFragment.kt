@@ -11,7 +11,7 @@ import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentCreatePlanBinding
 import com.gotov.getmeapp.main.plans.viewmodel.SharedViewModel
 
-class NewPlanDialogFragment: DialogFragment() {
+class NewPlanDialogFragment : DialogFragment() {
 
     private lateinit var viewModel: SharedViewModel
 
@@ -41,10 +41,10 @@ class NewPlanDialogFragment: DialogFragment() {
         )
     }
 
-   private fun setupClickListeners() {
+    private fun setupClickListeners() {
         binding.newPlanCreateButton.setOnClickListener {
             viewModel.sendName(binding.newPlanTitleInput.text.toString())
             dismiss()
         }
-   }
+    }
 }

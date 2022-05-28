@@ -46,9 +46,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
 
         binding.loadSkillsList.visibility = View.VISIBLE
-        binding.loadUserList.visibility = View.GONE
-        //binding.userList.visibility = View.GONE
+        binding.userList.visibility = View.GONE
         binding.mentorInfoSkillsList.visibility = View.GONE
+        binding.searchSwipeLayout.isRefreshing = false
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             searchViewModel.skills.collect {
@@ -63,8 +63,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     }
                     is Resource.Loading -> {
                         binding.loadSkillsList.visibility = View.VISIBLE
-                        binding.loadUserList.visibility = View.GONE
-                        //binding.userList.visibility = View.GONE
+                        binding.searchSwipeLayout.isRefreshing = false
+                        binding.userList.visibility = View.GONE
                         binding.mentorInfoSkillsList.visibility = View.GONE
                     }
                     is Resource.Error -> {}
@@ -87,10 +87,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                                     },
                                     { oldItem: User, newItem: User ->
                                         oldItem.firstName == newItem.firstName &&
-                                                oldItem.lastName == newItem.lastName &&
-                                                oldItem.isMentor == newItem.isMentor &&
-                                                oldItem.about == newItem.about &&
-                                                oldItem.skills === newItem.skills
+                                            oldItem.lastName == newItem.lastName &&
+                                            oldItem.isMentor == newItem.isMentor &&
+                                            oldItem.about == newItem.about &&
+                                            oldItem.skills === newItem.skills
                                     }
                                 )
                             val productDiffResult = DiffUtil.calculateDiff(userDiffUtilCallback)
@@ -99,21 +99,25 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                             productDiffResult.dispatchUpdatesTo(adapter!!)
                         }
 
-                        binding.loadUserList.visibility = View.GONE
-                        // binding.userList.visibility = View.VISIBLE
+                        binding.searchSwipeLayout.isRefreshing = false
+                        binding.userList.visibility = View.VISIBLE
                     }
                     is Resource.Loading -> {
-                        binding.loadUserList.visibility = View.VISIBLE
-                        //binding.userList.visibility = View.GONE
+                        binding.searchSwipeLayout.isRefreshing = true
+                        binding.userList.visibility = View.GONE
                     }
                     is Resource.Error -> {
-                        binding.loadUserList.visibility = View.GONE
+                        binding.searchSwipeLayout.isRefreshing = false
                     }
                     else -> {}
                 }
             }
         }
 
+        binding.searchSwipeLayout.setOnRefreshListener {
+            searchViewModel.getMentors()
+            binding.searchSwipeLayout.isRefreshing = true
+        }
         searchViewModel.getSkills()
         searchViewModel.getMentors()
     }
@@ -123,7 +127,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val tmp = Chip(context)
         tmp.text = skill
         tmp.isCheckable = true
-        tmp.isChecked = true
+        tmp.isChecked = false
         tmp.setChipBackgroundColorResource(R.drawable.ic_custom_skill_chip_draw)
         tmp.textAlignment = View.TEXT_ALIGNMENT_CENTER
         tmp.setTextColor(Color.WHITE)

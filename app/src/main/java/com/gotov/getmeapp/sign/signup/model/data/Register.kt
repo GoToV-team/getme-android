@@ -9,18 +9,11 @@ data class Register(
 ) {
     companion object {
         private val PASSWORD_PATTERN: Pattern = Pattern.compile(
-            "^" +  //"(?=.*[0-9])" +         //at least 1 digit
-                    // "(?=.*[a-z])" +         //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                    "(?=.*[a-zA-Z0-9])" +  //any letter
-                    "(?=.*[@#$%^&+=])" +  //at least 1 special character
-                    "(?=\\S+$)" +  //no white spaces
-                    ".{4,}" +  //at least 4 characters
-                    "$"
+            "^(?=.*\\d|[A-Z]|[a-z]|[^\\w\\d\\s:])([^\\s]){4,16}\$"
         )
 
         private const val EmptyField = "Поле должно быть не пустым"
-        private const val IncorrectPassword = "Пароль может содержать только символы a-z, A-Z, 0-9, @#\$%^&+="
+        private const val IncorrectPassword = "Пароль может содержать только символы a-z, A-Z, 0-9, @#\$%^&+= \n b и быть длинной от 4 до 16 символов"
 
         fun validateLogin(login: String): String? {
             return if (login.isEmpty()) {

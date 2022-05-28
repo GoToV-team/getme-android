@@ -19,6 +19,7 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val status = arguments?.getString("status")
         val test: Array<Plan> = getPlans()
 
         val testMenti: Array<Menti> = arrayOf(
@@ -41,10 +42,17 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
         recMenti.layoutManager = layoutManagerMenti
         recMenti.adapter = MentisViewAdapter(testMenti)
 
-        binding.radioMenti.isChecked = true
-        binding.radioMentor.isChecked = false
-        binding.mentiList.visibility = View.VISIBLE
-        binding.dividerBetweenMentiAndPlan.visibility = View.VISIBLE
+        if (status == "menti") {
+            binding.radioMenti.isChecked = false
+            binding.radioMentor.isChecked = true
+            binding.mentiList.visibility = View.GONE
+            binding.dividerBetweenMentiAndPlan.visibility = View.GONE
+        } else {
+            binding.radioMenti.isChecked = true
+            binding.radioMentor.isChecked = false
+            binding.mentiList.visibility = View.VISIBLE
+            binding.dividerBetweenMentiAndPlan.visibility = View.VISIBLE
+        }
 
         binding.radioMenti.setOnClickListener {
             binding.mentiList.visibility = View.VISIBLE
