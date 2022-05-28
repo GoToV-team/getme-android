@@ -4,8 +4,8 @@ import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import okio.Buffer
 import java.io.IOException
+import okio.Buffer
 
 object CookiesStore {
     private var cookies: HashSet<String> = hashSetOf()
