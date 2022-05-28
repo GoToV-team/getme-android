@@ -57,7 +57,10 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
                         it.data?.let { isAdded ->
                             if (isAdded) {
                                 val args: Bundle = bundleOf("status" to "menti")
-                                findNavController().navigate(R.id.action_UserFragment_to_PlansFragment, args)
+                                findNavController().navigate(
+                                    R.id.action_UserFragment_to_PlansFragment,
+                                    args
+                                )
                             }
                         }
                         binding.loadPageList.visibility = View.GONE

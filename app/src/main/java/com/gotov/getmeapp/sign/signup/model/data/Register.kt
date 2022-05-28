@@ -13,7 +13,8 @@ data class Register(
         )
 
         private const val EmptyField = "Поле должно быть не пустым"
-        private const val IncorrectPassword = "Пароль может содержать только символы a-z, A-Z, 0-9, @#\$%^&+= \n b и быть длинной от 4 до 16 символов"
+        private const val IncorrectPassword = "Пароль может содержать только символы " +
+            "a-z, A-Z, 0-9, @#\$%^&+= \n b и быть длинной от 4 до 16 символов"
 
         fun validateLogin(login: String): String? {
             return if (login.isEmpty()) {
