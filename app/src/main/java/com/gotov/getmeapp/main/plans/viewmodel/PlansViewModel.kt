@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 private const val SUCCESS_CODE = 200
 
@@ -44,7 +46,14 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                             _mentis.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
+                    _mentis.emit(
+                        Resource.Error(
+                            "Err when try get mentis: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
                     _mentis.emit(
                         Resource.Error(
                             "Err when try get mentis: " + e.message,
@@ -75,10 +84,17 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                             _mentiPlans.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
                     _mentiPlans.emit(
                         Resource.Error(
-                            "Err when try get menti plans: " + e.message,
+                            "Err when try get mentis: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
+                    _mentiPlans.emit(
+                        Resource.Error(
+                            "Err when try get mentis: " + e.message,
                             null
                         )
                     )
@@ -106,10 +122,17 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                             _mentorPlans.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
-                    _mentorPlans.emit(
+                } catch (e: IOException) {
+                    _mentiPlans.emit(
                         Resource.Error(
-                            "Err when try get menti plans: " + e.message,
+                            "Err when try get mentis: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
+                    _mentiPlans.emit(
+                        Resource.Error(
+                            "Err when try get mentis: " + e.message,
                             null
                         )
                     )
@@ -137,10 +160,17 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                             _isMentor.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
+                }  catch (e: IOException) {
                     _isMentor.emit(
                         Resource.Error(
-                            "Err when try get menti plans: " + e.message,
+                            "Err when try get isMentor: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
+                    _isMentor.emit(
+                        Resource.Error(
+                            "Err when try get isMentor: " + e.message,
                             null
                         )
                     )

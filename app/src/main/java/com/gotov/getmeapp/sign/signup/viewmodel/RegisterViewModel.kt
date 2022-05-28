@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 private const val SUCCESS_CODE = 201
 private const val INCORRECT_FIELD_CODE = 403
@@ -40,10 +42,17 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                             _status.emit(Resource.Error(body, RegisterStatus.SERVER_ERROR))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
                     _status.emit(
                         Resource.Error(
-                            "Err when try login: " + e.message,
+                            "Err when try register: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
+                    _status.emit(
+                        Resource.Error(
+                            "Err when try register: " + e.message,
                             null
                         )
                     )

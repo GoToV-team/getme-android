@@ -22,13 +22,17 @@ data class Plan(
     @JsonProperty("mentor") val mentor: User?,
     @JsonProperty("menti") val menti: User?,
 ) {
+    companion object {
+        private const val textSizeChip = 11F
+    }
+
     private fun getChipSkill(skill: String, context: Context): Chip {
         val tmp = Chip(context)
         tmp.text = skill
         tmp.setChipBackgroundColorResource(R.color.teal_700)
         tmp.textAlignment = View.TEXT_ALIGNMENT_CENTER
         tmp.setTextColor(Color.WHITE)
-        tmp.textSize = 11F
+        tmp.textSize = textSizeChip
 
         return tmp
     }

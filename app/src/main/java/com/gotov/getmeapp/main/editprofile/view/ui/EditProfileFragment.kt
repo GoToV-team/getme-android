@@ -1,4 +1,4 @@
-package com.gotov.getmeapp.main.edit_profile.view.ui
+package com.gotov.getmeapp.main.editprofile.view.ui
 
 import android.os.Bundle
 import android.view.View

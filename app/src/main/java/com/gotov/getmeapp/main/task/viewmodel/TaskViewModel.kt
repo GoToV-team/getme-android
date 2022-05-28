@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 private const val SUCCESS_CODE = 200
 
@@ -38,10 +40,17 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
                             _task.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
                     _task.emit(
                         Resource.Error(
-                            "Err when try get skills: " + e.message,
+                            "Err when try get task: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
+                    _task.emit(
+                        Resource.Error(
+                            "Err when try get task: " + e.message,
                             null
                         )
                     )
@@ -69,7 +78,14 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
                             _task.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
+                    _task.emit(
+                        Resource.Error(
+                            "Err when try get task: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
                     _task.emit(
                         Resource.Error(
                             "Err when try get task: " + e.message,

@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 private const val SUCCESS_CODE = 200
 private const val INCORRECT_FIELD_CODE = 403
@@ -40,7 +42,14 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                             _status.emit(Resource.Error(body, LoginStatus.SERVER_ERROR))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
+                    _status.emit(
+                        Resource.Error(
+                            "Err when try login: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
                     _status.emit(
                         Resource.Error(
                             "Err when try login: " + e.message,

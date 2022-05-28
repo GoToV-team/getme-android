@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 private const val SUCCESS_CODE = 200
 
@@ -59,7 +61,14 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                             _skills.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
+                    _skills.emit(
+                        Resource.Error(
+                            "Err when try get skills: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
                     _skills.emit(
                         Resource.Error(
                             "Err when try get skills: " + e.message,
@@ -103,7 +112,14 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                     } else {
                         _mentors.emit(Resource.Error("NoSkills"))
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
+                    _mentors.emit(
+                        Resource.Error(
+                            "Err when try search: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
                     _mentors.emit(
                         Resource.Error(
                             "Err when try search: " + e.message,

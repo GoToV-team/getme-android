@@ -4,5 +4,5 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class RequestMentor(
     @get:JsonProperty("mentor_id") var mentorId: Int,
-    @get:JsonProperty("skill_name") var SkillName: String
+    @get:JsonProperty("skill_name") var skillName: String
 )

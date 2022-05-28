@@ -32,6 +32,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 
 private const val BASE_URL = "http://android.glidemess.pw/api/v1/"
+private const val cacheSize = 10 * 1024 * 1024
 
 val viewModelModule = module {
     viewModel { LoginViewModel(get()) }
@@ -53,7 +54,6 @@ val apiModule = module {
 
 val netModule = module {
     fun provideCache(application: Application): Cache {
-        val cacheSize = 10 * 1024 * 1024
         return Cache(application.cacheDir, cacheSize.toLong())
     }
 

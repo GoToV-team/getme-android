@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 private const val SUCCESS_CODE = 200
 
@@ -39,10 +41,17 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
                             _user.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
                     _user.emit(
                         Resource.Error(
-                            "Err when try get skills: " + e.message,
+                            "Err when try get users: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
+                    _user.emit(
+                        Resource.Error(
+                            "Err when try get users: " + e.message,
                             null
                         )
                     )
@@ -67,10 +76,17 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
                             _isAdded.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
                     _isAdded.emit(
                         Resource.Error(
-                            "Err when try get skills: " + e.message,
+                            "Err when try get isAdded: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
+                    _isAdded.emit(
+                        Resource.Error(
+                            "Err when try get isAdded: " + e.message,
                             null
                         )
                     )
@@ -98,10 +114,17 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
                             _user.emit(Resource.Error(body))
                         }
                     }
-                } catch (e: Exception) {
+                } catch (e: IOException) {
                     _user.emit(
                         Resource.Error(
-                            "Err when try get profile: " + e.message,
+                            "Err when try get users: " + e.message,
+                            null
+                        )
+                    )
+                } catch (e: HttpException) {
+                    _user.emit(
+                        Resource.Error(
+                            "Err when try get users: " + e.message,
                             null
                         )
                     )

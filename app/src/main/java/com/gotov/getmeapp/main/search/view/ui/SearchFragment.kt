@@ -26,6 +26,11 @@ import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
+    companion object {
+        private const val textSizeChip = 11F
+        private const val heightChip = 48f
+    }
+
     private val binding by viewBinding(FragmentSearchBinding::bind)
 
     private val searchViewModel by viewModel<SearchViewModel>()
@@ -35,6 +40,25 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setRecycleView()
+        startedUIProperty()
+        runSkillsLifeCycle()
+        runMentorsLifeCycle()
+
+        setListeners()
+
+        searchViewModel.getSkills()
+        searchViewModel.getMentors()
+    }
+
+    private fun setListeners() {
+        binding.searchSwipeLayout.setOnRefreshListener {
+            searchViewModel.getMentors()
+            binding.searchSwipeLayout.isRefreshing = true
+        }
+    }
+
+    private fun setRecycleView() {
         val layoutManager: RecyclerView.LayoutManager =
             LinearLayoutManager(context)
         binding.userList.layoutManager = layoutManager
@@ -44,12 +68,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             adapter = UsersViewAdapter(arrayListOf())
             binding.userList.adapter = adapter
         }
+    }
 
+    private fun startedUIProperty() {
         binding.loadSkillsList.visibility = View.VISIBLE
         binding.userList.visibility = View.GONE
         binding.mentorInfoSkillsList.visibility = View.GONE
         binding.searchSwipeLayout.isRefreshing = false
+    }
 
+    private fun runSkillsLifeCycle() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             searchViewModel.skills.collect {
                 when (it) {
@@ -72,7 +100,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 }
             }
         }
+    }
 
+    private fun runMentorsLifeCycle() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             searchViewModel.mentors.collect {
                 when (it) {
@@ -87,10 +117,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                                     },
                                     { oldItem: User, newItem: User ->
                                         oldItem.firstName == newItem.firstName &&
-                                            oldItem.lastName == newItem.lastName &&
-                                            oldItem.isMentor == newItem.isMentor &&
-                                            oldItem.about == newItem.about &&
-                                            oldItem.skills === newItem.skills
+                                                oldItem.lastName == newItem.lastName &&
+                                                oldItem.isMentor == newItem.isMentor &&
+                                                oldItem.about == newItem.about &&
+                                                oldItem.skills === newItem.skills
                                     }
                                 )
                             val productDiffResult = DiffUtil.calculateDiff(userDiffUtilCallback)
@@ -113,13 +143,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 }
             }
         }
-
-        binding.searchSwipeLayout.setOnRefreshListener {
-            searchViewModel.getMentors()
-            binding.searchSwipeLayout.isRefreshing = true
-        }
-        searchViewModel.getSkills()
-        searchViewModel.getMentors()
     }
 
     @SuppressLint("ResourceType")
@@ -131,9 +154,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         tmp.setChipBackgroundColorResource(R.drawable.ic_custom_skill_chip_draw)
         tmp.textAlignment = View.TEXT_ALIGNMENT_CENTER
         tmp.setTextColor(Color.WHITE)
-        tmp.textSize = 11F
+        tmp.textSize = textSizeChip
         tmp.layoutParams =
-            ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, (48f).toDips(resources))
+            ChipGroup.LayoutParams(
+                ChipGroup.LayoutParams.WRAP_CONTENT,
+                (heightChip).toDips(resources)
+            )
 
         tmp.setOnCheckedChangeListener { compoundButton, b ->
             searchViewModel.changeStateOfSkill(compoundButton.text.toString(), b)
