@@ -23,7 +23,12 @@ class NewPlanDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCreatePlanBinding.bind(inflater.inflate(R.layout.fragment_create_plan, container))
+        _binding = FragmentCreatePlanBinding.bind(
+            inflater.inflate(
+                R.layout.fragment_create_plan,
+                container
+            )
+        )
         return _binding!!.root
     }
 

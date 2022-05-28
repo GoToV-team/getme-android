@@ -31,7 +31,7 @@ class AddCookiesInterceptor : Interceptor {
         Log.v(
             "OkHttp",
             "Adding Header: $cookies"
-        ) // This is done so I know which headers are being added; this interceptor is used after the normal logging of OkHttp
+        )
         val request = builder.build()
         val buffer = Buffer()
         request.body()?.writeTo(buffer)
