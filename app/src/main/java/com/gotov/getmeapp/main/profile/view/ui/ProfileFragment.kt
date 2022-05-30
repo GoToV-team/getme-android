@@ -2,6 +2,7 @@ package com.gotov.getmeapp.main.profile.view.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -9,6 +10,7 @@ import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentProfileBinding
 import com.gotov.getmeapp.main.profile.viewmodel.ProfileViewModel
 import com.gotov.getmeapp.utils.model.Resource
+import com.gotov.getmeapp.utils.ui.displayToastOnTop
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,6 +43,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         binding.loadPageList.visibility = View.VISIBLE
                     }
                     is Resource.Error -> {
+                        displayToastOnTop(
+                            context,
+                            "Произошла ошибка загрузки страницы ${it.msg}",
+                            Toast.LENGTH_SHORT
+                        )
                         binding.loadPageList.visibility = View.GONE
                     }
                     else -> {}

@@ -6,6 +6,7 @@ import com.gotov.getmeapp.main.search.model.data.Skill
 import com.gotov.getmeapp.main.search.model.data.User
 import com.gotov.getmeapp.main.search.model.repository.SearchRepository
 import com.gotov.getmeapp.utils.model.Resource
+import com.gotov.getmeapp.utils.model.getResponseError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -55,10 +56,7 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                             _skills.emit(Resource.Success(res))
                         }
                         else -> {
-                            val body: String?
-                            body = response.body().toString()
-
-                            _skills.emit(Resource.Error(body))
+                            _skills.emit(Resource.Error(getResponseError(response.errorBody())))
                         }
                     }
                 } catch (e: IOException) {
@@ -103,10 +101,9 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                                 }
                             }
                             else -> {
-                                val body: String?
-                                body = response.errorBody().toString()
-
-                                _mentors.emit(Resource.Error(body))
+                                _mentors.emit(Resource.Error(
+                                    getResponseError(response.errorBody()))
+                                )
                             }
                         }
                     } else {

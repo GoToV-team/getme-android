@@ -10,6 +10,7 @@ class SearchRepository(private val searchApi: SearchApi) {
     suspend fun getSkills(): Response<SkillResponse> {
         return searchApi.getSkills()
     }
+
     suspend fun search(skills: List<Skill>): Response<UserResponse> {
         return searchApi.search(skills.map { it.name })
     }

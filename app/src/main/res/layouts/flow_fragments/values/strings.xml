@@ -11,4 +11,19 @@
     <string name="login_page_username_input_title">Имя пользователя</string>
     <string name="login_page_password_input_title">Пароль</string>
     <string name="login_page_sigin_button_text">Войти</string>
+    <string name="register_dialog_title">Продолжение регистрации</string>
+    <string name="register_dialog_name_input_title">Имя</string>
+    <string name="register_dialog_second_name_input_title">Фамилия</string>
+    <string name="register_dialog_skills_input_title">Скиллы</string>
+    <string name="register_dialog_apply_button">Подтвердить</string>
+    <string name="register_dialog_about_input_title">Описание</string>
+    <string name="select_skills_title">Выбранные скиллы</string>
+    <string name="hide">Скрыть</string>
+    <string name="plans_page_info_title">Эта страница доступна только менторам</string>
+    <string name="search_page_header">Менторы</string>
+    <string name="search_page_empty_search_message">Увы пока нет менторов с такими скилами</string>
+    <string name="create_plan_header">Создание плана</string>
+    <string name="create_plan_title_text">Название</string>
+    <string name="create_plan_about_text">Описание</string>
+    <string name="create_plan_skills_text">Скиллы</string>
 </resources>

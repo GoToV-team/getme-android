@@ -1,22 +1,20 @@
 package com.gotov.getmeapp.main.plans.view.items
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.os.bundleOf
-import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.ChipGroup
 import com.gotov.getmeapp.R
-import com.gotov.getmeapp.main.plan.model.data.Plan
 
-class PlansViewAdapter(plans: Array<Plan>) : RecyclerView.Adapter<PlanItemHolder>() {
+class PlansViewAdapter(
+    plans: ArrayList<com.gotov.getmeapp.main.plans.model.data.Plan>,
+    private val onClick: (plan: com.gotov.getmeapp.main.plans.model.data.Plan) -> Unit
+) : RecyclerView.Adapter<PlanItemHolder>() {
 
-    private val _plans: Array<Plan> = plans
+    private val _plans: ArrayList<com.gotov.getmeapp.main.plans.model.data.Plan> = plans
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanItemHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(
@@ -24,7 +22,7 @@ class PlansViewAdapter(plans: Array<Plan>) : RecyclerView.Adapter<PlanItemHolder
             parent,
             false
         )
-        return PlanItemHolder(view)
+        return PlanItemHolder(view, onClick)
     }
 
     override fun onBindViewHolder(holder: PlanItemHolder, position: Int) {
@@ -35,14 +33,26 @@ class PlansViewAdapter(plans: Array<Plan>) : RecyclerView.Adapter<PlanItemHolder
     override fun getItemCount(): Int {
         return _plans.size
     }
+
+    fun setData(plans: Collection<com.gotov.getmeapp.main.plans.model.data.Plan>) {
+        _plans.clear()
+        _plans.addAll(plans)
+    }
+
+    fun getData(): List<com.gotov.getmeapp.main.plans.model.data.Plan> {
+        return _plans.toList()
+    }
 }
 
-class PlanItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class PlanItemHolder(
+    itemView: View,
+    private val onClick: (plan: com.gotov.getmeapp.main.plans.model.data.Plan) -> Unit
+) : RecyclerView.ViewHolder(itemView) {
     private val _namePlan: TextView = itemView.findViewById(R.id.plan_item_title)
     private val _progress: ProgressBar = itemView.findViewById(R.id.plan_progress_bar)
     private val _skills: ChipGroup = itemView.findViewById(R.id.plan_item_skills)
 
-    fun bind(plan: Plan) {
+    fun bind(plan: com.gotov.getmeapp.main.plans.model.data.Plan) {
         plan.addToViews(
             _namePlan,
             null,
@@ -51,13 +61,9 @@ class PlanItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemView.context
         )
 
-        var navController: NavController?
-
         this.apply {
             itemView.setOnClickListener {
-                navController = findNavController(itemView)
-                val args: Bundle = bundleOf("plan_id" to plan.id)
-                navController!!.navigate(R.id.action_PlansFragment_to_PlanFragment, args)
+                onClick(plan)
             }
         }
     }

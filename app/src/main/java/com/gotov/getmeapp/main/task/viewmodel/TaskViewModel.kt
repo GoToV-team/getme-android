@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.gotov.getmeapp.main.task.model.data.Task
 import com.gotov.getmeapp.main.task.model.repository.TaskRepository
 import com.gotov.getmeapp.utils.model.Resource
+import com.gotov.getmeapp.utils.model.getResponseError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,9 +36,7 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
                             }
                         }
                         else -> {
-                            val body: String?
-                            body = response.body().toString()
-                            _task.emit(Resource.Error(body))
+                            _task.emit(Resource.Error(getResponseError(response.errorBody())))
                         }
                     }
                 } catch (e: IOException) {
@@ -72,10 +71,7 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
                             }
                         }
                         else -> {
-                            val body: String?
-                            body = response.body().toString()
-
-                            _task.emit(Resource.Error(body))
+                            _task.emit(Resource.Error(getResponseError(response.errorBody())))
                         }
                     }
                 } catch (e: IOException) {
@@ -100,7 +96,12 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
     suspend fun update(title: String, description: String) {
         taskRepository.updateTask(
             _task.value.data!!.id,
-            Task(_task.value.data!!.id, title, description, _task.value.data!!.isDone, null)
+            Task(
+                _task.value.data!!.id,
+                title, description,
+                _task.value.data!!.isDone,
+                null
+            )
         )
     }
 }

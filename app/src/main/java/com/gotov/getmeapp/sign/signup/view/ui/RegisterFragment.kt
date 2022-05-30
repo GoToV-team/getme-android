@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -25,29 +26,33 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.loadingRegister.visibility = View.GONE
+        binding.registerErrorText.visibility = View.GONE
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             registerViewModel.status.collect {
                 when (it) {
                     is Resource.Success -> {
                         when (it.data) {
-                            RegisterStatus.SUCCESS ->
-                                findNavController().navigateUp()
+                            RegisterStatus.SUCCESS -> showRegisterDialog()
                             else -> {}
                         }
                         binding.registerRegisterButton.isClickable = true
                         binding.loadingRegister.visibility = View.GONE
                         binding.registerRegisterButton.visibility = View.VISIBLE
+                        binding.registerErrorText.visibility = View.GONE
                     }
                     is Resource.Loading -> {
                         binding.registerRegisterButton.isClickable = false
                         binding.registerRegisterButton.visibility = View.INVISIBLE
                         binding.loadingRegister.visibility = View.VISIBLE
+                        binding.registerErrorText.visibility = View.GONE
                     }
                     is Resource.Error -> {
                         binding.registerRegisterButton.isClickable = true
                         binding.loadingRegister.visibility = View.GONE
                         binding.registerRegisterButton.visibility = View.VISIBLE
+                        binding.registerErrorText.visibility = View.VISIBLE
+                        binding.registerErrorText.text = it.msg
                     }
                     else -> {}
                 }
@@ -71,6 +76,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 registerViewModel.register(Register(login, password))
             }
         }
+    }
+
+    private fun showRegisterDialog() {
+        val newFragment = ContinueRegisterDialogFragment()
+        newFragment.show(childFragmentManager, "continue")
     }
 
     private fun validate(register: Register): Boolean {

@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
@@ -21,6 +22,7 @@ import com.gotov.getmeapp.main.search.viewmodel.SearchViewModel
 import com.gotov.getmeapp.ui.items.UsersViewAdapter
 import com.gotov.getmeapp.utils.model.Resource
 import com.gotov.getmeapp.utils.ui.DiffUtilsCallback
+import com.gotov.getmeapp.utils.ui.displayToastOnTop
 import com.gotov.getmeapp.utils.ui.toDips
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -71,6 +73,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun startedUIProperty() {
+        binding.searchPageEmptyResultString.visibility = View.GONE
         binding.loadSkillsList.visibility = View.VISIBLE
         binding.userList.visibility = View.GONE
         binding.mentorInfoSkillsList.visibility = View.GONE
@@ -95,7 +98,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         binding.userList.visibility = View.GONE
                         binding.mentorInfoSkillsList.visibility = View.GONE
                     }
-                    is Resource.Error -> {}
+                    is Resource.Error -> {
+                        displayToastOnTop(
+                            context,
+                            "Произошла ошибка загрузки страницы ${it.msg}",
+                            Toast.LENGTH_SHORT
+                        )
+                    }
                     else -> {}
                 }
             }
@@ -107,6 +116,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             searchViewModel.mentors.collect {
                 when (it) {
                     is Resource.Success -> {
+                        binding.searchPageEmptyResultString.visibility = View.GONE
                         if (it.data != null && adapter != null) {
                             val userDiffUtilCallback =
                                 DiffUtilsCallback(
@@ -127,16 +137,25 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
                             adapter!!.setData(it.data)
                             productDiffResult.dispatchUpdatesTo(adapter!!)
+                        } else {
+                            binding.searchPageEmptyResultString.visibility = View.VISIBLE
                         }
 
                         binding.searchSwipeLayout.isRefreshing = false
                         binding.userList.visibility = View.VISIBLE
                     }
                     is Resource.Loading -> {
+                        binding.searchPageEmptyResultString.visibility = View.GONE
                         binding.searchSwipeLayout.isRefreshing = true
                         binding.userList.visibility = View.GONE
                     }
                     is Resource.Error -> {
+                        displayToastOnTop(
+                            context,
+                            "Произошла ошибка поиска менторов ${it.msg}",
+                            Toast.LENGTH_SHORT
+                        )
+                        binding.searchPageEmptyResultString.visibility = View.GONE
                         binding.searchSwipeLayout.isRefreshing = false
                     }
                     else -> {}

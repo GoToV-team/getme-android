@@ -1,7 +1,9 @@
 package com.gotov.getmeapp.main.profile.view.ui
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +13,7 @@ import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentProfileBinding
 import com.gotov.getmeapp.main.profile.viewmodel.ProfileViewModel
 import com.gotov.getmeapp.utils.model.Resource
+import com.gotov.getmeapp.utils.ui.displayToastOnTop
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +23,12 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
     private val profileViewModel by viewModel<ProfileViewModel>()
 
     private var userId: Int? = null
+
+
+    companion object {
+        private val textSendOffer = "Заявка на менторство отправлина," +
+                " ожидайте появления плана от ментора или его письма"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +52,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
                         binding.loadPageList.visibility = View.VISIBLE
                     }
                     is Resource.Error -> {
+                        displayToastOnTop(
+                            context,
+                            "Произошла ошибка получения пользователя ${it.msg}",
+                            Toast.LENGTH_SHORT
+                        )
                         binding.loadPageList.visibility = View.GONE
                     }
                     else -> {}
@@ -56,6 +70,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
                     is Resource.Success -> {
                         it.data?.let { isAdded ->
                             if (isAdded) {
+                                val toast =
+                                    Toast.makeText(context, textSendOffer, Toast.LENGTH_LONG)
+                                toast.setGravity(Gravity.TOP or Gravity.CENTER, 0, 0)
+                                toast.show()
+
                                 val args: Bundle = bundleOf("status" to "menti")
                                 findNavController().navigate(
                                     R.id.action_UserFragment_to_PlansFragment,
@@ -69,6 +88,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
                         binding.loadPageList.visibility = View.VISIBLE
                     }
                     is Resource.Error -> {
+                        displayToastOnTop(
+                            context,
+                            "Произошла ошибка получения пользователя ${it.msg}",
+                            Toast.LENGTH_SHORT
+                        )
                         binding.loadPageList.visibility = View.GONE
                     }
                     else -> {}

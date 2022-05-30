@@ -1,25 +1,40 @@
 package com.gotov.getmeapp.main.plans.model.repository
 
-import com.gotov.getmeapp.main.plan.model.data.Plan
 import com.gotov.getmeapp.main.plans.model.api.PlansApi
-import com.gotov.getmeapp.main.plans.model.data.Menti
-import com.gotov.getmeapp.main.search.model.data.User
+import com.gotov.getmeapp.main.plans.model.data.*
 import retrofit2.Response
 
 class PlansRepository(private val plansApi: PlansApi) {
-    suspend fun getUser(): Response<User> {
-        return plansApi.getUser()
+    companion object {
+        private const val mentor = "mentor"
+        private const val menti = "mentee"
     }
 
-    suspend fun getMentorPlans(): Response<List<Plan>> {
-        return plansApi.getMentorPlans()
+    suspend fun getIsMentor(): Response<IsMentorResponse> {
+        return plansApi.getIsMentor()
     }
 
-    suspend fun getMentiPlans(): Response<List<Plan>> {
-        return plansApi.getMentiPlans()
+    suspend fun getPlansAsMentor(): Response<PlansResponse> {
+        return plansApi.getPlans(mentor)
     }
 
-    suspend fun getMentis(): Response<List<Menti>> {
+    suspend fun getPlansAsMenti(): Response<PlansResponse> {
+        return plansApi.getPlans(menti)
+    }
+
+    suspend fun getSkills(): Response<SkillResponse> {
+        return plansApi.getSkills()
+    }
+
+    suspend fun applyMenti(id: Int, body: OffersRequest): Response<Plan> {
+        return plansApi.applyMenti(id, body)
+    }
+
+    suspend fun cancelMenti(id: Int): Response<Void> {
+        return plansApi.cancelMenti(id)
+    }
+
+    suspend fun getMentis(): Response<Mentis> {
         return plansApi.getMentis()
     }
 }

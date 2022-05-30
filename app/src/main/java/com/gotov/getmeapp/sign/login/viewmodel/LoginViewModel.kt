@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.gotov.getmeapp.sign.login.model.data.Login
 import com.gotov.getmeapp.sign.login.model.repository.LoginRepository
 import com.gotov.getmeapp.utils.model.Resource
+import com.gotov.getmeapp.utils.model.getResponseError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,10 +37,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                             )
                         )
                         else -> {
-                            val body: String?
-                            body = response.errorBody().toString()
-
-                            _status.emit(Resource.Error(body, LoginStatus.SERVER_ERROR))
+                            _status.emit(Resource.Error(
+                                getResponseError(response.errorBody()),
+                                LoginStatus.SERVER_ERROR)
+                            )
                         }
                     }
                 } catch (e: IOException) {

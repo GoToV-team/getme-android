@@ -55,13 +55,25 @@
             android:id="@+id/main_page__header__mentor"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:text="Менторы"
+            android:text="@string/search_page_header"
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@id/main_page__header"
             app:layout_constraintLeft_toLeftOf="@id/main_page__header"
             app:layout_constraintTop_toTopOf="@id/main_page__header" />
+
+    <TextView
+            android:id="@+id/search_page_empty_result_string"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="@string/search_page_empty_search_message"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/skills"
+            app:layout_constraintStart_toStartOf="@+id/line_1"
+            app:layout_constraintEnd_toStartOf="@+id/line_2" />
 
     <View
             android:id="@+id/skills"

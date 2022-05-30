@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.gotov.getmeapp.main.plan.model.api.PlanApi
 import com.gotov.getmeapp.main.plan.model.repository.PlanRepository
 import com.gotov.getmeapp.main.plan.viewmodel.PlanViewModel
+import com.gotov.getmeapp.main.plans.model.api.PlansApi
+import com.gotov.getmeapp.main.plans.model.repository.PlansRepository
+import com.gotov.getmeapp.main.plans.viewmodel.PlansViewModel
 import com.gotov.getmeapp.main.profile.model.api.ProfileApi
 import com.gotov.getmeapp.main.profile.model.repository.ProfileRepository
 import com.gotov.getmeapp.main.profile.viewmodel.ProfileViewModel
@@ -39,6 +42,7 @@ val viewModelModule = module {
     viewModel { SearchViewModel(get()) }
     viewModel { ProfileViewModel(get()) }
     viewModel { PlanViewModel(get()) }
+    viewModel { PlansViewModel(get()) }
     viewModel { TaskViewModel(get()) }
     viewModel { RegisterViewModel(get()) }
 }
@@ -48,6 +52,7 @@ val apiModule = module {
     single { provideApi<SearchApi>(get()) }
     single { provideApi<ProfileApi>(get()) }
     single { provideApi<PlanApi>(get()) }
+    single { provideApi<PlansApi>(get()) }
     single { provideApi<TaskApi>(get()) }
     single { provideApi<RegisterApi>(get()) }
 }
@@ -90,6 +95,7 @@ val repositoryModule = module {
     single { provideRepository<SearchRepository, SearchApi>(get()) }
     single { provideRepository<ProfileRepository, ProfileApi>(get()) }
     single { provideRepository<PlanRepository, PlanApi>(get()) }
+    single { provideRepository<PlansRepository, PlansApi>(get()) }
     single { provideRepository<TaskRepository, TaskApi>(get()) }
     single { provideRepository<RegisterRepository, RegisterApi>(get()) }
 }

@@ -1,21 +1,25 @@
 package com.gotov.getmeapp.main.plans.model.api
 
-import com.gotov.getmeapp.main.plan.model.data.Plan
-import com.gotov.getmeapp.main.plans.model.data.Menti
-import com.gotov.getmeapp.main.search.model.data.User
+import com.gotov.getmeapp.main.plans.model.data.*
 import retrofit2.Response
-import retrofit2.http.GET
+import retrofit2.http.*
 
 interface PlansApi {
-    @GET("user")
-    suspend fun getUser(): Response<User>
+    @GET("skills")
+    suspend fun getSkills(): Response<SkillResponse>
 
-    @GET("mentor/plans")
-    suspend fun getMentorPlans(): Response<List<Plan>>
+    @GET("user/status")
+    suspend fun getIsMentor(): Response<IsMentorResponse>
 
-    @GET("menti/plans")
-    suspend fun getMentiPlans(): Response<List<Plan>>
+    @GET("plans")
+    suspend fun getPlans(@Query("role") role: String): Response<PlansResponse>
 
-    @GET("mentis")
-    suspend fun getMentis(): Response<List<Menti>>
+    @POST("offer/{id}/accept")
+    suspend fun applyMenti(@Path("id") id: Int, @Body body: OffersRequest): Response<Plan>
+
+    @DELETE("offer/{id}/accept")
+    suspend fun cancelMenti(@Path("id") id: Int): Response<Void>
+
+    @GET("offers")
+    suspend fun getMentis(): Response<Mentis>
 }

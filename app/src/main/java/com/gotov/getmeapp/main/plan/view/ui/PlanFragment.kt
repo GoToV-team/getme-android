@@ -51,7 +51,7 @@ class PlanFragment : Fragment(R.layout.fragment_plan) {
                         binding.userInfoSmallNote.text = it.data?.mentor?.about
 
                         it.data?.mentor?.avatar?.let { avatar ->
-                            binding.userInfoSmallAvatar?.setImage(avatar)
+                            binding.userInfoSmallAvatar.setImage(avatar)
                         }
 
                         binding.taskList.adapter = it.data?.tasks?.let {

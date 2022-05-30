@@ -6,6 +6,7 @@ import com.gotov.getmeapp.main.profile.model.data.RequestMentor
 import com.gotov.getmeapp.main.profile.model.repository.ProfileRepository
 import com.gotov.getmeapp.main.search.model.data.User
 import com.gotov.getmeapp.utils.model.Resource
+import com.gotov.getmeapp.utils.model.getResponseError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,9 +37,7 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
                             }
                         }
                         else -> {
-                            val body: String?
-                            body = response.body().toString()
-                            _user.emit(Resource.Error(body))
+                            _user.emit(Resource.Error(getResponseError(response.errorBody())))
                         }
                     }
                 } catch (e: IOException) {
@@ -71,9 +70,7 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
                             _isAdded.emit(Resource.Success(true))
                         }
                         else -> {
-                            val body: String?
-                            body = response.body().toString()
-                            _isAdded.emit(Resource.Error(body))
+                            _isAdded.emit(Resource.Error(getResponseError(response.errorBody())))
                         }
                     }
                 } catch (e: IOException) {
@@ -108,10 +105,7 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
                             }
                         }
                         else -> {
-                            val body: String?
-                            body = response.body().toString()
-
-                            _user.emit(Resource.Error(body))
+                            _user.emit(Resource.Error(getResponseError(response.errorBody())))
                         }
                     }
                 } catch (e: IOException) {
