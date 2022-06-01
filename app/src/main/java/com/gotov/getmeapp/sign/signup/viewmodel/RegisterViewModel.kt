@@ -140,7 +140,9 @@ class RegisterViewModel(
                             _updateStatus.emit(Resource.Success(RegisterStatus.SUCCESS))
                         }
                         else -> {
-                            _updateStatus.emit(Resource.Error(getResponseError(response.errorBody())))
+                            _updateStatus.emit(
+                                Resource.Error(getResponseError(response.errorBody()))
+                            )
                         }
                     }
                 } catch (e: IOException) {

@@ -98,7 +98,8 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
             _task.value.data!!.id,
             Task(
                 _task.value.data!!.id,
-                title, description,
+                title,
+                description,
                 _task.value.data!!.isDone,
                 null
             )

@@ -290,10 +290,10 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                             binding.editProfileStatus
                         )
 
-                        it.data?.run {
+                        it.data?.let { user ->
                             skills.filterIndexed { i, s ->
-                                isSelectedSkills[i] = this.skills.contains(s)
-                                return@run
+                                isSelectedSkills[i] = user.skills.contains(s)
+                                return@filterIndexed true
                             }
                         }
 

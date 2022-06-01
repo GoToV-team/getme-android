@@ -100,7 +100,6 @@
             app:layout_constrainedWidth="true"
             app:layout_constraintTop_toBottomOf="@+id/user_info_small_name"
             app:layout_constraintStart_toEndOf="@+id/user_info_small_avatar"
-            app:layout_constraintEnd_toStartOf="@+id/menti_send_button"
             app:layout_constraintWidth="0dp"
             android:padding="2dp"
             android:textSize="12sp" />
