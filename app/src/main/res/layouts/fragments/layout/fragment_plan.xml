@@ -1,139 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".main_module.plan.ui.PlanFragment"
+        android:layout_height="match_parent"
+        tools:context=".main.plan.view.ui.PlanFragment"
         android:orientation="vertical">
 
-    <LinearLayout
-            android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_central"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.96" />
+
+    <TextView
+            android:text="@string/plan_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@+id/plan_header"
+            app:layout_constraintStart_toStartOf="@+id/line_1"
+            app:layout_constraintEnd_toStartOf="@+id/line_2"
+            app:layout_constraintTop_toTopOf="@+id/line_3" />
+
+    <TextView
+            tools:text="Знакомство с Android"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/plan_title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/plan_header"
+            app:layout_constraintStart_toStartOf="@+id/line_1"
+            app:layout_constraintEnd_toStartOf="@+id/line_2" />
 
 
-        <TextView
-                android:text="План развития"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+    <ImageView
+            android:src="@drawable/ic_baseline_person_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_info_small_avatar"
+            app:layout_constraintStart_toStartOf="@+id/line_1"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/plan_title"
+            android:layout_marginTop="8dp" />
 
-        <TextView
-                android:text="Знакомство с Android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/plan_title"
+    <TextView
+            tools:text="Стив Джобс"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_info_small_name"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintStart_toEndOf="@id/user_info_small_avatar"
+            android:padding="2dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="@+id/user_info_small_avatar" />
 
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+    <TextView
+            tools:text="Новый менти"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_info_small_note"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintTop_toBottomOf="@+id/user_info_small_name"
+            app:layout_constraintStart_toEndOf="@+id/user_info_small_avatar"
+            app:layout_constraintWidth="0dp"
+            android:padding="2dp"
+            android:textSize="12sp" />
 
-        <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp">
+    <Button
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:text="@string/telegram_button_text"
+            android:textSize="10dp"
+            android:id="@+id/menti_info_send_button"
+            android:drawableLeft="@drawable/ic_telegram"
+            style="@style/TelegramButtonStyle"
+            app:layout_constraintEnd_toStartOf="@+id/line_2"
+            app:layout_constraintTop_toTopOf="@+id/user_info_small_name" />
 
-            <com.google.android.material.chip.ChipGroup
-                    app:singleLine="true"
-                    android:id="@+id/plan_skills"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-        </HorizontalScrollView>
+    <ProgressBar
+            style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:id="@+id/plan_progress_bar"
+            android:layout_weight="1"
+            android:progress="25"
+            android:layout_marginVertical="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/plan_description"
+            app:layout_constraintStart_toStartOf="@+id/line_1"
+            app:layout_constraintEnd_toStartOf="@+id/line_2" />
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <ImageView
-                    android:src="@drawable/ic_baseline_person_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/user_info_small_avatar"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:padding="10dp" />
-
-            <TextView
-                    android:text="Стив Джобс"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/user_info_small_name"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/user_info_small_avatar"
-                    app:layout_constraintBottom_toTopOf="@id/user_info_small_note"
-                    android:padding="2dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-            <TextView
-                    android:text="Новый менти"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/user_info_small_note"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintTop_toBottomOf="@id/user_info_small_name"
-                    app:layout_constraintStart_toEndOf="@id/user_info_small_avatar"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:padding="2dp"
-                    android:textSize="12sp" />
+    <TextView
+            tools:text="Описание плана, такое чтобы Никита Куликов позавидовал"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/plan_description"
+            android:scrollbars="vertical"
+            android:maxLines="4"
+            android:textSize="14sp"
+            android:layout_marginVertical="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/user_info_small_note"
+            app:layout_constraintStart_toStartOf="@+id/line_1"
+            app:layout_constraintEnd_toStartOf="@+id/line_2" />
 
 
-            <Button
-                    android:text="Написать"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button"
-                    android:drawableLeft="@drawable/ic_baseline_send_24"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/plan_page_swipe_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/plan_progress_bar"
+            app:layout_constraintBottom_toTopOf="@+id/line_4"
+            app:layout_constraintStart_toStartOf="@+id/line_1"
+            app:layout_constraintEnd_toStartOf="@+id/line_2">
 
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:backgroundTint="@color/telegram"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/task_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
 
-        <ProgressBar
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:maxHeight="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:id="@+id/progressBar"
-                android:layout_weight="1"
-                android:progress="25"
-                android:layout_marginVertical="10dp" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/plan_add_task_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/purple_500"
+            app:srcCompat="@drawable/ic_baseline_add_24"
+            app:layout_constraintBottom_toTopOf="@+id/line_4"
+            app:layout_constraintEnd_toStartOf="@+id/line_2"
+            android:contentDescription="@string/plan_add_task_button" />
 
-        <TextView
-                android:text="Описание плана, такое чтобы Никита Куликов позавидовал"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/plan_description"
-
-                android:textSize="14sp"
-                android:layout_marginVertical="10dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/task_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp">
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Добавить таску" />
-    </LinearLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

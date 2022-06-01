@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/PlansFragment"
-        android:name="com.gotov.getmeapp.main_module.plans.ui.PlansFragment"
+        android:name="com.gotov.getmeapp.main.plans.view.ui.PlansFragment"
         android:label="@string/plans_fragment_label"
         tools:layout="@layout/fragment_plans_page">
         <action
@@ -17,8 +17,15 @@
     </fragment>
 
     <fragment
+            android:id="@+id/EditTaskFragment"
+            android:name="com.gotov.getmeapp.main.task.view.ui.EditTaskFragment"
+            android:label="Редактировать задачу"
+            tools:layout="@layout/fragment_edit_task">
+    </fragment>
+
+    <fragment
             android:id="@+id/PlanFragment"
-            android:name="com.gotov.getmeapp.main_module.plan.ui.PlanFragment"
+            android:name="com.gotov.getmeapp.main.plan.view.ui.PlanFragment"
             android:label="@string/plan_fragment_label"
             tools:layout="@layout/fragment_plan">
         <action
@@ -28,14 +35,18 @@
 
     <fragment
             android:id="@+id/TaskFragment"
-            android:name="com.gotov.getmeapp.main_module.task.ui.TaskFragment"
+            android:name="com.gotov.getmeapp.main.task.view.ui.TaskFragment"
             android:label="@string/task_fragment_label"
             tools:layout="@layout/fragment_plan_task">
+
+        <action
+                android:id="@+id/action_TaskFragment_to_EditTaskFragment"
+                app:destination="@id/EditTaskFragment" />
     </fragment>
 
     <fragment
             android:id="@+id/SearchFragment"
-            android:name="com.gotov.getmeapp.main_module.search.ui.SearchFragment"
+            android:name="com.gotov.getmeapp.main.search.view.ui.SearchFragment"
             android:label="@string/search_fragment_label"
             tools:layout="@layout/fragment_search">
         <action
@@ -44,28 +55,15 @@
     </fragment>
 
     <fragment
-            android:id="@+id/ProfileFragment"
-            android:name="com.gotov.getmeapp.main_module.profile.ui.ProfileFragment"
-            android:label="@string/profile_fragment_label"
-            tools:layout="@layout/fragment_profile">
-        <action
-                android:id="@+id/action_ProfileFragment_to_EditProfileFragment"
-                app:destination="@id/EditProfileFragment" />
-    </fragment>
-
-    <fragment
             android:id="@+id/EditProfileFragment"
-            android:name="com.gotov.getmeapp.main_module.plans.ui.PlansFragment"
+            android:name="com.gotov.getmeapp.main.editprofile.view.ui.EditProfileFragment"
             android:label="@string/edit_profile_fragment_label"
-            tools:layout="@layout/fragment_plans_page">
-        <action
-                android:id="@+id/action_EditProfileFragment_to_ProfileFragment"
-                app:destination="@id/ProfileFragment" />
+            tools:layout="@layout/fragment_edit_profile">
     </fragment>
 
     <fragment
             android:id="@+id/UserFragment"
-            android:name="com.gotov.getmeapp.main_module.profile.ui.UserProfileFragment"
+            android:name="com.gotov.getmeapp.main.profile.view.ui.UserProfileFragment"
             android:label="@string/user_profile_fragment_label"
             tools:layout="@layout/fragment_profile">
 

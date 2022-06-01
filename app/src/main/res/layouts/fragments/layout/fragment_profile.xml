@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main_module.profile.ui.ProfileFragment">
+        tools:context=".main.profile.view.ui.ProfileFragment">
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/line_central"
@@ -40,6 +40,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.9" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toStartOf="@+id/line_2"
+            app:layout_constraintStart_toStartOf="@+id/line_1"
+            android:id="@+id/load_page_list"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toTopOf="@+id/line_3" />
+
     <View
             android:id="@+id/profile_watch__header"
             android:layout_width="0dp"
@@ -49,19 +59,19 @@
             app:layout_constraintEnd_toEndOf="@id/line_2"
             app:layout_constraintTop_toTopOf="@id/line_3"
             app:layout_constraintLeft_toRightOf="@id/line_1"
-            app:layout_constraintRight_toLeftOf="@id/line_2"
-            />
+            app:layout_constraintRight_toLeftOf="@id/line_2" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_watch__header__avatar"
-                app:civ_border_width="1dp"
-                android:src="@drawable/avatar"
-                app:civ_border_color="@color/white"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:layout_constraintStart_toStartOf="@id/profile_watch__header"
-                app:layout_constraintLeft_toLeftOf="@id/profile_watch__header"
-                app:layout_constraintTop_toTopOf="@id/profile_watch__header" />
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_watch__header__avatar"
+            app:civ_border_width="1dp"
+            android:src="@drawable/avatar"
+            app:civ_border_color="@color/white"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintStart_toStartOf="@id/profile_watch__header"
+            app:layout_constraintLeft_toLeftOf="@id/profile_watch__header"
+            app:layout_constraintTop_toTopOf="@id/profile_watch__header" />
+
     <View
             android:id="@+id/profile_watch__header__fio_container"
             android:layout_width="0dp"
@@ -71,37 +81,38 @@
             app:layout_constraintEnd_toEndOf="@id/profile_watch__header"
             app:layout_constraintTop_toTopOf="@id/profile_watch__header"
             app:layout_constraintBottom_toBottomOf="@id/profile_watch__header__avatar" />
-        <TextView
-                android:id="@+id/profile_watch__header__fio"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_margin="8dp"
-                android:textColor="@color/black"
-                android:text="Василий Романов"
-                android:textSize="25sp"
-                app:layout_constraintStart_toStartOf="@id/profile_watch__header__fio_container"
-                app:layout_constraintEnd_toEndOf="@id/profile_watch__header__fio_container"
-                app:layout_constraintTop_toTopOf="@id/profile_watch__header__fio_container"
-                />
+
+    <TextView
+            android:id="@+id/profile_watch__header__fio"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:textColor="@color/black"
+            tools:text="Василий Романов"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@id/profile_watch__header__fio_container"
+            app:layout_constraintEnd_toEndOf="@id/profile_watch__header__fio_container"
+            app:layout_constraintTop_toTopOf="@id/profile_watch__header__fio_container" />
+
     <TextView
             android:id="@+id/profile_watch__header__role"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"
-            android:text="Ментор"
+            tools:text="Ментор"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@id/profile_watch__header__fio_container"
             app:layout_constraintLeft_toLeftOf="@id/profile_watch__header__avatar"
             app:layout_constraintEnd_toEndOf="@id/profile_watch__header__fio_container"
-            app:layout_constraintTop_toBottomOf="@id/profile_watch__header__fio"
-            />
+            app:layout_constraintTop_toBottomOf="@id/profile_watch__header__fio" />
+
     <Button
             android:id="@+id/profile_watch__contacts__btn_message"
             android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:layout_constrainedWidth="true"
-            android:text="Написать"
+            android:text="@string/profile_page_start_writting_button_text"
             android:textSize="10dp"
             android:backgroundTint="@color/telegram"
             app:layout_constraintStart_toStartOf="@id/profile_watch__contacts"
@@ -109,21 +120,20 @@
             app:layout_constraintLeft_toLeftOf="@id/profile_watch__contacts"
             app:layout_constraintRight_toLeftOf="@id/line_central"
             app:layout_constraintTop_toTopOf="@id/profile_watch__contacts"
-            app:layout_constraintBottom_toBottomOf="@id/profile_watch__contacts"
-            />
+            app:layout_constraintBottom_toBottomOf="@id/profile_watch__contacts" />
+
     <Button
             android:id="@+id/profile_watch__contacts__btn_start_work"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Начать заниматься"
+            android:text="@string/profile_page_start_working_button_text"
             android:textSize="10dp"
             app:layout_constrainedWidth="true"
             app:layout_constraintStart_toStartOf="@id/line_central"
             app:layout_constraintEnd_toEndOf="@id/profile_watch__contacts"
             app:layout_constraintTop_toTopOf="@id/profile_watch__contacts"
-            app:layout_constraintBottom_toBottomOf="@id/profile_watch__contacts"
-            />
+            app:layout_constraintBottom_toBottomOf="@id/profile_watch__contacts" />
 
     <View
             android:id="@+id/profile_watch__contacts"
@@ -132,22 +142,20 @@
             android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@id/profile_watch__header"
             app:layout_constraintEnd_toStartOf="@id/line_2"
-            app:layout_constraintStart_toEndOf="@id/line_1"
-            />
+            app:layout_constraintStart_toEndOf="@id/line_1" />
 
-    <View
-            android:id="@+id/profile_watch__skills_view"
+
+    <HorizontalScrollView
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:background="@color/gray_light"
+            android:layout_height="50dp"
+            android:id="@+id/profile_watch__skills_view"
             app:layout_constraintEnd_toStartOf="@id/line_2"
             app:layout_constraintStart_toEndOf="@id/line_1"
-            app:layout_constraintTop_toBottomOf="@id/profile_watch__contacts" />
-
+            app:layout_constraintTop_toBottomOf="@id/profile_watch__contacts"
+            >
     <com.google.android.material.chip.ChipGroup
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_margin="5dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
             android:id="@+id/profile_watch__skills"
@@ -155,6 +163,7 @@
             app:layout_constraintEnd_toEndOf="@id/profile_watch__skills_view"
             app:layout_constraintTop_toTopOf="@id/profile_watch__skills_view"
             app:layout_constraintBottom_toBottomOf="@id/profile_watch__skills_view" />
+    </HorizontalScrollView>
 
     <View
             android:id="@+id/profile_watch_about_view"
@@ -163,21 +172,21 @@
             android:background="@color/white"
             app:layout_constraintEnd_toStartOf="@id/line_2"
             app:layout_constraintStart_toEndOf="@id/line_1"
-            app:layout_constraintTop_toBottomOf="@id/profile_watch__skills"
-            app:layout_constraintBottom_toTopOf="@id/line_4"
-            />
-      <TextView
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-              android:textColor="@color/black"
-              android:id="@+id/profile_watch__about"
-              android:text="Работаю в vk\n   *опыт работы;\n   *стоимость;\n   *помог n людям."
-              android:textSize="25sp"
-              app:layout_constraintStart_toStartOf="@id/profile_watch_about_view"
-              app:layout_constraintEnd_toEndOf="@id/profile_watch_about_view"
-              app:layout_constraintTop_toTopOf="@id/profile_watch_about_view"
-              app:layout_constraintBottom_toBottomOf="@id/profile_watch_about_view"
-              />
+            app:layout_constraintTop_toBottomOf="@id/profile_watch__skills_view"
+            app:layout_constraintBottom_toTopOf="@id/line_4" />
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:scrollbars="vertical"
+            android:id="@+id/profile_watch__about"
+            tools:text="Работаю в vk\n   *опыт работы;\n   *стоимость;\n   *помог n людям."
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/profile_watch_about_view"
+            app:layout_constraintEnd_toEndOf="@id/profile_watch_about_view"
+            app:layout_constraintTop_toTopOf="@id/profile_watch_about_view"
+            app:layout_constraintBottom_toBottomOf="@id/profile_watch_about_view" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

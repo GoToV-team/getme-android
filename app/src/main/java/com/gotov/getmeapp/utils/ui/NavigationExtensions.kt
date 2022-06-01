@@ -10,9 +10,17 @@ import com.gotov.getmeapp.R
 fun Fragment.activityNavController() = requireActivity().findNavController(R.id.nav_host_fragment)
 
 fun NavController.navigateSafely(@IdRes actionId: Int) {
-    currentDestination?.getAction(actionId)?.let { navigate(actionId) }
+    if (graph.getAction(actionId) == null) {
+        currentDestination?.getAction(actionId)?.let { navigate(actionId) }
+    } else {
+        graph.getAction(actionId)?.let { navigate(actionId) }
+    }
 }
 
 fun NavController.navigateSafely(directions: NavDirections) {
-    currentDestination?.getAction(directions.actionId)?.let { navigate(directions) }
+    if (graph.getAction(directions.actionId) == null) {
+        currentDestination?.getAction(directions.actionId)?.let { navigate(directions) }
+    } else {
+        graph.getAction(directions.actionId)?.let { navigate(directions) }
+    }
 }

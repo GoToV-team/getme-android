@@ -5,13 +5,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        tools:context=".main_module.plans.items.MentiItemHolder">
+        android:layout_margin="10dp"
+        tools:context=".main.plans.view.items.MentiItemHolder">
 
     <ImageView
-            android:id="@+id/avatar_item_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/menti_item_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_profile_default"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="4dp"
@@ -24,15 +25,15 @@
             android:layout_height="wrap_content"
 
 
-            android:text="Стив Джобс"
+            tools:text="Стив Джобс"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
 
             app:layout_constrainedWidth="true"
 
-            app:layout_constraintStart_toEndOf="@+id/avatar_item_icon"
-            app:layout_constraintTop_toTopOf="@+id/avatar_item_icon"
+            app:layout_constraintStart_toEndOf="@+id/menti_item_avatar"
+            app:layout_constraintTop_toTopOf="@+id/menti_item_avatar"
             android:layout_marginStart="10dp" />
 
     <TextView
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
 
 
-            android:text="Новый менти"
+            android:text="@string/menti_info_new_menti"
             android:textColor="@color/black"
             android:textSize="14sp"
 
@@ -54,12 +55,11 @@
             android:layout_height="40dp"
             android:text="@string/telegram_button_text"
             android:textSize="5dp"
+            android:id="@+id/menti_send_button"
             app:layout_constraintTop_toBottomOf="@+id/menti_item_about"
-            app:layout_constraintStart_toEndOf="@+id/avatar_item_icon"
+            app:layout_constraintStart_toEndOf="@+id/menti_item_avatar"
             android:drawableLeft="@drawable/ic_telegram"
-            android:layout_marginTop="8dp"
-            style="@style/TelegramButtonStyle"
-            tools:ignore="TouchTargetSizeCheck" />
+            style="@style/TelegramButtonStyle"/>
 
     <Button
             android:layout_width="130dp"
@@ -68,11 +68,10 @@
             android:text="@string/apply_button_text"
             android:textSize="9sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/menti_item_name"
-            android:layout_marginTop="12dp"
-            android:id="@+id/button"
+            android:id="@+id/menti_apply_button"
             style="@style/ApplyButtonStyle"
-            tools:ignore="SmallSp,TouchTargetSizeCheck" />
+            tools:ignore="SmallSp,TouchTargetSizeCheck"
+            app:layout_constraintTop_toBottomOf="@+id/menti_item_name" />
 
     <Button
             android:layout_width="130dp"
@@ -81,8 +80,8 @@
             android:text="@string/reject_button_text"
             android:textSize="9sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
-            android:id="@+id/button2"
+            app:layout_constraintTop_toBottomOf="@+id/menti_apply_button"
+            android:id="@+id/menti_cancel_button"
             style="@style/RejectButtonStyle"
             tools:ignore="TouchTargetSizeCheck" />
 

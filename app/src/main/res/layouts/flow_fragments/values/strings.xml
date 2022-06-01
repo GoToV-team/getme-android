@@ -1,0 +1,45 @@
+<resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menti_info_new_menti">Новый менти</string>
+    <string name="register_page_username_input_title">Имя пользователя</string>
+    <string name="register_page_password_input_title">Пароль</string>
+    <string name="register_page_register_button_text">Зарегистироваться</string>
+    <string name="profile_page_start_working_button_text">Начать заниматься</string>
+    <string name="profile_page_start_writting_button_text">Написать</string>
+    <string name="plan_task_edit_button">Редактировать</string>
+    <string name="login_page_username_input_title">Имя пользователя</string>
+    <string name="login_page_password_input_title">Пароль</string>
+    <string name="login_page_sigin_button_text">Войти</string>
+    <string name="register_dialog_title">Продолжение регистрации</string>
+    <string name="register_dialog_name_input_title">Имя</string>
+    <string name="register_dialog_second_name_input_title">Фамилия</string>
+    <string name="register_dialog_skills_input_title">Скиллы</string>
+    <string name="register_dialog_apply_button">Подтвердить</string>
+    <string name="register_dialog_about_input_title">Описание</string>
+    <string name="select_skills_title">Выбранные скиллы</string>
+    <string name="hide">Скрыть</string>
+    <string name="plans_page_info_title">Эта страница доступна только менторам</string>
+    <string name="search_page_header">Менторы</string>
+    <string name="search_page_empty_search_message">Увы пока нет менторов с такими скилами</string>
+    <string name="create_plan_header">Создание плана</string>
+    <string name="create_plan_title_text">Название</string>
+    <string name="create_plan_about_text">Описание</string>
+    <string name="create_plan_skills_text">Скиллы</string>
+    <string name="edit_profile_page_about_title">О себе</string>
+    <string name="edit_profile_page_skills_title">Скиллы</string>
+    <string name="edit_profile_page_apply_button">Изменить</string>
+    <string name="edit_profile_page_first_name_title">Имя</string>
+    <string name="edit_profile_page_last_name_title">Фамилия</string>
+    <string name="register_dialog_tg_tag_input_title">Тэг телеграмма</string>
+    <string name="edit_profile_tg_tag_title">Тэг телеграмма</string>
+    <string name="main_flow_menu_item_logout">Выйти</string>
+    <string name="new_task_header">Создание задачи</string>
+    <string name="new_task_title_text">Название</string>
+    <string name="new_task_about_text">Описание</string>
+    <string name="new_task_skills_text">Срок выполнения</string>
+    <string name="new_plan_create_button">Создать</string>
+    <string name="new_task_create_button_text">Создать</string>
+    <string name="plan_header">План развития</string>
+    <string name="plan_add_task_button">Добавить</string>
+</resources>

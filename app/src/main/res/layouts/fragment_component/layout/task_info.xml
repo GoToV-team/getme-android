@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        tools:context=".main_module.plans.items.PlanItemHolder">
+        tools:context=".main.plans.view.items.PlanItemHolder">
 
     <ImageView
             android:id="@+id/plan_item_title_arrow"
@@ -24,8 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:paddingLeft="10dp"
-            android:text="Знакомство с Android"
+            android:paddingStart="10dp"
+            tools:text="Знакомство с Android"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -56,7 +56,7 @@
         </HorizontalScrollView>
 
         <ProgressBar
-                style="@android:style/Widget.ProgressBar.Horizontal"
+                style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
                 android:maxHeight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
