@@ -17,7 +17,9 @@ import java.io.IOException
 private const val SUCCESS_CODE = 200
 private const val INCORRECT_FIELD_CODE = 403
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel(
+    private val loginRepository: LoginRepository
+) : ViewModel() {
     private val _status = MutableStateFlow<Resource<LoginStatus>>(Resource.Null())
 
     val status = _status.asStateFlow()
@@ -29,7 +31,9 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                     _status.emit(Resource.Loading())
                     val response = loginRepository.login(login)
                     when (response.code()) {
-                        SUCCESS_CODE -> _status.emit(Resource.Success(LoginStatus.SUCCESS))
+                        SUCCESS_CODE -> {
+                            _status.emit(Resource.Success(LoginStatus.SUCCESS))
+                        }
                         INCORRECT_FIELD_CODE -> _status.emit(
                             Resource.Error(
                                 "",
@@ -37,9 +41,11 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                             )
                         )
                         else -> {
-                            _status.emit(Resource.Error(
-                                getResponseError(response.errorBody()),
-                                LoginStatus.SERVER_ERROR)
+                            _status.emit(
+                                Resource.Error(
+                                    getResponseError(response.errorBody()),
+                                    LoginStatus.SERVER_ERROR
+                                )
                             )
                         }
                     }

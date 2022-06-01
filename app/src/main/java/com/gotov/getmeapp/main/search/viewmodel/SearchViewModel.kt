@@ -2,6 +2,7 @@ package com.gotov.getmeapp.main.search.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gotov.getmeapp.app.preference.AppPreferences
 import com.gotov.getmeapp.main.search.model.data.Skill
 import com.gotov.getmeapp.main.search.model.data.User
 import com.gotov.getmeapp.main.search.model.repository.SearchRepository
@@ -12,14 +13,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import retrofit2.HttpException
 import java.io.IOException
 
 private const val SUCCESS_CODE = 200
 
-class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
-    private val _mentors = MutableStateFlow<Resource<List<User>>>(Resource.Null())
+class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel(), KoinComponent {
 
+    private val appPreferences by inject<AppPreferences>()
+
+    private val _mentors = MutableStateFlow<Resource<List<User>>>(Resource.Null())
     private val _skills = MutableStateFlow<Resource<List<Skill>>>(Resource.Null())
 
     val skills = _skills.asStateFlow()
@@ -41,6 +46,16 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
 
     fun getSkills() {
         viewModelScope.launch {
+            val tmpSkills = appPreferences.getHashSet(AppPreferences.Skills)
+            if (tmpSkills != null && tmpSkills.isNotEmpty()) {
+                val res: MutableList<Skill> = ArrayList()
+                for (skill in tmpSkills) {
+                    res.add(Skill(skill, false))
+                }
+                _skills.emit(Resource.Success(res))
+                return@launch
+            }
+
             withContext(Dispatchers.IO) {
                 try {
                     _skills.emit(Resource.Loading())
@@ -52,6 +67,10 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                                 for (skill in it.skills) {
                                     res.add(Skill(skill.name, false))
                                 }
+                                appPreferences.putHashSet(
+                                    AppPreferences.Skills,
+                                    HashSet(it.skills.map { skill -> skill.name })
+                                )
                             }
                             _skills.emit(Resource.Success(res))
                         }
@@ -101,13 +120,13 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
                                 }
                             }
                             else -> {
-                                _mentors.emit(Resource.Error(
-                                    getResponseError(response.errorBody()))
+                                _mentors.emit(
+                                    Resource.Error(
+                                        getResponseError(response.errorBody())
+                                    )
                                 )
                             }
                         }
-                    } else {
-                        _mentors.emit(Resource.Error("NoSkills"))
                     }
                 } catch (e: IOException) {
                     _mentors.emit(

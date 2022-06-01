@@ -18,13 +18,3 @@ data class Task(
         checkBox?.isChecked = this.isDone
     }
 }
-
-fun getTasks(): Array<Task> {
-    return arrayOf(
-        Task(0, "Dore", "Купить", true, null),
-        Task(1, "Dore", "Купить", true, null),
-        Task(2, "Dore", "Купить", true, null),
-        Task(3, "Dore", "Купить", true, null),
-        Task(4, "Dore", "Купить", true, null)
-    )
-}

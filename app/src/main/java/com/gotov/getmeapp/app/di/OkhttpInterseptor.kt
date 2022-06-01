@@ -1,31 +1,26 @@
 package com.gotov.getmeapp.app.di
 
 import android.util.Log
-import java.io.IOException
+import com.gotov.getmeapp.app.preference.AppPreferences
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import okio.Buffer
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import java.io.IOException
 
-object CookiesStore {
-    private var cookies: HashSet<String> = hashSetOf()
+class AddCookiesInterceptor : Interceptor, KoinComponent {
+    private val pref by inject<AppPreferences>()
 
-    fun setCookies(v: String) {
-        cookies.add(v)
-    }
-
-    fun getCookies(): HashSet<String> {
-        return cookies
-    }
-}
-
-class AddCookiesInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder: Request.Builder = chain.request().newBuilder()
-        val cookies = CookiesStore.getCookies()
-        for (cookie in cookies) {
-            builder.addHeader("Cookie", cookie)
+        val cookies = pref.getHashSet(AppPreferences.Cookies)
+        cookies?.let {
+            for (cookie in cookies) {
+                builder.addHeader("Cookie", cookie)
+            }
         }
 
         Log.v(
@@ -37,20 +32,24 @@ class AddCookiesInterceptor : Interceptor {
         request.body()?.writeTo(buffer)
         Log.v(
             "Request Body",
-            buffer.toString()
+            buffer.inputStream().reader().readText()
         )
         return chain.proceed(request)
     }
 }
 
-class ReceivedCookiesInterceptor : Interceptor {
+class ReceivedCookiesInterceptor : Interceptor, KoinComponent {
+    private val pref by inject<AppPreferences>()
+
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalResponse: Response = chain.proceed(chain.request())
         if (originalResponse.headers("Set-Cookie").isNotEmpty()) {
+            val tmp: HashSet<String> = hashSetOf()
             for (header in originalResponse.headers("Set-Cookie")) {
-                CookiesStore.setCookies(header)
+                tmp.add(header)
             }
+            pref.putHashSet(AppPreferences.Cookies, tmp)
         }
         return originalResponse
     }

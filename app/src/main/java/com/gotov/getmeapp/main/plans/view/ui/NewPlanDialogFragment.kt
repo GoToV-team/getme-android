@@ -5,28 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentCreatePlanBinding
 import com.gotov.getmeapp.main.plans.model.data.OffersRequest
 import com.gotov.getmeapp.main.plans.viewmodel.PlansViewModel
-import com.gotov.getmeapp.main.plans.viewmodel.SharedViewModel
 import com.gotov.getmeapp.utils.model.Resource
 import com.gotov.getmeapp.utils.ui.MultiSelectInput
+import com.gotov.getmeapp.utils.ui.fieldEmptyError
+import com.gotov.getmeapp.utils.ui.setOnEmptyError
 import kotlinx.coroutines.flow.collect
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewPlanDialogFragment(
     private val offerId: Int,
     private val plansViewModel: PlansViewModel
 ) : DialogFragment() {
-
-    companion object {
-        private const val fieldError = "Поле не должно быть пустым"
-    }
 
     private var skills: ArrayList<String> = arrayListOf()
     private var isSelectedSkills: ArrayList<Boolean> = arrayListOf()
@@ -52,6 +46,7 @@ class NewPlanDialogFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             plansViewModel.skills.collect {
                 when (it) {
@@ -101,29 +96,12 @@ class NewPlanDialogFragment(
                 dismiss()
             } else {
                 if (skills.isEmpty()) {
-                    binding.newPlanSkillsInput.error = fieldError
+                    binding.newPlanSkillsInput.error = fieldEmptyError
                 }
             }
         }
 
-        binding.newPlanTitleInput.doOnTextChanged { text, _, _, _ ->
-            if (text != null) {
-                if (text.isEmpty()) {
-                    binding.newPlanTitleInput.error = fieldError
-                }
-            } else {
-                binding.newPlanTitleInput.error = fieldError
-            }
-        }
-
-        binding.newPlanAboutInput.doOnTextChanged { text, _, _, _ ->
-            if (text != null) {
-                if (text.isEmpty()) {
-                    binding.newPlanAboutInput.error = fieldError
-                }
-            } else {
-                binding.newPlanAboutInput.error = fieldError
-            }
-        }
+        binding.newPlanTitleInput.setOnEmptyError()
+        binding.newPlanAboutInput.setOnEmptyError()
     }
 }

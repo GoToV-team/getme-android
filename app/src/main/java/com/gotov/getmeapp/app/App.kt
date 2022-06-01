@@ -2,6 +2,7 @@ package com.gotov.getmeapp.app
 
 import android.app.Application
 import com.gotov.getmeapp.app.di.apiModule
+import com.gotov.getmeapp.app.di.appPreferencesModule
 import com.gotov.getmeapp.app.di.netModule
 import com.gotov.getmeapp.app.di.repositoryModule
 import com.gotov.getmeapp.app.di.viewModelModule
@@ -16,7 +17,15 @@ class App : Application() {
         startKoin {
             androidContext(this@App)
             androidLogger(Level.DEBUG)
-            modules(listOf(viewModelModule, repositoryModule, netModule, apiModule))
+            modules(
+                listOf(
+                    viewModelModule,
+                    repositoryModule,
+                    netModule,
+                    apiModule,
+                    appPreferencesModule
+                )
+            )
         }
     }
 }

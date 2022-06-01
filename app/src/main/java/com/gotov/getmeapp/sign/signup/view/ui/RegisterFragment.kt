@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentRegisterBinding
@@ -79,7 +77,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun showRegisterDialog() {
-        val newFragment = ContinueRegisterDialogFragment()
+        val newFragment = ContinueRegisterDialogFragment(registerViewModel)
         newFragment.show(childFragmentManager, "continue")
     }
 

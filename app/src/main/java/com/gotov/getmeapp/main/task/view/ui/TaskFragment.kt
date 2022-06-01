@@ -30,13 +30,13 @@ class TaskFragment : Fragment(R.layout.fragment_plan_task) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.taskItemEditButton.setOnClickListener {
+        binding.editTaskItemEditButton.setOnClickListener {
             val navController = Navigation.findNavController(view)
             val args: Bundle = bundleOf("task_id" to taskId)
             navController.navigate(R.id.action_TaskFragment_to_EditTaskFragment, args)
         }
 
-        binding.taskItemCheckbox.setOnCheckedChangeListener { _, _ ->
+        binding.editTaskItemCheckbox.setOnCheckedChangeListener { _, _ ->
             taskId?.let {
                 taskViewModel.markTask(taskId!!)
             }
@@ -50,9 +50,9 @@ class TaskFragment : Fragment(R.layout.fragment_plan_task) {
                 when (it) {
                     is Resource.Success -> {
                         it.data?.addToViews(
-                            binding.taskItemTitle,
-                            binding.taskItemDescription,
-                            binding.taskItemCheckbox
+                            binding.editTaskItemTitle,
+                            binding.editTaskItemTitle,
+                            binding.editTaskItemCheckbox
                         )
                     }
                     is Resource.Loading -> {

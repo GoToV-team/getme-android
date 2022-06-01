@@ -1,5 +1,7 @@
 package com.gotov.getmeapp.main.plans.view.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -17,8 +19,8 @@ import com.gotov.getmeapp.main.plans.model.data.Plan
 import com.gotov.getmeapp.main.plans.view.items.MentisViewAdapter
 import com.gotov.getmeapp.main.plans.view.items.PlansViewAdapter
 import com.gotov.getmeapp.main.plans.viewmodel.PlansViewModel
-import com.gotov.getmeapp.sign.signup.view.ui.ContinueRegisterDialogFragment
 import com.gotov.getmeapp.utils.model.Resource
+import com.gotov.getmeapp.utils.model.removeTgTag
 import com.gotov.getmeapp.utils.ui.DiffUtilsCallback
 import com.gotov.getmeapp.utils.ui.displayToastOnTop
 import kotlinx.coroutines.flow.collect
@@ -27,6 +29,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class PlansFragment : Fragment(R.layout.fragment_plans_page) {
     companion object {
         private const val applyUserInfo = "Вы приняли менти, теперь можете заполнить план"
+        private const val tgUrl = "https://t.me/"
     }
 
     private val binding by viewBinding(FragmentPlansPageBinding::bind)
@@ -44,11 +47,12 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
         setMentisRecycleView()
 
         runLifeCycles()
-        setStartParam()
-
         setEventListeners()
+    }
 
-        plansViewModel.getMentis()
+    override fun onResume() {
+        super.onResume()
+        setStartParam()
     }
 
     private fun setStartParam() {
@@ -67,11 +71,13 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
         adapterPlans?.let {
             binding.planList.adapter = it
         } ?: run {
-            adapterPlans = PlansViewAdapter(arrayListOf())
-            {
+            adapterPlans = PlansViewAdapter(arrayListOf()) {
                 findNavController().navigate(
                     R.id.action_PlansFragment_to_PlanFragment,
-                    bundleOf("plan_id" to it.id)
+                    bundleOf(
+                        "plan_id" to it.id,
+                        "is_mentor" to binding.radioMenti.isChecked
+                    )
                 )
             }
             binding.planList.adapter = adapterPlans
@@ -95,6 +101,14 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
                 },
                 { menti ->
                     plansViewModel.cancelMenti(menti.offerId)
+                },
+                {
+                    val browserIntent =
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("$tgUrl/${it.TgTag.removeTgTag()}")
+                        )
+                    startActivity(browserIntent)
                 }
             )
             binding.mentiList.adapter = adapterMentis
@@ -110,10 +124,14 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
                     binding.mentiList.visibility = View.VISIBLE
                     binding.dividerBetweenMentiAndPlan.visibility = View.VISIBLE
                     binding.plansPageInfoTitle.visibility = View.GONE
+                    binding.plansPageSwipeLayout.visibility = View.VISIBLE
                     plansViewModel.getMentis()
                     plansViewModel.getPlansAsMentor()
                 } else {
                     binding.plansPageInfoTitle.visibility = View.VISIBLE
+                    binding.mentiList.visibility = View.GONE
+                    binding.dividerBetweenMentiAndPlan.visibility = View.GONE
+                    binding.plansPageSwipeLayout.visibility = View.GONE
                 }
             }
         }
@@ -122,6 +140,7 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
             plansViewModel.getPlansAsMenti()
             binding.plansPageInfoTitle.visibility = View.GONE
             binding.mentiList.visibility = View.GONE
+            binding.plansPageSwipeLayout.visibility = View.VISIBLE
             binding.dividerBetweenMentiAndPlan.visibility = View.GONE
         }
 
@@ -188,9 +207,13 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
                                 applyUserInfo,
                                 Toast.LENGTH_SHORT
                             )
+                            plansViewModel.clearNewPlan()
                             findNavController().navigate(
                                 R.id.action_PlansFragment_to_PlanFragment,
-                                bundleOf("plan_id" to plan.id)
+                                bundleOf(
+                                    "plan_id" to plan.id,
+                                    "is_mentor" to binding.radioMenti.isChecked
+                                )
                             )
                         }
                     }
@@ -223,10 +246,10 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
                                     },
                                     { oldItem: Menti, newItem: Menti ->
                                         oldItem.lastName == newItem.lastName &&
-                                                oldItem.firstName == newItem.firstName &&
-                                                oldItem.isMentor == newItem.isMentor &&
-                                                oldItem.avatar == newItem.avatar &&
-                                                oldItem.about === newItem.about
+                                            oldItem.firstName == newItem.firstName &&
+                                            oldItem.isMentor == newItem.isMentor &&
+                                            oldItem.avatar == newItem.avatar &&
+                                            oldItem.about === newItem.about
                                     }
                                 )
                             val productDiffResult = DiffUtil.calculateDiff(userDiffUtilCallback)
@@ -268,10 +291,10 @@ class PlansFragment : Fragment(R.layout.fragment_plans_page) {
                                     },
                                     { oldItem: Plan, newItem: Plan ->
                                         oldItem.title == newItem.title &&
-                                                oldItem.description == newItem.description &&
-                                                oldItem.progress == newItem.progress &&
-                                                oldItem.mentiId == newItem.mentiId &&
-                                                oldItem.skills === newItem.skills
+                                            oldItem.description == newItem.description &&
+                                            oldItem.progress == newItem.progress &&
+                                            oldItem.mentiId == newItem.mentiId &&
+                                            oldItem.skills === newItem.skills
                                     }
                                 )
                             val productDiffResult = DiffUtil.calculateDiff(userDiffUtilCallback)

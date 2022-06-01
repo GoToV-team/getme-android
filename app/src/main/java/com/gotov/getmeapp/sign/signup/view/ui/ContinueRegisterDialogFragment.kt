@@ -1,9 +1,6 @@
 package com.gotov.getmeapp.sign.signup.view.ui
 
-import android.graphics.Rect
 import android.os.Bundle
-import android.text.Spanned
-import android.text.style.ImageSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,21 +8,22 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.chip.ChipDrawable
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentRegisterDialogBinding
+import com.gotov.getmeapp.sign.signup.model.data.UpdateUser
 import com.gotov.getmeapp.sign.signup.viewmodel.RegisterViewModel
 import com.gotov.getmeapp.utils.model.Resource
 import com.gotov.getmeapp.utils.ui.MultiSelectInput
+import com.gotov.getmeapp.utils.ui.activityNavController
 import com.gotov.getmeapp.utils.ui.displayToastOnTop
+import com.gotov.getmeapp.utils.ui.fieldEmptyError
+import com.gotov.getmeapp.utils.ui.navigateSafely
+import com.gotov.getmeapp.utils.ui.setOnEmptyError
 import kotlinx.coroutines.flow.collect
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-class ContinueRegisterDialogFragment : DialogFragment() {
-
-    private val registerViewModel by viewModel<RegisterViewModel>()
+class ContinueRegisterDialogFragment(
+    private val registerViewModel: RegisterViewModel
+) : DialogFragment() {
 
     private var skills: ArrayList<String> = arrayListOf()
     private var isSelectedSkills: ArrayList<Boolean> = arrayListOf()
@@ -47,12 +45,84 @@ class ContinueRegisterDialogFragment : DialogFragment() {
             )
         )
 
+        setEventListener()
+
         return _binding!!.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        runLifeCycles()
+        registerViewModel.getSkills()
+    }
+
+    private fun setEventListener() {
+        binding.registerDialogNameInput.setOnEmptyError()
+        binding.registerDialogSecondNameInput.setOnEmptyError()
+        binding.registerDialogTgTagInput.setOnEmptyError()
+
+        binding.registerDialogApplyButton.setOnClickListener {
+            var skills: List<String> = listOf()
+            multiSelectInput?.let {
+                skills = it.getSelectedSkills()
+            }
+            val firstName = binding.registerDialogNameInput.text.toString()
+            val secondName = binding.registerDialogSecondNameInput.text.toString()
+            val about = binding.registerDialogAboutInput.text.toString()
+            val tgTag = binding.registerDialogTgTagInput.text.toString()
+
+            if (firstName.isNotEmpty() &&
+                secondName.isNotEmpty() &&
+                tgTag.isNotEmpty() &&
+                skills.isNotEmpty()
+            ) {
+                registerViewModel.updateUser(
+                    UpdateUser(firstName, secondName, about, tgTag, skills)
+                )
+                binding.registerDialogApplyButton.isClickable = false
+            } else {
+                if (skills.isEmpty()) {
+                    binding.registerDialogSkillsInput.error = fieldEmptyError
+                }
+            }
+        }
+    }
+
+    private fun runLifeCycles() {
+        runStatusUpdateLifeCycle()
+        runSkillLifeCycle()
+    }
+
+    private fun runStatusUpdateLifeCycle() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            registerViewModel.updateStatus.collect {
+                when (it) {
+                    is Resource.Success -> {
+                        displayToastOnTop(
+                            context,
+                            "Вы успешно зарегестировались",
+                            Toast.LENGTH_SHORT
+                        )
+                        binding.registerDialogApplyButton.isClickable = true
+                        dismiss()
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        displayToastOnTop(
+                            context,
+                            "Произошла ошибка обновлеия юзера ${it.msg}",
+                            Toast.LENGTH_SHORT
+                        )
+                        binding.registerDialogApplyButton.isClickable = true
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun runSkillLifeCycle() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             registerViewModel.skills.collect {
                 when (it) {
@@ -80,8 +150,6 @@ class ContinueRegisterDialogFragment : DialogFragment() {
                 }
             }
         }
-
-        registerViewModel.getSkills()
     }
 
     override fun onStart() {
@@ -90,5 +158,11 @@ class ContinueRegisterDialogFragment : DialogFragment() {
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        activityNavController()
+            .navigateSafely(R.id.action_global_mainFlowFragment)
     }
 }

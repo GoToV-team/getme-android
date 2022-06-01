@@ -19,6 +19,7 @@ data class User(
     @JsonProperty("about") val about: String? = "",
     @JsonProperty("avatar") val avatar: String? = "",
     @JsonProperty("skills") val skills: List<String>,
+    @JsonProperty("tg_tag") val TgTag: String,
     @JsonProperty("is_mentor") val isMentor: Boolean
 ) {
     companion object {

@@ -2,9 +2,10 @@ package com.gotov.getmeapp.main.plans.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gotov.getmeapp.main.plans.model.data.Plan
+import com.gotov.getmeapp.app.preference.AppPreferences
 import com.gotov.getmeapp.main.plans.model.data.Menti
 import com.gotov.getmeapp.main.plans.model.data.OffersRequest
+import com.gotov.getmeapp.main.plans.model.data.Plan
 import com.gotov.getmeapp.main.plans.model.repository.PlansRepository
 import com.gotov.getmeapp.utils.model.Resource
 import com.gotov.getmeapp.utils.model.getResponseError
@@ -13,13 +14,17 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import retrofit2.HttpException
 import java.io.IOException
 
 private const val SUCCESS_CODE = 200
 private const val SUCCESS_CODE_ACCEPT_MENTI = 201
 
-class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel() {
+class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel(), KoinComponent {
+    private val appPreferences by inject<AppPreferences>()
+
     private val _plans = MutableStateFlow<Resource<List<Plan>>>(Resource.Null())
     private val _mentis = MutableStateFlow<Resource<List<Menti>>>(Resource.Null())
     private val _isMentor = MutableStateFlow<Resource<Boolean>>(Resource.Null())
@@ -210,22 +215,23 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
     fun cancelMenti(id: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
+                val tmp = mentis.value
                 try {
                     _mentis.emit(Resource.Loading())
                     val response = plansRepository.cancelMenti(id)
                     when (response.code()) {
                         SUCCESS_CODE -> {
-                            val tmp = mentis.value
                             tmp.data?.run {
                                 _mentis.emit(
                                     Resource.Success(
-                                        this.filter { menti -> menti.id != id }
+                                        this.filter { menti -> menti.offerId != id }
                                     )
                                 )
                             }
                         }
                         else -> {
                             _mentis.emit(Resource.Error(getResponseError(response.errorBody())))
+                            _mentis.emit(tmp)
                         }
                     }
                 } catch (e: IOException) {
@@ -235,6 +241,7 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                             null
                         )
                     )
+                    _mentis.emit(tmp)
                 } catch (e: HttpException) {
                     _mentis.emit(
                         Resource.Error(
@@ -242,14 +249,19 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                             null
                         )
                     )
+                    _mentis.emit(tmp)
                 }
             }
         }
-
     }
 
     fun getSkills() {
         viewModelScope.launch {
+            val tmpSkills = appPreferences.getHashSet(AppPreferences.Skills)
+            if (tmpSkills != null && tmpSkills.isNotEmpty()) {
+                _skills.emit(Resource.Success(tmpSkills.toList()))
+                return@launch
+            }
             withContext(Dispatchers.IO) {
                 try {
                     _skills.emit(Resource.Loading())
@@ -257,9 +269,15 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                     when (response.code()) {
                         SUCCESS_CODE -> {
                             response.body()?.let {
-                                _skills.emit(Resource.Success(
-                                    it.skills.map { skill -> skill.name }
-                                ))
+                                appPreferences.putHashSet(
+                                    AppPreferences.Skills,
+                                    HashSet(it.skills.map { skill -> skill.name })
+                                )
+                                _skills.emit(
+                                    Resource.Success(
+                                        it.skills.map { skill -> skill.name }
+                                    )
+                                )
                             }
                         }
                         else -> {
@@ -282,6 +300,12 @@ class PlansViewModel(private val plansRepository: PlansRepository) : ViewModel()
                     )
                 }
             }
+        }
+    }
+
+    fun clearNewPlan() {
+        viewModelScope.launch {
+            _newPlan.emit(Resource.Null())
         }
     }
 }

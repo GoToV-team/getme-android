@@ -1,5 +1,7 @@
 package com.gotov.getmeapp.main.profile.view.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -13,6 +15,7 @@ import com.gotov.getmeapp.R
 import com.gotov.getmeapp.databinding.FragmentProfileBinding
 import com.gotov.getmeapp.main.profile.viewmodel.ProfileViewModel
 import com.gotov.getmeapp.utils.model.Resource
+import com.gotov.getmeapp.utils.model.removeTgTag
 import com.gotov.getmeapp.utils.ui.displayToastOnTop
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,10 +27,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private var userId: Int? = null
 
-
     companion object {
         private val textSendOffer = "Заявка на менторство отправлина," +
-                " ожидайте появления плана от ментора или его письма"
+            " ожидайте появления плана от ментора или его письма"
+
+        private val tgUrl = "https://t.me/"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +49,16 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile) {
                                 binding.profileWatchHeaderAvatar,
                                 ctx
                             )
+                            binding.profileWatchContactsBtnMessage.setOnClickListener { _ ->
+                                it.data?.let { user ->
+                                    val browserIntent =
+                                        Intent(
+                                            Intent.ACTION_VIEW,
+                                            Uri.parse("$tgUrl/${user.TgTag.removeTgTag()}")
+                                        )
+                                    startActivity(browserIntent)
+                                }
+                            }
                         }
                         binding.loadPageList.visibility = View.GONE
                     }

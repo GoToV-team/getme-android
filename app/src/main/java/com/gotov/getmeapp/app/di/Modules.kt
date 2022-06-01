@@ -3,6 +3,13 @@ package com.gotov.getmeapp.app.di
 import android.app.Application
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.joda.JodaModule
+import com.gotov.getmeapp.app.preference.AppPreferences
+import com.gotov.getmeapp.main.editprofile.model.api.EditProfileApi
+import com.gotov.getmeapp.main.editprofile.model.repository.EditProfileRepository
+import com.gotov.getmeapp.main.editprofile.viewmodel.EditProfileViewModel
+import com.gotov.getmeapp.main.model.api.MainFlowApi
+import com.gotov.getmeapp.main.model.repository.MainFlowRepository
 import com.gotov.getmeapp.main.plan.model.api.PlanApi
 import com.gotov.getmeapp.main.plan.model.repository.PlanRepository
 import com.gotov.getmeapp.main.plan.viewmodel.PlanViewModel
@@ -18,6 +25,7 @@ import com.gotov.getmeapp.main.search.viewmodel.SearchViewModel
 import com.gotov.getmeapp.main.task.model.api.TaskApi
 import com.gotov.getmeapp.main.task.model.repository.TaskRepository
 import com.gotov.getmeapp.main.task.viewmodel.TaskViewModel
+import com.gotov.getmeapp.main.viewmodel.MainFlowViewModel
 import com.gotov.getmeapp.sign.login.model.api.LoginApi
 import com.gotov.getmeapp.sign.login.model.repository.LoginRepository
 import com.gotov.getmeapp.sign.login.viewmodel.LoginViewModel
@@ -29,6 +37,7 @@ import com.gotov.getmeapp.utils.app.provideRepository
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -45,6 +54,8 @@ val viewModelModule = module {
     viewModel { PlansViewModel(get()) }
     viewModel { TaskViewModel(get()) }
     viewModel { RegisterViewModel(get()) }
+    viewModel { EditProfileViewModel(get()) }
+    viewModel { MainFlowViewModel(get()) }
 }
 
 val apiModule = module {
@@ -55,6 +66,8 @@ val apiModule = module {
     single { provideApi<PlansApi>(get()) }
     single { provideApi<TaskApi>(get()) }
     single { provideApi<RegisterApi>(get()) }
+    single { provideApi<EditProfileApi>(get()) }
+    single { provideApi<MainFlowApi>(get()) }
 }
 
 val netModule = module {
@@ -72,7 +85,9 @@ val netModule = module {
     }
 
     fun provideJackson(): ObjectMapper {
-        return ObjectMapper()
+        val mapper = ObjectMapper()
+        mapper.registerModule(JodaModule())
+        return mapper
     }
 
     fun provideRetrofit(mapper: ObjectMapper, client: OkHttpClient): Retrofit {
@@ -90,6 +105,10 @@ val netModule = module {
     single { provideRetrofit(get(), get()) }
 }
 
+val appPreferencesModule = module {
+    single { AppPreferences(androidContext()) }
+}
+
 val repositoryModule = module {
     single { provideRepository<LoginRepository, LoginApi>(get()) }
     single { provideRepository<SearchRepository, SearchApi>(get()) }
@@ -98,4 +117,6 @@ val repositoryModule = module {
     single { provideRepository<PlansRepository, PlansApi>(get()) }
     single { provideRepository<TaskRepository, TaskApi>(get()) }
     single { provideRepository<RegisterRepository, RegisterApi>(get()) }
+    single { provideRepository<EditProfileRepository, EditProfileApi>(get()) }
+    single { provideRepository<MainFlowRepository, MainFlowApi>(get()) }
 }

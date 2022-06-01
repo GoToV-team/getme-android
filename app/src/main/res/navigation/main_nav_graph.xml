@@ -55,23 +55,10 @@
     </fragment>
 
     <fragment
-            android:id="@+id/ProfileFragment"
-            android:name="com.gotov.getmeapp.main.profile.view.ui.ProfileFragment"
-            android:label="@string/profile_fragment_label"
-            tools:layout="@layout/fragment_profile">
-        <action
-                android:id="@+id/action_ProfileFragment_to_EditProfileFragment"
-                app:destination="@id/EditProfileFragment" />
-    </fragment>
-
-    <fragment
             android:id="@+id/EditProfileFragment"
-            android:name="com.gotov.getmeapp.main.plans.view.ui.PlansFragment"
+            android:name="com.gotov.getmeapp.main.editprofile.view.ui.EditProfileFragment"
             android:label="@string/edit_profile_fragment_label"
-            tools:layout="@layout/fragment_plans_page">
-        <action
-                android:id="@+id/action_EditProfileFragment_to_ProfileFragment"
-                app:destination="@id/ProfileFragment" />
+            tools:layout="@layout/fragment_edit_profile">
     </fragment>
 
     <fragment

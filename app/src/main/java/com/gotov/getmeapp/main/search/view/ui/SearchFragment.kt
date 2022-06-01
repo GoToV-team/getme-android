@@ -127,10 +127,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                                     },
                                     { oldItem: User, newItem: User ->
                                         oldItem.firstName == newItem.firstName &&
-                                                oldItem.lastName == newItem.lastName &&
-                                                oldItem.isMentor == newItem.isMentor &&
-                                                oldItem.about == newItem.about &&
-                                                oldItem.skills === newItem.skills
+                                            oldItem.lastName == newItem.lastName &&
+                                            oldItem.isMentor == newItem.isMentor &&
+                                            oldItem.about == newItem.about &&
+                                            oldItem.skills === newItem.skills
                                     }
                                 )
                             val productDiffResult = DiffUtil.calculateDiff(userDiffUtilCallback)

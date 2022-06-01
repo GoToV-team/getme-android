@@ -17,6 +17,8 @@ class MultiSelectInput(
         editText.isFocusable = false
         editText.isLongClickable = false
 
+        addChips()
+
         editText.setOnClickListener {
             editText.context?.let { ctx ->
                 MaterialAlertDialogBuilder(ctx)

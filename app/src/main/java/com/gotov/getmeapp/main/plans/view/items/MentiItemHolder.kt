@@ -9,13 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gotov.getmeapp.R
 import com.gotov.getmeapp.main.plans.model.data.Menti
-import com.gotov.getmeapp.main.search.model.data.User
-import com.gotov.getmeapp.sign.signup.view.ui.ContinueRegisterDialogFragment
 
 class MentisViewAdapter(
     mentis: ArrayList<Menti>,
     private val onApply: (menti: Menti) -> Unit,
-    private val onCancel: (menti: Menti) -> Unit
+    private val onCancel: (menti: Menti) -> Unit,
+    private val onSend: (menti: Menti) -> Unit
 ) : RecyclerView.Adapter<MentiItemHolder>() {
     private val _mentis: ArrayList<Menti> = mentis
 
@@ -26,7 +25,7 @@ class MentisViewAdapter(
             false
         )
 
-        return MentiItemHolder(view, onApply, onCancel)
+        return MentiItemHolder(view, onApply, onCancel, onSend)
     }
 
     override fun onBindViewHolder(holder: MentiItemHolder, position: Int) {
@@ -51,13 +50,15 @@ class MentisViewAdapter(
 class MentiItemHolder(
     itemView: View,
     private val onApply: (menti: Menti) -> Unit,
-    private val onCancel: (menti: Menti) -> Unit
+    private val onCancel: (menti: Menti) -> Unit,
+    private val onSend: (menti: Menti) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 
     private val _name: TextView = itemView.findViewById(R.id.menti_item_name)
     private val _image: ImageView = itemView.findViewById(R.id.menti_item_avatar)
     private val _buttonApply: Button = itemView.findViewById(R.id.menti_apply_button)
     private val _buttonCancel: Button = itemView.findViewById(R.id.menti_cancel_button)
+    private val _buttonSend: Button = itemView.findViewById(R.id.menti_send_button)
 
     fun bind(menti: Menti) {
         menti.addToViews(_name, null, _image)
@@ -68,6 +69,10 @@ class MentiItemHolder(
 
         _buttonCancel.setOnClickListener {
             onCancel(menti)
+        }
+
+        _buttonSend.setOnClickListener {
+            onSend(menti)
         }
     }
 }

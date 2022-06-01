@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="40sp"
+            android:textSize="36sp"
             android:id="@+id/register_dialog_title" />
 
     <TextView
@@ -60,11 +60,29 @@
             android:id="@+id/register_dialog_second_name_input" />
 
     <TextView
-            android:text="@string/register_dialog_about_input_title"
+            android:text="@string/register_dialog_tg_tag_input_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/register_dialog_second_name_input"
             app:layout_constraintStart_toStartOf="@+id/register_dialog_second_name_input"
+            android:id="@+id/register_dialog_tg_tag_input_title"
+            android:layout_marginTop="20dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            tools:text="Dore"
+            app:layout_constraintTop_toBottomOf="@+id/register_dialog_tg_tag_input_title"
+            app:layout_constraintStart_toStartOf="@+id/register_dialog_tg_tag_input_title"
+            android:id="@+id/register_dialog_tg_tag_input" />
+
+    <TextView
+            android:text="@string/register_dialog_about_input_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/register_dialog_tg_tag_input"
+            app:layout_constraintStart_toStartOf="@+id/register_dialog_tg_tag_input"
             android:id="@+id/register_dialog_about_title_input"
             android:layout_marginTop="20dp" />
 

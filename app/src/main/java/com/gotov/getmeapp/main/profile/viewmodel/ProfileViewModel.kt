@@ -3,8 +3,8 @@ package com.gotov.getmeapp.main.profile.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gotov.getmeapp.main.profile.model.data.RequestMentor
+import com.gotov.getmeapp.main.profile.model.data.User
 import com.gotov.getmeapp.main.profile.model.repository.ProfileRepository
-import com.gotov.getmeapp.main.search.model.data.User
 import com.gotov.getmeapp.utils.model.Resource
 import com.gotov.getmeapp.utils.model.getResponseError
 import kotlinx.coroutines.Dispatchers

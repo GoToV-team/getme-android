@@ -9,7 +9,6 @@ data class Mentis(
     @JsonProperty("users") val mentis: List<Menti>
 )
 
-
 data class Menti(
     @JsonProperty("id") val id: Int,
     @JsonProperty("offer_id") val offerId: Int,
@@ -17,6 +16,7 @@ data class Menti(
     @JsonProperty("last_name") val lastName: String?,
     @JsonProperty("about") val about: String?,
     @JsonProperty("avatar") val avatar: String?,
+    @JsonProperty("tg_tag") val TgTag: String,
     @JsonProperty("isMentor") val isMentor: Boolean,
 ) {
 

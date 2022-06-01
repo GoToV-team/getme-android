@@ -1,7 +1,12 @@
 package com.gotov.getmeapp.main.plans.model.repository
 
 import com.gotov.getmeapp.main.plans.model.api.PlansApi
-import com.gotov.getmeapp.main.plans.model.data.*
+import com.gotov.getmeapp.main.plans.model.data.IsMentorResponse
+import com.gotov.getmeapp.main.plans.model.data.Mentis
+import com.gotov.getmeapp.main.plans.model.data.OffersRequest
+import com.gotov.getmeapp.main.plans.model.data.Plan
+import com.gotov.getmeapp.main.plans.model.data.PlansResponse
+import com.gotov.getmeapp.main.plans.model.data.SkillResponse
 import retrofit2.Response
 
 class PlansRepository(private val plansApi: PlansApi) {

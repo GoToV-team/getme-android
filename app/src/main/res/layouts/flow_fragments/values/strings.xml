@@ -26,4 +26,20 @@
     <string name="create_plan_title_text">Название</string>
     <string name="create_plan_about_text">Описание</string>
     <string name="create_plan_skills_text">Скиллы</string>
+    <string name="edit_profile_page_about_title">О себе</string>
+    <string name="edit_profile_page_skills_title">Скиллы</string>
+    <string name="edit_profile_page_apply_button">Изменить</string>
+    <string name="edit_profile_page_first_name_title">Имя</string>
+    <string name="edit_profile_page_last_name_title">Фамилия</string>
+    <string name="register_dialog_tg_tag_input_title">Тэг телеграмма</string>
+    <string name="edit_profile_tg_tag_title">Тэг телеграмма</string>
+    <string name="main_flow_menu_item_logout">Выйти</string>
+    <string name="new_task_header">Создание задачи</string>
+    <string name="new_task_title_text">Название</string>
+    <string name="new_task_about_text">Описание</string>
+    <string name="new_task_skills_text">Срок выполнения</string>
+    <string name="new_plan_create_button">Создать</string>
+    <string name="new_task_create_button_text">Создать</string>
+    <string name="plan_header">План развития</string>
+    <string name="plan_add_task_button">Добавить</string>
 </resources>

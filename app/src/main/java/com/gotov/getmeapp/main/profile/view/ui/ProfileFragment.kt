@@ -55,6 +55,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             }
         }
 
+        /*binding.profileWatchHeaderAvatar.setOnClickListener {
+            findNavController().navigate(R.id.action_ProfileFragment_to_EditProfileFragment)
+        }*/
+
         profileViewModel.getCurrentUser()
 
         binding.profileWatchContacts.visibility = View.GONE

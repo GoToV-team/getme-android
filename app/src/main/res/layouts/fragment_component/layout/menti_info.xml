@@ -55,11 +55,11 @@
             android:layout_height="40dp"
             android:text="@string/telegram_button_text"
             android:textSize="5dp"
+            android:id="@+id/menti_send_button"
             app:layout_constraintTop_toBottomOf="@+id/menti_item_about"
             app:layout_constraintStart_toEndOf="@+id/menti_item_avatar"
             android:drawableLeft="@drawable/ic_telegram"
-            style="@style/TelegramButtonStyle"
-            tools:ignore="TouchTargetSizeCheck" />
+            style="@style/TelegramButtonStyle"/>
 
     <Button
             android:layout_width="130dp"
